@@ -1,16 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>글자수 세기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ㄱㄴㄷ의 반응형 웹사이트</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* 반응형 처리 */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>이름 글자수 세기</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="name">이름:</label>
-        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-        <button type="submit">확인</button>
-    </form>
+    <header>
+        <h1>박기영이 만든 11월 18일자 웹사이트</h1>
+    </header>
+    <main>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+            <button type="submit">확인</button>
+        </form>
+    </main>
 </body>
 </html>
