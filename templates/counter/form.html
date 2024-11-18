@@ -67,8 +67,12 @@
         <form method="POST">
             {% csrf_token %}
             <label for="name">이름:</label>
-            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+            <input type="text" id="ticker" name="ticker" placeholder="ticker을 입력하세요" required>
+            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력" required>
+            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력" required>
+            <input type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required>
             <button type="submit">확인</button>
+
         </form>
     </main>
 </body>

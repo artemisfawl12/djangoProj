@@ -1,12 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결과</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        strong {
+            color: #4CAF50;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            main {
+                margin: 10px;
+                padding: 15px;
+                max-width: 100%;
+                box-shadow: none; /* 모바일에서는 그림자 제거 */
+            }
+            header {
+                font-size: 20px;
+                padding: 15px;
+            }
+            p {
+                font-size: 16px;
+            }
+            a {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 18px;
+                padding: 10px;
+            }
+            p {
+                font-size: 14px;
+            }
+            a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>결과</h1>
-    <p>입력한 이름: <strong>{{ name }}</strong></p>
-    <p>깔깔 <strong>{{ char_count }}</strong></p>
-    <a href="/">첫 페이지로 돌아가기</a>
+    <header>
+        결과 페이지
+    </header>
+    <main>
+        <h1>결과</h1>
+        <p>입력한 주식의 Ticker: <strong>{{ ticker }}</strong></p>
+        <p><strong>{{ buy_navigate }}</strong></p>
+        <a href="/">첫 페이지로 돌아가기</a>
+    </main>
+    <footer>
+        &copy; 2024 당신의 웹사이트 이름
+    </footer>
 </body>
 </html>
