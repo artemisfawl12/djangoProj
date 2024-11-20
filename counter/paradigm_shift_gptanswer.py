@@ -5,10 +5,11 @@ from counter.booleanway_new import trade
 
 # ChatGPT에게 코드 요청
 
-
+print("api_key print:"+str(os.environ.get("OPEN_API_KEY")))
 client = OpenAI(
     api_key=os.environ.get("OPEN_API_KEY"),
 )
+
 model = "gpt-4"
 
 def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received_ticker):
