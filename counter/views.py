@@ -1,13 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from counter.paradigm_shift_gptanswer import gpt_call
 def count_characters(request):
     if request.method == "POST":
         ticker =request.POST.get('ticker','')
         start_date = request.POST.get('start_date', '')
         end_date = request.POST.get('end_date', '')
         buy_strat = request.POST.get('buy_strat', '')
+        sell_strat=request.POST.get('sell_strat','')
+        final_earning_percent_str=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
 
-        buy_navigate="매수전략은 다음과 같습니다: "+buy_strat
-        return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':buy_navigate})
+        final_earning_percent_str="최종 수익률: "+final_earning_percent_str
+
+
+        return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':final_earning_percent_str})
 
     return render(request,'counter/form.html')
