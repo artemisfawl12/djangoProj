@@ -50,50 +50,38 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
     }]
     print("messeage sent")
     """
+
     response = client.chat.completions.create(model=model, messages=messages)
 
     # ChatGPT의 응답에서 코드만 추출하기
     assistant_message = response.choices[0].message.content
-    """
-    assistant_message="""
-    조건에 맞는 boolean series를 생성하기 위해 pandas의 rolling 및 shift 메서드 등을 사용하겠습니다.
-
-1. 먼저, 100일 이동평균선, 5일 이동평균선, 20일 이동평균선을 각각 계산할 것입니다.
-2. 계산한 이동평균선을 사용하여 구매 및 판매 조건에 따른 조건문을 작성하고 이를 조건문 수식으로 변환할 것입니다.
-3. 또한 이전의 행을 참조하면서 현재 행의 값을 비교하려면 shift 메서드가 사용됩니다.
-
-아래에 작성한 코드를 볼 수 있습니다.
-
-```python
-# 이동평균선 계산
-stock_data['MA100'] = stock_data["종가"].rolling(window=100).mean()
-stock_data['MA5'] = stock_data["종가"].rolling(window=5).mean()
-stock_data['MA20'] = stock_data["종가"].rolling(window=20).mean()
-stock_data['volume_MA5'] = stock_data["거래량"].rolling(window=5).mean()
-
-# 구매 조건
-condition_buy =  (
-    (stock_data['MA100'].diff() >= 0) |
-    (stock_data['MA100'].diff() < stock_data['종가'] * 0.001)
-) & (
-    (stock_data['종가'].shift(5) > stock_data['종가']) &
-    (stock_data['volume_MA5'].shift(5) > stock_data['volume_MA5'])
-)
-
-# 판매 조건
-stock_data['MA_crossdown'] = stock_data['MA5'] < stock_data['MA20']
-condition_sell = (stock_data['MA_crossdown'] == True) & (stock_data['MA_crossdown'].shift(1) == False)
-```
-
-위 코드에서 구매 조건은 MA100 값이 증가하거나, 혹은 그 감소량이 종가의 0.1% 미만인 경우이며, 동시에 5일 전보다 종가 및 거래량이 모두 감소해야합니다.
-
-판매 조건은 MA5가 MA20을 하향 돌파하는 경우입니다. 즉, 오늘 MA5가 MA20보다 작고 어제 MA5가 MA20보다 크다면 True(즉, 매도)가 될 것입니다.
-
-참고로, 이동평균선 값 계산이나 다른 연산에서 앞선 데이터를 필요로 하므로, 일부 데이터에서는 NaN 값이 발생할 수 있습니다. 이를 해결하기 위해 알맞은 방법으로 전처리 하기 바랍니다. 
     
     """
 
 
+    assistant_message="""
+    ```python
+import pandas as pd
+
+# 5일, 20일, 100일 이동평균선 계산
+stock_data['MA_5'] = stock_data['종가'].rolling(window=5).mean()
+stock_data['MA_20'] = stock_data['종가'].rolling(window=20).mean()
+stock_data['MA_100'] = stock_data['종가'].rolling(window=100).mean()
+
+# 5일 이동평균선이 100일 이동평균선을 위로 뚫는 조건 (condition_buy)
+condition_buy = (stock_data['MA_5'] > stock_data['MA_100']) & (stock_data['MA_5'].shift(1) <= stock_data['MA_100'].shift(1))
+
+# 5일 이동평균선이 20일 이동평균선을 아래로 뚫는 조건 (condition_sell)
+condition_sell = (stock_data['MA_5'] < stock_data['MA_20']) & (stock_data['MA_5'].shift(1) >= stock_data['MA_20'].shift(1))
+
+# 결측치 처리: 이동평균 계산 초기에는 값이 없으므로 결측치를 False로 처리
+condition_buy = condition_buy.fillna(False)
+condition_sell = condition_sell.fillna(False)
+
+```
+
+    
+    """
 
     # 코드 필터링: ```로 감싸진 모든 코드 부분 추출
     code_blocks = re.findall(r"```python\n(.*?)\n```", assistant_message, re.DOTALL)

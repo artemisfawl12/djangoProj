@@ -3,6 +3,7 @@ from plotly.subplots import make_subplots
 import webbrowser
 from pykrx import stock
 import pandas as pd
+import os
 
 #이게 최초의  코드이다.
 
@@ -138,9 +139,9 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         showlegend=True
     )
 
-    html_path = '/home/ubuntu/djangoProj/plotly_candlestick_chart.html'
+    html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
     fig.write_html(html_path)
-    webbrowser.open(html_path)
+    #webbrowser.open(html_path)
 
 class position:
     def __init__(self,startmoney):

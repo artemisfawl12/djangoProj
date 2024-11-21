@@ -102,7 +102,15 @@
         <p><strong>{{ buy_navigate }}</strong></p>
         <p><strong>수수료 0원인 상황을 가정한 시뮬레이션입니다. 유의해주세요.</strong></p>
         <a href="/">첫 페이지로 돌아가기</a>
+        <button id="openChart">Open Chart</button>
     </main>
+
+    <script>
+        document.getElementById('openChart').addEventListener('click', function() {
+            // 새로운 창 열기
+            window.open('/chart/', '_blank', 'width=800,height=600');
+        });
+    </script>
     <footer>
         &copy; 2024 당신의 웹사이트 이름
     </footer>

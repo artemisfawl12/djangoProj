@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from counter.paradigm_shift_gptanswer import gpt_call
+
+def show_chart(request):
+    return render(request,'counter/plotly_candlestick_chart_1.html')
 def count_characters(request):
     if request.method == "POST":
         ticker =request.POST.get('ticker','')
