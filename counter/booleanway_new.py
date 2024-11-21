@@ -141,7 +141,6 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
 
     html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
     fig.write_html(html_path)
-    #webbrowser.open(html_path)
 
 class position:
     def __init__(self,startmoney):

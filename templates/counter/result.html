@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결과</title>
     <style>
+        .link {
+            display: inline-block; /* 블록처럼 취급 */
+            vertical-align: middle; /* 수직 정렬 */
+        }
+        .code-box {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap; /* 기본적으로 줄바꿈 */
+            overflow-x: auto; /* 스크롤 추가 */
+            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         /* 기본 스타일 */
         body {
             font-family: Arial, sans-serif;
@@ -38,12 +55,14 @@
         a {
             display: inline-block;
             margin-top: 20px;
+            height: 30px;
             text-decoration: none;
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
+            text-align: center;
             font-size: 16px;
         }
         a:hover {
@@ -101,8 +120,17 @@
         <p>입력한 주식의 Ticker: <strong>{{ ticker }}</strong></p>
         <p><strong>{{ buy_navigate }}</strong></p>
         <p><strong>수수료 0원인 상황을 가정한 시뮬레이션입니다. 유의해주세요.</strong></p>
-        <a href="/">첫 페이지로 돌아가기</a>
-        <button id="openChart">Open Chart</button>
+        <a href="/" class="link">첫 페이지로 돌아가기</a>
+        <a href="/chart/" class="link" target="_blank" rel="noopener noreferrer">Open Chart</a>
+        <p><strong>아래는 코드에 적용된 로직 입니다.</strong></p>
+        <div class="code-box">
+            <pre>
+        <code>
+        {{ assistant_msg }}
+        </code>
+            </pre>
+        </div>
+
     </main>
 
     <script>

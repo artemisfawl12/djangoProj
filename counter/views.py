@@ -11,11 +11,13 @@ def count_characters(request):
         end_date = request.POST.get('end_date', '')
         buy_strat = request.POST.get('buy_strat', '')
         sell_strat=request.POST.get('sell_strat','')
-        final_earning_percent_str=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
+        ret_list=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
 
+        final_earning_percent_str=ret_list[0]
         final_earning_percent_str="최종 수익률: "+final_earning_percent_str
+        assistant_msg=ret_list[1]
 
 
-        return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':final_earning_percent_str})
+        return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':final_earning_percent_str,'assistant_msg':assistant_msg})
 
     return render(request,'counter/form.html')

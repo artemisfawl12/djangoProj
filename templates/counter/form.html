@@ -3,8 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>반응형 웹사이트</title>
+    <title>STOCK SIMULATOR</title>
     <style>
+        .hidden-text {
+                display: none; /* 기본적으로 숨김 */
+            }
+
+        .visible {
+            display: block; /* 보이게 변경 */
+        }
+        /*loader style*/
+        .loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3em;
+            position: relative;
+            vertical-align: middle;
+        }
+        .loader,
+    .loader:before,
+    .loader:after {
+        animation: 1s infinite ease-in-out;
+    }
+    .loader:before,
+    .loader:after {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+        .loader-3:before {
+        content: '';
+        border: 10px solid white;
+        top: -10px;
+        left: -10px;
+        animation-name: loader3;
+        }
+        .loader-black{
+            background-color: #333;
+        }
+        .loader.visible{
+            display: inline-block;
+        }
+
+        @keyframes loader3 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+
         /* 기본 스타일 */
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +72,7 @@
         }
         form {
             margin: 20px auto;
-            max-width: 300px;
+            max-width: 500px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -32,8 +82,17 @@
             margin-bottom: 8px;
         }
         input {
-            width: 100%;
+            width: 90%;
             padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input_large {
+            width: 90%;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -61,20 +120,45 @@
 </head>
 <body>
     <header>
-        <h1>11월 18일자 웹사이트</h1>
+        <h1>STOCK SIMULATOR</h1>
     </header>
     <main>
-        <form method="POST">
+        <form id="wholeform" method="POST">
             {% csrf_token %}
-            <label for="name">이름:</label>
-            <input type="text" id="ticker" name="ticker" placeholder="ticker을 입력하세요" required>
-            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력" required>
-            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력" required>
-            <input type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required>
-            <input type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required>
-            <button type="submit">확인</button>
+            <label for="name">INPUT</label>
+            <input type="text" id="ticker" name="ticker" placeholder="주식의 ticker을 입력하세요. EX)000660: sk하이닉스" required>
+            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
+            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
+            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
+            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
+            <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+
+            <p><strong>ticker은 yahoo finance에 가서 찾으시면 됩니다. </strong></p>
+            <p><strong>단, 한국 주식은 ~~.KS가 붙어있어요. ".KS"를 제외한 숫자만 입력해주세요.</strong></p>
+            <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
+            <p id="loadtxt" class="hidden-text"><strong>gpt에게 답변을 받아오는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+
 
         </form>
+
+
     </main>
+    <script>
+        const btn1 = document.getElementById("submitbtn");
+        const loader = document.getElementById("loading");
+        const loadtxt = document.getElementById("loadtxt");
+        const form=document.getElementById("wholeform");
+        function showLoading(){
+
+            loader.style.display="inline-block";
+            loadtxt.classList.add("visible");
+
+        };
+
+
+
+    </script>
 </body>
 </html>
+
+

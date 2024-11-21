@@ -6,8 +6,6 @@ from counter.booleanway_new import trade
 
 # ChatGPT에게 코드 요청
 
-print("*****************open_api_key print:"+str(os.environ.get("OPEN_API_KEY")))
-print("*****************openai_api_key print:"+str(os.environ.get("OPENAI_API_KEY")))
 client = OpenAI(
     api_key=os.environ.get("OPEN_API_KEY")
 )
@@ -124,8 +122,9 @@ condition_sell = condition_sell.fillna(False)
 
     print(final_earning_percentage + "at paradigm file")
 
-    return final_earning_percentage
+    ret_list=[final_earning_percentage,assistant_message]
 
+    return ret_list
 #gpt_call(0,".",".","20200101","20241101","000660")
 
 
