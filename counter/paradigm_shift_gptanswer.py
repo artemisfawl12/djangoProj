@@ -47,39 +47,13 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
         "content": query
     }]
     print("messeage sent")
-    """
+
 
     response = client.chat.completions.create(model=model, messages=messages)
 
     # ChatGPT의 응답에서 코드만 추출하기
     assistant_message = response.choices[0].message.content
-    
-    """
 
-
-    assistant_message="""
-    ```python
-import pandas as pd
-
-# 5일, 20일, 100일 이동평균선 계산
-stock_data['MA_5'] = stock_data['종가'].rolling(window=5).mean()
-stock_data['MA_20'] = stock_data['종가'].rolling(window=20).mean()
-stock_data['MA_100'] = stock_data['종가'].rolling(window=100).mean()
-
-# 5일 이동평균선이 100일 이동평균선을 위로 뚫는 조건 (condition_buy)
-condition_buy = (stock_data['MA_5'] > stock_data['MA_100']) & (stock_data['MA_5'].shift(1) <= stock_data['MA_100'].shift(1))
-
-# 5일 이동평균선이 20일 이동평균선을 아래로 뚫는 조건 (condition_sell)
-condition_sell = (stock_data['MA_5'] < stock_data['MA_20']) & (stock_data['MA_5'].shift(1) >= stock_data['MA_20'].shift(1))
-
-# 결측치 처리: 이동평균 계산 초기에는 값이 없으므로 결측치를 False로 처리
-condition_buy = condition_buy.fillna(False)
-condition_sell = condition_sell.fillna(False)
-
-```
-
-    
-    """
 
     # 코드 필터링: ```로 감싸진 모든 코드 부분 추출
     code_blocks = re.findall(r"```python\n(.*?)\n```", assistant_message, re.DOTALL)
