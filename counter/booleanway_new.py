@@ -138,7 +138,7 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         showlegend=True
     )
 
-    html_path = 'plotly_candlestick_chart.html'
+    html_path = '/home/ubuntu/djangoProj/plotly_candlestick_chart.html'
     fig.write_html(html_path)
     webbrowser.open(html_path)
 
