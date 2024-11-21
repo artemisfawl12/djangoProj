@@ -6,8 +6,11 @@ from counter.booleanway_new import trade
 
 # ChatGPT에게 코드 요청
 
-print("api_key print:"+str(os.environ.get("OPENAI_API_KEY")))
-client = OpenAI()
+print("*****************open_api_key print:"+str(os.environ.get("OPEN_API_KEY")))
+print("*****************openai_api_key print:"+str(os.environ.get("OPENAI_API_KEY")))
+client = OpenAI(
+    api_key=os.environ.get("OPEN_API_KEY")
+)
 
 model = "gpt-4"
 
