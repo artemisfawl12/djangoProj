@@ -17,10 +17,15 @@
             border-radius: 4px;
         }
         .table-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
             max-height: 400px; /* 테이블 최대 높이 지정 */
             overflow-y: auto; /* 스크롤 가능하게 설정 */
-            border: 1px solid #ccc;
-            border-radius: 4px;
+
         }
         table {
             width: 100%;
@@ -45,8 +50,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>Ticker</th>
                     <th>주식 이름</th>
+                    <th>Ticker</th>
                 </tr>
             </thead>
             <tbody id="resultsTable">
@@ -56,6 +61,7 @@
     </div>
 
     <script>
+        let cachedData=null;
         // API에서 데이터를 가져오기
         fetch('/api/stocks/') // Django API Endpoint 호출
             .then(response => {
@@ -67,6 +73,7 @@
             .then(data => {
                 console.log('Stock data:', data);
                 renderTable(data); // 데이터를 기반으로 테이블 렌더링
+                cachedData=data;
             })
             .catch(error => {
                 console.error('Error fetching stock data:', error);
@@ -83,17 +90,24 @@
             });
         }
 
+        function fetchData(){
+            return Promise.resolve(cachedData);
+        }
+
         // 검색 기능
         const searchInput = document.getElementById("searchInput");
         searchInput.addEventListener("input", () => {
             const query = searchInput.value.toLowerCase();
-            fetch('/api/stocks/') // 항상 원본 데이터를 가져옴
-                .then(response => response.json())
+
+            fetchData()
                 .then(data => {
                     const filteredData = Object.entries(data).filter(([ticker, name]) =>
                         ticker.includes(query) || name.toLowerCase().includes(query)
                     );
                     renderTable(Object.fromEntries(filteredData)); // 필터링된 데이터 렌더링
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
                 });
         });
     </script>
