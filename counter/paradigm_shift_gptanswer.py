@@ -3,6 +3,9 @@ from openai import OpenAI
 import os
 import re
 from counter.booleanway_new import trade
+import logging
+
+logger=logging.getLogger('counter')
 
 # ChatGPT에게 코드 요청
 
@@ -13,6 +16,7 @@ client = OpenAI(
 model = "gpt-4"
 
 def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received_ticker):
+    logger.info("gpt_call function started")
 
     query = (
 
@@ -46,13 +50,16 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
         "role": "user",
         "content": query
     }]
-    print("messeage sent")
 
-
+    logger.info("query:"+query)
+    logger.info("message to gpt sent")
     response = client.chat.completions.create(model=model, messages=messages)
+    logger.info("message to gpt received")
 
     # ChatGPT의 응답에서 코드만 추출하기
     assistant_message = response.choices[0].message.content
+
+
 
 
     # 코드 필터링: ```로 감싸진 모든 코드 부분 추출
@@ -73,6 +80,7 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
 
     else:
         print("python 코드를 찾을 수 없습니다.")
+        logger.info("python code not found")
 
     final_earning_percentage=trade(start_date, end_date, str(received_ticker), exec_code=execute_code)
     print(str(final_earning_percentage))

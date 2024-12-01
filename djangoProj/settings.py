@@ -124,3 +124,37 @@ STATIC_ROOT=BASE_DIR /'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # 기존 로거를 비활성화하지 않음
+    'formatters': {
+        'verbose': {  # 상세한 로그 출력 형식
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {  # 간단한 로그 출력 형식
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {  # 콘솔에 로그 출력
+            'level': 'INFO',  # INFO 이상의 로그를 처리
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',  # 간단한 로그 형식 사용
+        },
+    },
+    'loggers': {
+        'django': {  # Django의 기본 로거
+            'handlers': ['console'],  # 콘솔로 로그 출력
+            'level': 'INFO',  # INFO 이상의 로그를 기록
+            'propagate': True,  # 부모 로거로 로그 전파
+        },
+        'counter': {  # 특정 앱을 위한 로거 설정
+            'handlers': ['console'],  # 콘솔로 로그 출력
+            'level': 'INFO',  # INFO 이상의 로그를 기록
+            'propagate': False,  # 부모 로거로 로그 전파 안 함
+        },
+    },
+}

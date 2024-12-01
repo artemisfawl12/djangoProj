@@ -5,33 +5,11 @@ from pykrx import stock
 import pandas as pd
 import os
 
+import logging
+
+loggers=logging.getLogger('counter')
+
 #이게 최초의  코드이다.
-
-
-exec_code:str="""
-stock_data['MA_100'] = stock_data['종가'].rolling(window=100).mean()
-
-# The difference from the previous day is less than 0.1% of the current price or maintains or increases
-condition_MA = ((stock_data['MA_100'].pct_change() > -0.001) | (stock_data['MA_100'].diff() >= 0))
-
-# The stock price has been consistently falling compared to 2.5 days ago
-condition_price = (stock_data['종가'] < stock_data['종가'].shift(periods=3))
-
-# Trading volume has also fallen compared to 5 days ago
-condition_volume = (stock_data['거래량'] < stock_data['거래량'].shift(periods=5))
-
-# Combine conditions with &
-condition_buy = condition_MA & condition_price & condition_volume
-
-
-# Selling condition
-# Finding the maximum price since the recent buying point
-stock_data['Since_Buy_Max'] = stock_data.loc[condition_buy, '종가'].cummax()
-
-# Compare the current price to 5% decrease from the highest price since the recent buying point
-condition_sell = (stock_data['종가'] < stock_data['Since_Buy_Max'] * 0.95)
-
-"""
 
 #차트 만드는 부분을 따로 빼서 코드의 피로도를 줄인다.
 
@@ -219,6 +197,7 @@ class position:
 
 
 def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_draw_ornot=1):
+    loggers.info("trade func in booleanway _ py started")
 
     trader=position(startmoney)
     stock_data = stock.get_market_ohlcv(str(start_date), str(end_date), ticker)
@@ -244,10 +223,10 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
     """)
     condition_buy=condition_list[0]
     condition_sell = condition_list[1]
-    print("bought count: "+str(len(condition_buy)))
+    print("len of condition_buy: this value should be same as length of stock_data "+str(len(condition_buy)))
     print("sold count: " + str(len(condition_sell)))
-    print(condition_buy)
-    print(condition_sell)
+    loggers.info("len of condition_buy: this value should be same as length of stock_data "+str(len(condition_buy)))
+    loggers.info("sold count: " + str(len(condition_sell)))
 
     # 조건을 만족하는 행들 필터링
 
