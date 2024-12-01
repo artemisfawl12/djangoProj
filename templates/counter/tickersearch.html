@@ -61,6 +61,16 @@
     </div>
 
     <script>
+
+        function renderTable(data) {
+            const resultsTable = document.getElementById("resultsTable");
+            resultsTable.innerHTML = ""; // 기존 데이터 삭제
+            Object.entries(data).forEach(([ticker, name]) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${ticker}</td><td>${name}</td>`;
+                resultsTable.appendChild(row);
+            });
+        }
         let cachedData=null;
         // API에서 데이터를 가져오기
         fetch('/api/stocks/') // Django API Endpoint 호출
@@ -79,16 +89,7 @@
                 console.error('Error fetching stock data:', error);
             });
 
-        // 테이블 렌더링 함수
-        function renderTable(data) {
-            const resultsTable = document.getElementById("resultsTable");
-            resultsTable.innerHTML = ""; // 기존 데이터 삭제
-            Object.entries(data).forEach(([ticker, name]) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `<td>${ticker}</td><td>${name}</td>`;
-                resultsTable.appendChild(row);
-            });
-        }
+        // 테이블 렌더링 함수를 위로 옮겼다.
 
         function fetchData(){
             return Promise.resolve(cachedData);
