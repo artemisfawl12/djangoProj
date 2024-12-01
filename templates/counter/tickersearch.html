@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주식 Ticker 검색</title>
     <style>
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            height: 30px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -60,6 +76,7 @@
             </tbody>
         </table>
     </div>
+    <a href="/" class="link">조건 작성 페이지로 돌아가기</a>
     <p><i style="color: #808080;">ticker 데이터 받아오는데 4초정도 걸립니다. 쪼끔만 기다려주세요.</i></p>
 
     <script>
