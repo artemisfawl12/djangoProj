@@ -144,6 +144,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',  # 간단한 로그 형식 사용
         },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/app.log',  # 로그 파일 경로
+        },
     },
     'loggers': {
         'django': {  # Django의 기본 로거
@@ -152,7 +157,7 @@ LOGGING = {
             'propagate': True,  # 부모 로거로 로그 전파
         },
         'counter': {  # 특정 앱을 위한 로거 설정
-            'handlers': ['console'],  # 콘솔로 로그 출력
+            'handlers': ['console','file'],  # 콘솔로 로그 출력
             'level': 'INFO',  # INFO 이상의 로그를 기록
             'propagate': False,  # 부모 로거로 로그 전파 안 함
         },
