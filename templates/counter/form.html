@@ -126,12 +126,14 @@
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
+            <a href="tickersearch/" class="link">ticker 찾기</a>
             <input type="text" id="ticker" name="ticker" placeholder="주식의 ticker을 입력하세요. EX)000660: sk하이닉스" required>
             <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
             <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
             <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
             <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+
 
             <p><strong>ticker은 yahoo finance에 가서 찾으시면 됩니다. </strong></p>
             <p><strong>단, 한국 주식은 ~~.KS가 붙어있어요. ".KS"를 제외한 숫자만 입력해주세요.</strong></p>

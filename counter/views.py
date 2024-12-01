@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from counter.paradigm_shift_gptanswer import gpt_call
+from pykrx import stock
+from django.http import JsonResponse
+
 
 def show_chart(request):
     return render(request,'counter/plotly_candlestick_chart_1.html')
@@ -21,3 +24,14 @@ def count_characters(request):
         return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':final_earning_percent_str,'assistant_msg':assistant_msg})
 
     return render(request,'counter/form.html')
+
+def stock_ticker_data(request):
+    tickers = stock.get_market_ticker_list()
+    name_ticker_dict={}
+    for ticker in tickers:
+        name = stock.get_market_ticker_name(ticker)
+        name_ticker_dict[name]=ticker
+    return JsonResponse(name_ticker_dict)
+
+def show_tickersearch(request):
+    return render(request,'counter/tickersearch.html')

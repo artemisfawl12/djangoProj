@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from counter.views import show_chart
+from counter.views import show_tickersearch
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chart/',show_chart, name="show_chart" ),
     path('', include('counter.urls')),
+    path('tickersearch/',show_tickersearch, name="show_tickersearch")
 
 ]
