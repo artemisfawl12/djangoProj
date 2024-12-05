@@ -18,7 +18,16 @@ def count_characters(request):
         buy_strat = request.POST.get('buy_strat', '')
         sell_strat=request.POST.get('sell_strat','')
 
-        ret_list=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
+        try:
+            ret_list=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
+        except Exception as e:
+            ret_list=[]
+            ret_list.append(" ")
+            ret_list.append("ERROR OCCURED:",e)
+            ret_list.append("에러가 발생해서 차트도 표시되지 않아요.")
+
+
+
 
         final_earning_percent_str=ret_list[0]
         final_earning_percent_str="최종 수익률: "+final_earning_percent_str
