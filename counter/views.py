@@ -23,8 +23,8 @@ def count_characters(request):
         except Exception as e:
             ret_list=[]
             ret_list.append(" ")
-            ret_list.append("ERROR OCCURED:",e)
-            ret_list.append("에러가 발생해서 차트도 표시되지 않아요.")
+            ret_list.append("ERROR OCCURED:"+str(e)+"\n 뭔가 잘못됐는데요?")
+            ret_list.append("<p><strong>에러가 발생해서 차트도 표시되지 않아요.</strong></p>")
 
 
 
