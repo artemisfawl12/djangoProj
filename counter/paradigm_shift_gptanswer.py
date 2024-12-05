@@ -82,7 +82,8 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
 
-    final_earning_percentage=trade(start_date, end_date, str(received_ticker), exec_code=execute_code)
+    trade_received_list=trade(start_date, end_date, str(received_ticker), exec_code=execute_code)
+    final_earning_percentage=trade_received_list[0]
     print(str(final_earning_percentage))
     final_earning_percentage=str(float(final_earning_percentage)*100)+"%"
 
@@ -105,6 +106,7 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
     print(final_earning_percentage + "at paradigm file")
 
     ret_list=[final_earning_percentage,assistant_message]
+    ret_list.append(trade_received_list[1])
 
     return ret_list
 #gpt_call(0,".",".","20200101","20241101","000660")

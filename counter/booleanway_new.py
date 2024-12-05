@@ -1,9 +1,9 @@
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import webbrowser
 from pykrx import stock
 import pandas as pd
 import os
+from plotly.io import to_html
 
 import logging
 
@@ -117,8 +117,9 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         showlegend=True
     )
 
-    html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
-    fig.write_html(html_path)
+    #html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
+
+    return to_html(fig)
 
 class position:
     def __init__(self,startmoney):
@@ -303,16 +304,17 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
 
     #차트 그리기: chart_draw가 1일때만 그리자.
     if chart_draw_ornot==1:
-        chart_draw(stock_data,buy_date_dict,sell_date_dict,total_monitoring_dict)
+        html_txt=chart_draw(stock_data,buy_date_dict,sell_date_dict,total_monitoring_dict)
     else:
         pass
 
     print(final_money)
 
     ratio=final_money / startmoney
-    print(ratio)
     ratio=format(ratio,'.5f')
-    print(ratio)
-    return ratio
+    ret_list=[]
+    ret_list.append(str(ratio))
+    ret_list.append(html_txt)
+    return ret_list
 
 #trade("20210101","20241101","000660",exec_code=exec_code)
