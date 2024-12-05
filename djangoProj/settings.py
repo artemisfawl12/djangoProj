@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-pkq6yppi%4#r_vw&_a8fxa+0r9rprh85g*9r7m81ymt*fal+@y
 DEBUG = False
 
 ALLOWED_HOSTS = ['158.180.71.195', '127.0.0.1', 'localhost', "backtocks.net", 'www.backtocks.net']
-
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
