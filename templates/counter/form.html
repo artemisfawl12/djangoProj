@@ -112,6 +112,7 @@
         a {
             display: inline-block;
             margin-top: 20px;
+            margin-bottom: 20px;
             height: 30px;
             text-decoration: none;
             background-color: #4CAF50;
@@ -152,10 +153,12 @@
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
 
 
-            <p><strong>ticker은 yahoo finance에 가서 찾으시면 됩니다. </strong></p>
-            <p><strong>단, 한국 주식은 ~~.KS가 붙어있어요. ".KS"를 제외한 숫자만 입력해주세요.</strong></p>
             <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
-            <p id="loadtxt" class="hidden-text"><strong>gpt에게 답변을 받아오는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+            <p id="loadtxt" class="hidden-text"><strong>시뮬레이션 하는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+            <p><strong> 현재 시뮬레이션에 사용가능한 지표는 아래와 같습니다. </strong> </p>
+            <p><strong> 시가, 고가, 저가, 종가, 거래량 </strong></p>
+            <p><strong>위 지표들로 만들 수 있는 지표라면 얼마든지 요청가능합니다.</strong></p>
+            <p>EX)5일 이평선이 100일 이평선을 상향돌파: 이평선은 종가 데이터 기반으로 계산하므로 사용가능</p>
 
 
         </form>
