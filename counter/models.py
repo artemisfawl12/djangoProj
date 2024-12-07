@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class FileLog(models.Model):
-    ip_address=models.GenericIPAddressField()
+    ip_address=models.GenericIPAddressField(default='0.0.0.0') #default 추가
     timestamp=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50)
 

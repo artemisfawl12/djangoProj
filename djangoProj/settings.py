@@ -152,6 +152,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/var/log/counter/app.log',
+            #'filename': os.path.join(BASE_DIR,"app.log"),
 
         },
     },
