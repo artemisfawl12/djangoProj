@@ -185,18 +185,13 @@
             }
             return null;
         }
-        window.addEventListener('unload', () =>{
-            fetch('/delete-file/',{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
+        window.addEventListener('unload', () => {
+            const url = '/delete-file/';
+            const data = JSON.stringify({});
 
-                },
-                body:JSON.stringify({})
-            })
-            console.log()
-        })
+            navigator.sendBeacon(url, data);
+        });
+
 
 
 

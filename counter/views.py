@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from counter.paradigm_shift_gptanswer import gpt_call
 from pykrx import stock
 from django.http import JsonResponse
@@ -69,7 +71,7 @@ def stock_ticker_data(request):
 def show_tickersearch(request):
     return render(request,'counter/tickersearch.html')
 
-
+@csrf_exempt
 def delete_file(request):
     if request.method == 'POST':
         # 클라이언트의 IP 주소 가져오기
