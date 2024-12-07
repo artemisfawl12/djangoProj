@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from counter.views import show_chart
-from counter.views import show_tickersearch
+from counter.views import show_tickersearch, delete_file, statistic_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chart/',show_chart, name="show_chart" ),
     path('', include('counter.urls')),
-    path('tickersearch/',show_tickersearch, name="show_tickersearch")
+    path('tickersearch/',show_tickersearch, name="show_tickersearch"),
+    path('delete_file/',delete_file,name='delete_chart_file'),
+    path('statistic/',statistic_view, name='statistics'),
 
 ]

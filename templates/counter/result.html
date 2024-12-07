@@ -21,6 +21,10 @@
             font-size: 16px;
             font-weight: bold;
         }
+        .code-box pre {
+            white-space: pre-wrap; /* 줄바꿈 허용 */
+            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+        }
 
         /* 기본 스타일 */
         body {
@@ -138,6 +142,26 @@
             // 새로운 창 열기
             window.open('/chart/', '_blank', 'width=800,height=600');
         });
+        function getCookie(name){
+            const cookies=document.cookie.split(';');
+            for (let cookie of cookies){
+                if (cookie.trim().startsWith(name + '=')){
+                    return cookie.trim().split('=')[1];
+                }
+            }
+            return null;
+        }
+        window.addEventListener('unload', () =>{
+            fetch('/delete-file/',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+
+                },
+                body:JSON.stringify({})
+            })
+        })
     </script>
     <footer>
         &copy; 2024 당신의 웹사이트 이름

@@ -176,6 +176,27 @@
             loadtxt.classList.add("visible");
 
         };
+        function getCookie(name){
+            const cookies=document.cookie.split(';');
+            for (let cookie of cookies){
+                if (cookie.trim().startsWith(name + '=')){
+                    return cookie.trim().split('=')[1];
+                }
+            }
+            return null;
+        }
+        window.addEventListener('unload', () =>{
+            fetch('/delete-file/',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+
+                },
+                body:JSON.stringify({})
+            })
+            console.log()
+        })
 
 
 

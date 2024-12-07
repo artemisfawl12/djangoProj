@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,10 +147,12 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',  # 간단한 로그 형식 사용
         },
+
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/counter/app.log',  # 로그 파일 경로
+            'filename': '/var/log/counter/app.log',
+
         },
     },
     'loggers': {
