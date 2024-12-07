@@ -78,7 +78,7 @@ def delete_file(request):
         try:
             client_ip = get_ip(request)
             # 파일 경로 생성
-            filename = f"{client_ip}.html"
+            filename = f"chart_{client_ip}.html"
             file_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', filename)
 
             # 파일 삭제
@@ -101,7 +101,7 @@ def file_del_byip(request):
         ip=request.POST.get('ip')
         if not ip:
             return JsonResponse({'error': 'IP 주소가 제공되지 않았습니다.'}, status=400)
-        filename = f"{ip}.html"
+        filename = f"chart_{ip}.html"
         file_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', filename)
 
         if os.path.exists(file_path):
