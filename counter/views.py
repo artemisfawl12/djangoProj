@@ -92,6 +92,6 @@ def delete_file(request):
 
 def statistic_view(request):
     logs=FileLog.objects.all()
-    return render(request,'/counter/statistic.html',{'logs':logs})
+    return render(request,'counter/statistic.html',{'logs':logs})
 
 
