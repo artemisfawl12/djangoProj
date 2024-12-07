@@ -13,7 +13,7 @@ client = OpenAI(
     api_key=os.environ.get("OPEN_API_KEY")
 )
 
-model = "gpt-4"
+model = "gpt-3.5-turbo"
 
 def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received_ticker):
     logger.info("gpt_call function started")

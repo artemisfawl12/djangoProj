@@ -7,9 +7,15 @@ import os
 from counter.models import FileLog
 from datetime import datetime
 
-
+def get_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR', 'unknown_ip')
+    return ip
 def show_chart(request):
-    user_ip = request.META.get('REMOTE_ADDR', 'unknown_ip')  # IP 주소
+    user_ip = get_ip(request)  # IP 주소
     file_name = f"chart_{user_ip}.html"
     return render(request,'counter/'+file_name)
 def count_characters(request):
@@ -19,7 +25,7 @@ def count_characters(request):
         end_date = request.POST.get('end_date', '')
         buy_strat = request.POST.get('buy_strat', '')
         sell_strat=request.POST.get('sell_strat','')
-        user_ip = request.META.get('REMOTE_ADDR', 'unknown_ip')
+        user_ip = get_ip(request)
 
         try:
             ret_list=gpt_call(0,buy_strat,sell_strat,start_date,end_date,received_ticker=ticker)
@@ -39,7 +45,7 @@ def count_characters(request):
         html_txt=ret_list[2]
 
         # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
-        user_ip = request.META.get('REMOTE_ADDR', 'unknown_ip')  # IP 주소
+        user_ip = get_ip(request)  # IP 주소
 
         # 파일명 조합
         file_name = f"chart_{user_ip}.html"
@@ -68,7 +74,7 @@ def delete_file(request):
     if request.method == 'POST':
         # 클라이언트의 IP 주소 가져오기
         try:
-            client_ip = request.META.get('REMOTE_ADDR')
+            client_ip = get_ip(request)
             # 파일 경로 생성
             filename = f"{client_ip}.html"
             file_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', filename)
