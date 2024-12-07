@@ -25,5 +25,11 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <form id="wholeform" method="POST" action="{% url 'delete_html' %}">
+            {% csrf_token %}
+            <input type="text" id="ip" name="ip" placeholder="html file 삭제할 ip 입력" required>
+            <button id="submitbtn" type="submit">확인</button>
+    </form>
 </body>
 </html>

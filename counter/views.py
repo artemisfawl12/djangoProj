@@ -96,7 +96,22 @@ def delete_file(request):
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
+def file_del_byip(request):
+    if request.method == 'POST':
+        ip=request.POST.get('ip')
+        if not ip:
+            return JsonResponse({'error': 'IP 주소가 제공되지 않았습니다.'}, status=400)
+        filename = f"{ip}.html"
+        file_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', filename)
 
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status="closed and html file deleted")
+            return JsonResponse({'status': 'success', 'message': f'{filename} deleted.'})
+        else:
+            FileLog.objects.create(ip_address=ip, timestamp=datetime.now(),
+                                   status="closed and no html file.")
+            return JsonResponse({'status': 'not_found', 'message': f'{filename} does not exist.'})
 
 def statistic_view(request):
     logs=FileLog.objects.all()
