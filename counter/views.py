@@ -3,11 +3,80 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from counter.paradigm_shift_gptanswer import gpt_call
+from counter.paradigm_shift_gptanswer import gpt_call_multi
 from pykrx import stock
 from django.http import JsonResponse
 import os
 from counter.models import FileLog
 from datetime import datetime
+import json
+
+
+def multi_result(request):
+    if request.method == "POST":
+        tickers =request.POST.get('ticker','')
+        ticker_list = [ticker.strip() for ticker in tickers.split(',') if ticker.strip()]
+
+        start_date = request.POST.get('start_date', '')
+        end_date = request.POST.get('end_date', '')
+        buy_strat = request.POST.get('buy_strat', '')
+        sell_strat=request.POST.get('sell_strat','')
+        user_ip = get_ip(request)
+
+        try:
+            ret_list = gpt_call_multi(0, buy_strat, sell_strat, start_date, end_date, received_ticker=ticker_list)
+            if len(ret_list[0])==0:
+                buy_final = "err"
+                sell_final = "err"
+                total_final = "err"
+                error_list = ["gpt_call_multi error: "]
+                ticker_list = []
+                buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+                sell_final_json = json.dumps(sell_final, ensure_ascii=False)
+                total_final_json = json.dumps(total_final, ensure_ascii=False)
+
+            else:
+                buy_final = ret_list[0]
+                sell_final = ret_list[1]
+                total_final=ret_list[3]
+                error_list=ret_list[4]
+                ticker_list =ret_list[5]
+                buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+                sell_final_json = json.dumps(sell_final, ensure_ascii=False)
+                total_final_json = json.dumps(total_final, ensure_ascii=False)
+
+
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_success")
+
+        except Exception as e:
+            buy_final = "err"
+            sell_final = "err"
+            total_final = "err"
+            error_list = ["gpt_call_multi error: " + str(e)]
+            ticker_list = []
+            buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+            sell_final_json = json.dumps(sell_final, ensure_ascii=False)
+            total_final_json = json.dumps(total_final, ensure_ascii=False)
+
+
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed")
+
+
+        # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
+        user_ip = get_ip(request)  # IP 주소
+        """
+        # 파일명 조합
+        file_name = f"chart_{user_ip}.html"
+        html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
+
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html_txt)
+        """
+        return render(request, 'counter/multi_result.html',
+                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list, "ticker_list":ticker_list})
+
+    return render(request, 'counter/multi_form.html')
+
 
 def get_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

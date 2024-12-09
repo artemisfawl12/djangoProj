@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACKTOCKS.NET</title>
+    <style>
+        .hidden-text {
+                display: none; /* 기본적으로 숨김 */
+            }
+
+        .visible {
+            display: block; /* 보이게 변경 */
+        }
+        /*loader style*/
+        .loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3em;
+            position: relative;
+            vertical-align: middle;
+        }
+        .loader,
+    .loader:before,
+    .loader:after {
+        animation: 1s infinite ease-in-out;
+    }
+    .loader:before,
+    .loader:after {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+        .loader-3:before {
+        content: '';
+        border: 10px solid white;
+        top: -10px;
+        left: -10px;
+        animation-name: loader3;
+        }
+        .loader-black{
+            background-color: #333;
+        }
+        .loader.visible{
+            display: inline-block;
+        }
+
+        @keyframes loader3 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input_large {
+            width: 90%;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 30px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+
+        /* 반응형 처리 */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>주식 시뮬레이션</h1>
+    </header>
+    <main>
+        <form id="wholeform" method="POST">
+            {% csrf_token %}
+            <label for="name">INPUT</label>
+            <a href="tickersearch/" class="link">ticker 찾기</a>
+            <input type="text" id="ticker" name="ticker" placeholder="주식의 ticker을 쉼표로 구분해 입력하세요. EX)000660, 005930" required>
+            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
+            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
+            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
+            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
+            <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+
+
+            <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
+            <p id="loadtxt" class="hidden-text"><strong>시뮬레이션 하는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+            <p><strong> 현재 시뮬레이션에 사용가능한 지표는 아래와 같습니다. </strong> </p>
+            <p><strong> 시가, 고가, 저가, 종가, 거래량 </strong></p>
+            <p><strong>위 지표들로 만들 수 있는 지표라면 얼마든지 요청가능합니다.</strong></p>
+            <p>EX)5일 이평선이 100일 이평선을 상향돌파: 이평선은 종가 데이터 기반으로 계산하므로 사용가능</p>
+
+
+        </form>
+
+
+    </main>
+    <script>
+        const btn1 = document.getElementById("submitbtn");
+        const loader = document.getElementById("loading");
+        const loadtxt = document.getElementById("loadtxt");
+        const form=document.getElementById("wholeform");
+        function showLoading(){
+
+            loader.style.display="inline-block";
+            loadtxt.classList.add("visible");
+
+        };
+        function getCookie(name){
+            const cookies=document.cookie.split(';');
+            for (let cookie of cookies){
+                if (cookie.trim().startsWith(name + '=')){
+                    return cookie.trim().split('=')[1];
+                }
+            }
+            return null;
+        }
+        window.addEventListener('unload', () => {
+            const url = '/delete-file/';
+            const data = JSON.stringify({});
+
+            navigator.sendBeacon(url, data);
+        });
+
+
+
+
+    </script>
+</body>
+</html>
+
+

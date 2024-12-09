@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h3>Tickers</h3>
+        <ul id="tickerList">
+            <!-- Ticker 목록이 여기에 추가됨 -->
+        </ul>
+    </div>
+    <div class="content">
+        <h3>Data for <span id="selectedTicker">Select a Ticker</span></h3>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+            </tbody>
+        </table>
+
+    <script>
+        const buy_final = JSON.parse('{{ buy_final|safe|escapejs }}');
+        const sell_final = JSON.parse('{{ sell_final|safe|escapejs }}');
+        const total_final = JSON.parse('{{ total_final|safe|escapejs }}');
+        const ticker_list = JSON.parse('{{ticker_list|safe|escapejs }}');
+
+        // Ticker 목록 생성
+        const tickerList = document.getElementById("tickerList");
+        const dataTableBody = document.getElementById("dataTable").querySelector("tbody");
+        const selectedTicker = document.getElementById("selectedTicker");
+
+        Object.keys(buy_final).forEach(ticker => {
+            const li = document.createElement("li");
+            li.textContent = ticker;
+            li.className = "ticker";
+            li.onclick = () => displayData(ticker);
+            tickerList.appendChild(li);
+        });
+
+        // Ticker 데이터 표시
+        function displayData(ticker) {
+            selectedTicker.textContent = ticker;
+            dataTableBody.innerHTML = ""; // 이전 데이터를 제거
+
+            buy_final[ticker].forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.날짜}</td>
+                    <td>${row.수량}</td>
+                    <td>${row.가격}</td>
+                `;
+                dataTableBody.appendChild(tr);
+            });
+        }
+    </script>
+
+</body>
+</html>

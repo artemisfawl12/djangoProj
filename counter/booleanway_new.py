@@ -13,10 +13,77 @@ loggers=logging.getLogger('counter')
 
 #차트 만드는 부분을 따로 빼서 코드의 피로도를 줄인다.
 
+def prepare_data(df):
+    grouped_data = {}
+    for ticker, group in df.groupby(level='Ticker'):
+        grouped_data[ticker] = group.reset_index(level='Ticker').to_dict(orient='records')
+    return grouped_data
+
+def trade_multiple(start_date, end_date, tickers, exec_code):
+    #특정 범위 내 있는 티커들 전부에 대해서 trade를 돌린다
+    #매수기록 매도기록을 티커별로 정리한 dataframe을 return 받는다. 매도수량까지 넣으면 3차원이 되는데, 음 ... 분할매매 기능을 넣을진 모르겠으나 그냥 살려두자
+    #
+
+    buy_date_list=[]
+    sell_date_list=[]
+    total_monitoring_list=[]
+    ticker_list=[]
+    failed_ticker_list=[]
+    total_onlymoney_df=pd.DataFrame()
+    for ticker in tickers:
+        try:
+            ret_list=trade(start_date,end_date,ticker,exec_code,100000000,2)
+            stock_data = ret_list[0]
+            buy_date_dict = ret_list[1]
+            sell_date_dict = ret_list[2]
+            total_monitoring_dict = ret_list[3]
+            buy_price_list = []
+            sell_price_list = []
+            for d in buy_date_dict:
+                buy_price_list.append(stock_data.loc[d, '종가'])
+            for d in sell_date_dict:
+                sell_price_list.append(stock_data.loc[d, '종가'])
+
+            buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
+            buy_date_price_df_temp['가격'] = buy_price_list
+            sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
+            sell_date_price_df_temp['가격'] = sell_price_list
+            total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),
+                                                    columns=["날짜", "총 자산"]).set_index('날짜')
+
+            buy_date_list.append(buy_date_price_df_temp)
+            sell_date_list.append(sell_date_price_df_temp)
+            total_monitoring_list.append(total_monitoring_df_temp)
+            ticker_list.append(ticker)
+            total_onlymoney_df = total_onlymoney_df.add(total_monitoring_df_temp, fill_value=0)
+        except Exception as e:
+            failed_ticker_list.append(str(ticker)+": E || "+str(e))
+
+
+        buydf_final = pd.concat(buy_date_list, keys=ticker_list, names=["tickers", "날짜"])
+        # multiindex가 ticker, 날짜이고, 날짜, 수량, 가격 3개의 column을 가진듯 하다 .. .
+        selldf_final = pd.concat(sell_date_list, keys=ticker_list, names=["tickers", "날짜"])
+        totalmonitordf_final = pd.concat(total_monitoring_list, keys=ticker_list, names=["tickers", "날짜"])
+        multi_ret_list = []
+        multi_ret_list.append(prepare_data(buydf_final))
+        multi_ret_list.append(prepare_data(selldf_final))
+        multi_ret_list.append(prepare_data(totalmonitordf_final))
+        multi_ret_list.append(total_onlymoney_df)
+        multi_ret_list.append(failed_ticker_list)
+        multi_ret_list.append(ticker_list)
+
+    return multi_ret_list
+
+
+
+
+
+
+
+
+
+
 def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
-
-
-    # 차트 그리기
     fig = make_subplots(
         rows=3, cols=1,
         shared_xaxes=True,
@@ -117,9 +184,10 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         showlegend=True
     )
 
-    #html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
+    # html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', 'plotly_candlestick_chart_1.html')
 
     return to_html(fig)
+
 
 class position:
     def __init__(self,startmoney):
@@ -302,19 +370,35 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
     final_money=trader.current(code_curpricedict)
 
 
-    #차트 그리기: chart_draw가 1일때만 그리자.
+    #차트 그리기: chart_draw가 1일때만 그리자. 이거 이제보니까 chart_draw가 2이면 뭐 어떻게 해야겠는데?
     if chart_draw_ornot==1:
         html_txt=chart_draw(stock_data,buy_date_dict,sell_date_dict,total_monitoring_dict)
+        print(final_money)
+
+        ratio = final_money / startmoney
+        ratio = format(ratio, '.5f')
+        ret_list = []
+        ret_list.append(str(ratio))
+        ret_list.append(html_txt)
+        return ret_list
+    elif chart_draw_ornot==2:
+        ret_list=[]
+        ret_list.append(stock_data)
+        ret_list.append(buy_date_dict)
+        ret_list.append(sell_date_dict)
+        ret_list.append(total_monitoring_dict)
     else:
         pass
 
-    print(final_money)
-
-    ratio=final_money / startmoney
-    ratio=format(ratio,'.5f')
-    ret_list=[]
-    ret_list.append(str(ratio))
-    ret_list.append(html_txt)
-    return ret_list
 
 #trade("20210101","20241101","000660",exec_code=exec_code)
+
+#def market_trade(start_date,end_date,market_name,exec_code,):
+    #여기선 마켓에 대해서 할건데,,, 포트폴리오 구성방안 칸과, 각 주식에 대한 전략 칸을 분배를 해야될거같다.
+    #그렇다면 포트폴리오 클래스를 만들어서 각 시기별 보유할 종목의 티커? 를 갖고있는다거나 해야겠다.
+    #근데 만약에 그런거 없다면 음 .. 그럼그냥 마켓대상인것/아닌것으로 페이지를 쪼갤게 아니고, 포트폴리오 관리 기준 유무로 쪼갤까?
+    #그래서 전 종목 대상 시뮬레이션도 가능하게 ...
+    #근데사실, 전종목 중에서 PER이 상위 5등안에 들기: 이런 전략이면 상대적인 수치가 없어서 그런거지 전종목에 대해서 알고리즘을 들이민다는 기준에서
+    #보면 똑같지않나. 상위 5등안에 들면 매도 ~머 이거랑 머가 다르노 이거야. 이러면 그냥 상대적인 수치를 몇개 만들어서 넣어야되나? 데이터 양이 존나커지는데
+    #이러면 음 ... 그냥 절대지표 상대지표 나눠서 지표를 제공하고, TRADE는 똑같이 쓰고, chart만 하나더 만드는게 좋을지도 몰라
+
