@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Multi_result page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
     <style>
         .ticker-container {
         width: 80%;
@@ -128,9 +130,6 @@
 </head>
 
 <body>
-    <div>
-        {{ total_final|safe }}
-    </div>
     <div style="width: 80%; max-width: 800px; margin: auto;">
         <canvas id="assetChart"></canvas>
     </div>
