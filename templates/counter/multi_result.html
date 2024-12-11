@@ -15,7 +15,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        border: 1px solid #ccc;
+        border: 1px solid #eeeeee;
         border-radius: 8px;
         overflow-y: scroll;
         height: 150px; /* 스크롤 영역 */
@@ -69,7 +69,7 @@
         border-collapse: collapse;
         margin-top: 10px;
         background-color: #fff;
-        border: 1px solid #ddd;
+        border: 1px solid #fff;
         border-radius: 8px;
         overflow: hidden;
     }
@@ -151,6 +151,7 @@
                 <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
             </tbody>
         </table>
+    </div>
     <div class="content">
         <h3><span id="selectedTicker_2">티커를 골라주세요</span> 의 매도 기록</h3>
         <table id="dataTable_sell" class="dataTable">
@@ -173,6 +174,17 @@
         const total_final = JSON.parse('{{ total_final|safe|escapejs }}');
         const ticker_list = JSON.parse('{{ticker_list|safe|escapejs }}');
         const name_ticker_dict=JSON.parse('{{name_ticker_dict|safe|escapejs }}')
+        if (total_final?.data && Array.isArray(total_final.data)) {
+            const labels = total_final.data.map(item => item["날짜"]);
+            const prices = total_final.data.map(item => item["총 자산"]);
+
+            console.log("Labels:", labels);
+            console.log("Prices:", prices);
+        } else {
+            console.error("total_final.data가 배열이 아니거나 undefined입니다.");
+        }
+
+
 
         // Ticker 목록 생성
         const tickerList = document.getElementById("tickerList");
