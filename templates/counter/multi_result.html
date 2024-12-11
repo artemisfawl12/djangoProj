@@ -5,7 +5,8 @@
     <title>Multi_result page</title>
     <style>
         .ticker-container {
-        width: 300px;
+        width: 80%;
+        max-width: 600px;
         margin: 20px auto;
     }
 
@@ -42,7 +43,7 @@
         max-width: 800px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: #4CAF50;
         border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,12 +58,12 @@
     }
 
     .content #selectedTicker {
-        color: #007BFF;
+        color: #45a049;
         font-weight: bold;
     }
 
     /* 테이블 스타일 */
-    #dataTable {
+    .dataTable {
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
@@ -72,7 +73,7 @@
         overflow: hidden;
     }
 
-    #dataTable thead th {
+    .dataTable thead th {
         background-color: #007BFF;
         color: white;
         text-align: left;
@@ -81,43 +82,43 @@
         border-bottom: 2px solid #0056b3;
     }
 
-    #dataTable tbody tr {
+    .dataTable tbody tr {
         border-bottom: 1px solid #ddd;
     }
 
-    #dataTable tbody tr:nth-child(even) {
+    .dataTable tbody tr:nth-child(even) {
         background-color: #f7f7f7;
     }
 
-    #dataTable tbody td {
+    .dataTable tbody td {
         padding: 10px;
         text-align: left;
     }
 
     /* Hover 스타일 */
-    #dataTable tbody tr:hover {
+    .dataTable tbody tr:hover {
         background-color: #f0f8ff;
     }
 
     /* 스크롤 가능한 테이블 */
-    #dataTable {
+    .dataTable {
         display: block;
         max-height: 300px;
         overflow-y: auto;
     }
 
-    #dataTable thead,
-    #dataTable tbody tr {
+    .dataTable thead,
+    .dataTable tbody tr {
         display: table;
         width: 100%;
         table-layout: fixed;
     }
 
-    #dataTable thead {
+    .dataTable thead {
         width: calc(100% - 1em); /* 스크롤바 보정 */
     }
 
-    #dataTable tbody {
+    .dataTable tbody {
         display: block;
         max-height: 250px; /* 스크롤 영역 */
         overflow-y: auto;
@@ -134,7 +135,21 @@
     </div>
     <div class="content">
         <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
-        <table id="dataTable">
+        <table id="dataTable_buy" class="dataTable">
+            <thead>
+                <tr>
+                    <th>날짜</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+            </tbody>
+        </table>
+    <div class="content">
+        <h3><span id="selectedTicker_2">티커를 골라주세요</span> 의 매도 기록</h3>
+        <table id="dataTable_sell" class="dataTable">
             <thead>
                 <tr>
                     <th>날짜</th>
@@ -157,8 +172,10 @@
 
         // Ticker 목록 생성
         const tickerList = document.getElementById("tickerList");
-        const dataTableBody = document.getElementById("dataTable").querySelector("tbody");
+        const dataTableBody_buy = document.getElementById("dataTable_buy").querySelector("tbody");
+        const dataTableBody_sell = document.getElementById("dataTable_buy").querySelector("tbody");
         const selectedTicker = document.getElementById("selectedTicker");
+        const selectedTicker_2 = document.getElementById("selectedTicker_2");
 
         Object.keys(buy_final).forEach(ticker => {
             const li = document.createElement("li");
@@ -171,7 +188,8 @@
         // Ticker 데이터 표시
         function displayData(ticker) {
             selectedTicker.textContent = ticker + name_ticker_dict[ticker];
-            dataTableBody.innerHTML = ""; // 이전 데이터를 제거
+            dataTableBody_sell.innerHTML = ""; // 이전 데이터를 제거
+            dataTableBody_buy.innerHTML = "";
 
             buy_final[ticker].forEach(row => {
                 const tr = document.createElement("tr");
@@ -180,7 +198,16 @@
                     <td>${row.수량}</td>
                     <td>${row.가격}</td>
                 `;
-                dataTableBody.appendChild(tr);
+                dataTableBody_buy.appendChild(tr);
+            });
+            sell_final[ticker].forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.날짜}</td>
+                    <td>${row.수량}</td>
+                    <td>${row.가격}</td>
+                `;
+                dataTableBody_sell.appendChild(tr);
             });
         }
     </script>
