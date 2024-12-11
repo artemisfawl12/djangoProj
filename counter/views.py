@@ -35,6 +35,8 @@ def multi_result(request):
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
 
+
+
             else:
                 buy_final = ret_list[0]
                 sell_final = ret_list[1]
@@ -59,7 +61,7 @@ def multi_result(request):
             total_final_json = json.dumps(total_final, ensure_ascii=False)
 
 
-            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed")
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed"+str(e))
 
 
         # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
