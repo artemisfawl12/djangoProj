@@ -128,6 +128,9 @@
 </head>
 
 <body>
+    <div>
+        {{ total_final|safe }}
+    </div>
     <div style="width: 80%; max-width: 800px; margin: auto;">
         <canvas id="assetChart"></canvas>
     </div>
@@ -174,6 +177,9 @@
         const total_final = JSON.parse('{{ total_final|safe|escapejs }}');
         const ticker_list = JSON.parse('{{ticker_list|safe|escapejs }}');
         const name_ticker_dict=JSON.parse('{{name_ticker_dict|safe|escapejs }}')
+        console.log("total_final.data:", total_final?.data);
+        console.log("total dinal data printed")
+
         if (total_final?.data && Array.isArray(total_final.data)) {
             const labels = total_final.data.map(item => item["날짜"]);
             const prices = total_final.data.map(item => item["총 자산"]);
