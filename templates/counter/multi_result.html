@@ -46,7 +46,7 @@
         max-width: 800px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #ddd;
+        background-color: #ffffff;
         border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -194,7 +194,7 @@
         // Ticker 목록 생성
         const tickerList = document.getElementById("tickerList");
         const dataTableBody_buy = document.getElementById("dataTable_buy").querySelector("tbody");
-        const dataTableBody_sell = document.getElementById("dataTable_buy").querySelector("tbody");
+        const dataTableBody_sell = document.getElementById("dataTable_sell").querySelector("tbody");
         const selectedTicker = document.getElementById("selectedTicker");
         const selectedTicker_2 = document.getElementById("selectedTicker_2");
         const labels = total_final.data.map(item => item["날짜"]);
@@ -237,7 +237,7 @@
                         type: 'time', // 날짜 타입
                         time: {
                             unit: 'day', // X축 단위
-                            tooltipFormat: 'YYYY-MM-DD' // 툴팁 형식
+                            tooltipFormat: 'yyyy-MM-DD' // 툴팁 형식
                         }
                     },
                     y: {
@@ -264,8 +264,8 @@
 
         // Ticker 데이터 표시
         function displayData(ticker) {
-            selectedTicker.textContent = ticker + name_ticker_dict[ticker];
-            selectedTicker_2.textContent = ticker + name_ticker_dict[ticker];
+            selectedTicker.textContent = name_ticker_dict[ticker];
+            selectedTicker_2.textContent = name_ticker_dict[ticker];
             dataTableBody_sell.innerHTML = ""; // 이전 데이터를 제거
             dataTableBody_buy.innerHTML = "";
 
@@ -280,13 +280,13 @@
                 console.log("buy 표 실행");
             });
             sell_final[ticker].forEach(row => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
+                const tr2 = document.createElement("tr");
+                tr2.innerHTML = `
                     <td>${row.날짜}</td>
                     <td>${row.수량}</td>
                     <td>${row.가격}</td>
                 `;
-                dataTableBody_sell.appendChild(tr);
+                dataTableBody_sell.appendChild(tr2);
                 console.log("sell 표 실행");
             });
         }
