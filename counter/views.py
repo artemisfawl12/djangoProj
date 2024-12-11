@@ -16,6 +16,12 @@ def multi_result(request):
     if request.method == "POST":
         tickers =request.POST.get('ticker','')
         ticker_list = [ticker.strip() for ticker in tickers.split(',') if ticker.strip()]
+        name_ticker_dict={}
+        for ticker in ticker_list:
+            name = stock.get_market_ticker_name(ticker)
+            name_ticker_dict[ticker] = name
+        name_ticker_dict_json=json.dumps(name_ticker_dict,ensure_ascii=False)
+
 
         start_date = request.POST.get('start_date', '')
         end_date = request.POST.get('end_date', '')
@@ -68,6 +74,7 @@ def multi_result(request):
             error_list_json = json.dumps(error_list, ensure_ascii=False)
 
 
+
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed: "+str(e))
 
 
@@ -82,7 +89,7 @@ def multi_result(request):
             f.write(html_txt)
         """
         return render(request, 'counter/multi_result.html',
-                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list_json, "ticker_list":ticker_list_json})
+                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list_json, "ticker_list":ticker_list_json, "name_ticker_dict": name_ticker_dict_json} )
 
     return render(request, 'counter/multi_form.html')
 
