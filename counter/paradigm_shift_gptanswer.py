@@ -22,6 +22,7 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
     #새로운 차트의 필요성이 느껴진다. char draw 값이 0일 때, 포트폴리오 변화와 총자산 변화정도를 보여줄 수 있는 것이 필요합니다.
     logger.info("gpt_call_multi function started")
 
+
     query = (
 
             """
@@ -57,6 +58,7 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
 
     logger.info("query:" + query)
     logger.info("message to gpt sent")
+    """
     response = client.chat.completions.create(model=model, messages=messages)
     logger.info("message to gpt received")
 
@@ -80,13 +82,24 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
     else:
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
+    
+    """
+    execute_code="""stock_data['5일이평선'] = stock_data['종가'].rolling(window=5).mean()
+    
+# 20일 이평선 생성
+stock_data['20일이평선'] = stock_data['종가'].rolling(window=20).mean()
 
+# 100일 이평선 생성
+stock_data['100일이평선'] = stock_data['종가'].rolling(window=100).mean()
+
+# 조건문 작성 - 5일 이평선이 100일 이평선 상향돌파
+condition_buy = (stock_data['5일이평선'] > stock_data['100일이평선']) & (stock_data['5일이평선'].shift() < stock_data['100일이평선'].shift())
+
+# 조건문 작성 - 5일 이평선이 20일 이평선 하향돌파
+condition_sell = (stock_data['5일이평선'] < stock_data['20일이평선']) & (stock_data['5일이평선'].shift() > stock_data['20일이평선'].shift())
+"""
     ret_list = trade_multiple(start_date, end_date, received_ticker_list, exec_code=execute_code)
 
-    trade_received_list = trade(start_date, end_date, str(received_ticker_list), exec_code=execute_code)
-    final_earning_percentage = trade_received_list[0]
-    print(str(final_earning_percentage))
-    final_earning_percentage = str(float(final_earning_percentage) * 100) + "%"
 
     """
     user_check = input("이 답변 및 로직에 만족하시나요? 만족하면 y, 만족하지 않으면 n을 입력해주세요: ")
@@ -99,11 +112,6 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
         print("try one more time. you used this" + str(try_count) + "times, and 3 is maximum")
         gpt_call(try_count)
     """
-
-    print(final_earning_percentage + "at paradigm file")
-
-    ret_list = [final_earning_percentage, assistant_message]
-    ret_list.append(trade_received_list[1])
 
     return ret_list
 
@@ -203,7 +211,10 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
     ret_list.append(trade_received_list[1])
 
     return ret_list
-#gpt_call(0,".",".","20200101","20241101","000660")
+
+testlis=["000660","005930"]
+answer=gpt_call_multi(0,"5일 이평선이 100일 이평선 상향돌파","5일 이평선이 20일 이평선 하향돌파","20200101","20241101",testlis)
+print(answer[0])
 
 
 

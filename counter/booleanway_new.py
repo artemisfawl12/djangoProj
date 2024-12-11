@@ -15,14 +15,16 @@ loggers=logging.getLogger('counter')
 
 def prepare_data(df):
     grouped_data = {}
-    for ticker, group in df.groupby(level='Ticker'):
-        grouped_data[ticker] = group.reset_index(level='Ticker').to_dict(orient='records')
+    for ticker, group in df.groupby(level='tickers'):
+        grouped_data[ticker] = group.reset_index(level='tickers').to_dict(orient='records')
     return grouped_data
 
 def trade_multiple(start_date, end_date, tickers, exec_code):
     #특정 범위 내 있는 티커들 전부에 대해서 trade를 돌린다
     #매수기록 매도기록을 티커별로 정리한 dataframe을 return 받는다. 매도수량까지 넣으면 3차원이 되는데, 음 ... 분할매매 기능을 넣을진 모르겠으나 그냥 살려두자
     #
+
+    print(tickers)
 
     buy_date_list=[]
     sell_date_list=[]
@@ -39,15 +41,41 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
             total_monitoring_dict = ret_list[3]
             buy_price_list = []
             sell_price_list = []
-            for d in buy_date_dict:
-                buy_price_list.append(stock_data.loc[d, '종가'])
-            for d in sell_date_dict:
-                sell_price_list.append(stock_data.loc[d, '종가'])
+            if len(buy_date_dict)!=0:
+                for d in buy_date_dict:
+                    buy_price_list.append(stock_data.loc[d, '종가'])
+                buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
+                buy_date_price_df_temp['가격'] = buy_price_list
+            else:
+                data = {
+                    "수량": [0],
+                    "가격": [0],
+                }
 
-            buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
-            buy_date_price_df_temp['가격'] = buy_price_list
-            sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
-            sell_date_price_df_temp['가격'] = sell_price_list
+                # DataFrame 생성
+                buy_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
+
+                # Index 이름 설정
+                buy_date_price_df_temp.index.name = "날짜"
+
+            if len(sell_date_dict) != 0:
+                for d in sell_date_dict:
+                    sell_price_list.append(stock_data.loc[d, '종가'])
+                sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict.items()), columns=['날짜', '수량']).set_index(
+                    '날짜')
+                sell_date_price_df_temp['가격'] = sell_price_list
+
+            else:
+                data = {
+                    "수량": [0],
+                    "가격": [0],
+                }
+
+                # DataFrame 생성
+                buy_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
+
+                # Index 이름 설정
+                buy_date_price_df_temp.index.name = "날짜"
             total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),
                                                     columns=["날짜", "총 자산"]).set_index('날짜')
 
@@ -58,10 +86,12 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
             total_onlymoney_df = total_onlymoney_df.add(total_monitoring_df_temp, fill_value=0)
         except Exception as e:
             failed_ticker_list.append(str(ticker)+": E || "+str(e))
-
+            print(str(ticker)+"failed :"+str(e))
 
         buydf_final = pd.concat(buy_date_list, keys=ticker_list, names=["tickers", "날짜"])
         # multiindex가 ticker, 날짜이고, 날짜, 수량, 가격 3개의 column을 가진듯 하다 .. .
+        print(buydf_final)
+        print("buydf end")
         selldf_final = pd.concat(sell_date_list, keys=ticker_list, names=["tickers", "날짜"])
         totalmonitordf_final = pd.concat(total_monitoring_list, keys=ticker_list, names=["tickers", "날짜"])
         multi_ret_list = []
@@ -267,6 +297,7 @@ class position:
 
 def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_draw_ornot=1):
     loggers.info("trade func in booleanway _ py started")
+    print("trade started:"+str(ticker))
 
     trader=position(startmoney)
     stock_data = stock.get_market_ohlcv(str(start_date), str(end_date), ticker)
@@ -344,7 +375,6 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
         elif condition_sell[d_d]==True:
             #trader의 sell 함수의 return값은: 실제 매도가 이루어지면 1을 받고, 현재 보유한 주식이 없어 매도가 이루어지지 않았으면 0을 받음.
             received_sell_count=trader.sell(ticker,stock_data.iloc[loc]["종가"],1)
-            print(str(d_d)+"매도 신호")
             if received_sell_count!=0 and received_sell_count!=None:
                 print("매도가격: " + str(stock_data.iloc[loc]["종가"]))
                 code_curpricedict = {}
@@ -382,13 +412,17 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
         ret_list.append(html_txt)
         return ret_list
     elif chart_draw_ornot==2:
+        print("chart num==2")
         ret_list=[]
         ret_list.append(stock_data)
         ret_list.append(buy_date_dict)
         ret_list.append(sell_date_dict)
         ret_list.append(total_monitoring_dict)
     else:
+        print("passed")
         pass
+
+    return ret_list
 
 
 #trade("20210101","20241101","000660",exec_code=exec_code)
