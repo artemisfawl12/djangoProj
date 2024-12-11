@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Multi_result page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .ticker-container {
         width: 80%;
@@ -43,7 +44,7 @@
         max-width: 800px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #4CAF50;
+        background-color: #ddd;
         border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -127,6 +128,9 @@
 </head>
 
 <body>
+    <div style="width: 80%; max-width: 800px; margin: auto;">
+        <canvas id="assetChart"></canvas>
+    </div>
     <div class="ticker-container">
         <h3>Tickers</h3>
         <ul id="tickerList" class="ticker-list">
@@ -176,6 +180,58 @@
         const dataTableBody_sell = document.getElementById("dataTable_buy").querySelector("tbody");
         const selectedTicker = document.getElementById("selectedTicker");
         const selectedTicker_2 = document.getElementById("selectedTicker_2");
+        const labels = total_final.data.map(item => item["날짜"]);
+        const dataPoints = total_final.data.map(item => item["총 자산"]);
+
+        // Chart.js로 그래프 그리기
+        const ctx = document.getElementById('assetChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line', // 선 그래프
+            data: {
+                labels: labels, // X축: 날짜
+                datasets: [{
+                    label: '총 자산',
+                    data: dataPoints, // Y축: 총 자산
+                    borderColor: '#007BFF',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3, // 곡선의 매끄러움 조절
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '날짜'
+                        },
+                        type: 'time', // 날짜 타입
+                        time: {
+                            unit: 'day', // X축 단위
+                            tooltipFormat: 'YYYY-MM-DD' // 툴팁 형식
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '총 자산'
+                        },
+                        ticks: {
+                            callback: value => value.toLocaleString() // 천 단위 구분 추가
+                        }
+                    }
+                }
+            }
+        });
+
 
         Object.keys(buy_final).forEach(ticker => {
             const li = document.createElement("li");
@@ -188,6 +244,7 @@
         // Ticker 데이터 표시
         function displayData(ticker) {
             selectedTicker.textContent = ticker + name_ticker_dict[ticker];
+            selectedTicker_2.textContent = ticker + name_ticker_dict[ticker];
             dataTableBody_sell.innerHTML = ""; // 이전 데이터를 제거
             dataTableBody_buy.innerHTML = "";
 
