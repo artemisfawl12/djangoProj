@@ -58,7 +58,7 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
 
     logger.info("query:" + query)
     logger.info("message to gpt sent")
-    """
+
     response = client.chat.completions.create(model=model, messages=messages)
     logger.info("message to gpt received")
 
@@ -83,21 +83,7 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
     
-    """
-    execute_code="""stock_data['5일이평선'] = stock_data['종가'].rolling(window=5).mean()
-    
-# 20일 이평선 생성
-stock_data['20일이평선'] = stock_data['종가'].rolling(window=20).mean()
 
-# 100일 이평선 생성
-stock_data['100일이평선'] = stock_data['종가'].rolling(window=100).mean()
-
-# 조건문 작성 - 5일 이평선이 100일 이평선 상향돌파
-condition_buy = (stock_data['5일이평선'] > stock_data['100일이평선']) & (stock_data['5일이평선'].shift() < stock_data['100일이평선'].shift())
-
-# 조건문 작성 - 5일 이평선이 20일 이평선 하향돌파
-condition_sell = (stock_data['5일이평선'] < stock_data['20일이평선']) & (stock_data['5일이평선'].shift() > stock_data['20일이평선'].shift())
-"""
     ret_list = trade_multiple(start_date, end_date, received_ticker_list, exec_code=execute_code)
 
 
