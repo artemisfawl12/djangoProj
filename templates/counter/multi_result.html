@@ -174,7 +174,7 @@
     <script>
         const buy_final = JSON.parse('{{ buy_final|safe|escapejs }}');
         const sell_final = JSON.parse('{{ sell_final|safe|escapejs }}');
-        const total_final = JSON.parse('{{ total_final|safe }}');
+        const total_final = JSON.parse(JSON.parse('{{ total_final|safe|escapejs }}'));
         const ticker_list = JSON.parse('{{ticker_list|safe|escapejs }}');
         const name_ticker_dict=JSON.parse('{{name_ticker_dict|safe|escapejs }}')
         console.log("total_final.data:", total_final?.data);
