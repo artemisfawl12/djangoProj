@@ -24,7 +24,7 @@ def multi_result(request):
         user_ip = get_ip(request)
 
         try:
-            ret_list = gpt_call_multi(0, buy_strat, sell_strat, start_date, end_date, received_ticker=ticker_list)
+            ret_list = gpt_call_multi(0, buy_strat, sell_strat, start_date, end_date, ticker_list)
             if len(ret_list[0])==0:
                 buy_final = "err"
                 sell_final = "err"
