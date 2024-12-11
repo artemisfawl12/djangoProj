@@ -37,6 +37,91 @@
         background-color: #007BFF;
         color: #fff;
     }
+    .content {
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    /* 제목 스타일 */
+    .content h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .content #selectedTicker {
+        color: #007BFF;
+        font-weight: bold;
+    }
+
+    /* 테이블 스타일 */
+    #dataTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    #dataTable thead th {
+        background-color: #007BFF;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        font-weight: bold;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    #dataTable tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #dataTable tbody tr:nth-child(even) {
+        background-color: #f7f7f7;
+    }
+
+    #dataTable tbody td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Hover 스타일 */
+    #dataTable tbody tr:hover {
+        background-color: #f0f8ff;
+    }
+
+    /* 스크롤 가능한 테이블 */
+    #dataTable {
+        display: block;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    #dataTable thead,
+    #dataTable tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    #dataTable thead {
+        width: calc(100% - 1em); /* 스크롤바 보정 */
+    }
+
+    #dataTable tbody {
+        display: block;
+        max-height: 250px; /* 스크롤 영역 */
+        overflow-y: auto;
+    }
     </style>
 </head>
 
@@ -48,11 +133,11 @@
         </ul>
     </div>
     <div class="content">
-        <h3>Data for <span id="selectedTicker">Select a Ticker</span></h3>
+        <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
         <table id="dataTable">
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>날짜</th>
                     <th>수량</th>
                     <th>가격</th>
                 </tr>
