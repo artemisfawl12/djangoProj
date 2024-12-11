@@ -34,6 +34,9 @@ def multi_result(request):
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
+                ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
+                error_list_json=json.dumps(error_list,ensure_ascii=False)
+                FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_callmulti_len==0")
 
 
 
@@ -46,9 +49,11 @@ def multi_result(request):
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
+                ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
+                error_list_json = json.dumps(error_list, ensure_ascii=False)
+                FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_callmulti_success")
 
 
-            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_success")
 
         except Exception as e:
             buy_final = "err"
@@ -59,6 +64,8 @@ def multi_result(request):
             buy_final_json = json.dumps(buy_final, ensure_ascii=False)
             sell_final_json = json.dumps(sell_final, ensure_ascii=False)
             total_final_json = json.dumps(total_final, ensure_ascii=False)
+            ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
+            error_list_json = json.dumps(error_list, ensure_ascii=False)
 
 
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed: "+str(e))
@@ -75,7 +82,7 @@ def multi_result(request):
             f.write(html_txt)
         """
         return render(request, 'counter/multi_result.html',
-                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list, "ticker_list":ticker_list})
+                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list_json, "ticker_list":ticker_list_json})
 
     return render(request, 'counter/multi_form.html')
 
