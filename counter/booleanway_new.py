@@ -44,7 +44,10 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
             if len(buy_date_dict)!=0:
                 for d in buy_date_dict:
                     buy_price_list.append(stock_data.loc[d, '종가'])
-                buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict.items()), columns=['날짜', '수량']).set_index('날짜')
+
+                buy_date_dict_str = {str(key): value for key, value in buy_date_dict.items()}
+
+                buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict_str.items()), columns=['날짜', '수량']).set_index('날짜')
                 buy_date_price_df_temp['가격'] = buy_price_list
             else:
                 data = {
@@ -61,7 +64,8 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
             if len(sell_date_dict) != 0:
                 for d in sell_date_dict:
                     sell_price_list.append(stock_data.loc[d, '종가'])
-                sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict.items()), columns=['날짜', '수량']).set_index(
+                sell_date_dict_str = {str(key): value for key, value in sell_date_dict.items()}
+                sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict_str.items()), columns=['날짜', '수량']).set_index(
                     '날짜')
                 sell_date_price_df_temp['가격'] = sell_price_list
 
