@@ -61,7 +61,7 @@ def multi_result(request):
             total_final_json = json.dumps(total_final, ensure_ascii=False)
 
 
-            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed"+str(e))
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed: "+str(e))
 
 
         # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성

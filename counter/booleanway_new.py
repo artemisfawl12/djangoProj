@@ -98,7 +98,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
         multi_ret_list.append(prepare_data(buydf_final))
         multi_ret_list.append(prepare_data(selldf_final))
         multi_ret_list.append(prepare_data(totalmonitordf_final))
-        multi_ret_list.append(total_onlymoney_df)
+        multi_ret_list.append(total_onlymoney_df.to_json(orient="table", date_format="iso", index=True))
         multi_ret_list.append(failed_ticker_list)
         multi_ret_list.append(ticker_list)
 
