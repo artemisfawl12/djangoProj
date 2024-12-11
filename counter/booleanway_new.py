@@ -16,7 +16,7 @@ loggers=logging.getLogger('counter')
 def prepare_data(df):
     grouped_data = {}
     for ticker, group in df.groupby(level='tickers'):
-        grouped_data[ticker] = group.reset_index(level='tickers').to_dict(orient='records')
+        grouped_data[ticker] = group.reset_index(level='날짜').to_dict(orient='records')
     return grouped_data
 
 def trade_multiple(start_date, end_date, tickers, exec_code):
@@ -96,6 +96,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
         totalmonitordf_final = pd.concat(total_monitoring_list, keys=ticker_list, names=["tickers", "날짜"])
         multi_ret_list = []
         multi_ret_list.append(prepare_data(buydf_final))
+        print(prepare_data(buydf_final))
         multi_ret_list.append(prepare_data(selldf_final))
         multi_ret_list.append(prepare_data(totalmonitordf_final))
         multi_ret_list.append(total_onlymoney_df.to_json(orient="table", date_format="iso", index=True))

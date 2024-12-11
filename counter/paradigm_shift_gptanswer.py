@@ -212,9 +212,7 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
 
     return ret_list
 
-testlis=["000660","005930"]
-answer=gpt_call_multi(0,"5일 이평선이 100일 이평선 상향돌파","5일 이평선이 20일 이평선 하향돌파","20200101","20241101",testlis)
-print(answer[0])
+
 
 
 
