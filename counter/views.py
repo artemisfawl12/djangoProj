@@ -208,6 +208,8 @@ def stock_ticker_data(request):
 
 def show_tickersearch(request):
     return render(request,'counter/tickersearch.html')
+def coin_tickersearch(request):
+    return render(request,'counter/cointickersearch.html')
 
 @csrf_exempt
 def delete_file(request):
