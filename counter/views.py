@@ -5,7 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from counter.paradigm_shift_gptanswer import gpt_call
 from counter.paradigm_shift_gptanswer import gpt_call_multi
 from counter.booleanway_new import chart_draw
-from coin_data_collect import upbit_coinlist
+from counter.coin_data_collect import upbit_coinlist
+
 from pykrx import stock
 from django.http import JsonResponse
 import os
