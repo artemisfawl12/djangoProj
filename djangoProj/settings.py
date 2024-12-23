@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -30,6 +31,8 @@ ALLOWED_HOSTS = ['158.180.71.195', '127.0.0.1', 'localhost', "backtocks.net", 'w
 SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Application definition
 

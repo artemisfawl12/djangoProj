@@ -14,6 +14,7 @@ loggers=logging.getLogger('counter')
 #차트 만드는 부분을 따로 빼서 코드의 피로도를 줄인다.
 
 def prepare_data(df):
+    #dataframe을 받아서, ticker을 key, value는 index가 날짜이고 나머지가 column인 dictionary??로 만들어서 준다?? 이게 말이되노
     grouped_data = {}
     for ticker, group in df.groupby(level='tickers'):
         grouped_data[ticker] = group.reset_index(level='날짜').to_dict(orient='records')
@@ -26,12 +27,19 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
 
     print(tickers)
 
+    date_list=[]
+    date_list.append(str(start_date))
+    date_list.append(str(end_date))
+
     buy_date_list=[]
     sell_date_list=[]
     total_monitoring_list=[]
     ticker_list=[]
     failed_ticker_list=[]
     total_onlymoney_df=pd.DataFrame()
+    buydatedict_collect={}
+    selldatedict_collect={}
+    totalmonitoringdict_collect={}
     for ticker in tickers:
         try:
             ret_list=trade(start_date,end_date,ticker,exec_code,100000000,2)
@@ -39,6 +47,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
             buy_date_dict = ret_list[1]
             sell_date_dict = ret_list[2]
             total_monitoring_dict = ret_list[3]
+            #이 3개 받은것을, chart draw를 위해서 좀 밖으로 빼내야 한다.
             buy_price_list = []
             sell_price_list = []
             if len(buy_date_dict)!=0:
@@ -49,6 +58,8 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
 
                 buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict_str.items()), columns=['날짜', '수량']).set_index('날짜')
                 buy_date_price_df_temp['가격'] = buy_price_list
+                buydatedict_collect[ticker]=buy_date_dict
+
             else:
                 data = {
                     "수량": [0],
@@ -60,6 +71,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
 
                 # Index 이름 설정
                 buy_date_price_df_temp.index.name = "날짜"
+                buydatedict_collect[ticker]="err"
 
             if len(sell_date_dict) != 0:
                 for d in sell_date_dict:
@@ -68,6 +80,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
                 sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict_str.items()), columns=['날짜', '수량']).set_index(
                     '날짜')
                 sell_date_price_df_temp['가격'] = sell_price_list
+                selldatedict_collect[ticker] = sell_date_dict
 
             else:
                 data = {
@@ -76,12 +89,17 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
                 }
 
                 # DataFrame 생성
-                buy_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
+                sell_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
 
                 # Index 이름 설정
-                buy_date_price_df_temp.index.name = "날짜"
+                sell_date_price_df_temp.index.name = "날짜"
+                selldatedict_collect[ticker]="err"
+
+
             total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),
                                                     columns=["날짜", "총 자산"]).set_index('날짜')
+
+            totalmonitoringdict_collect[ticker] = total_monitoring_dict
 
             buy_date_list.append(buy_date_price_df_temp)
             sell_date_list.append(sell_date_price_df_temp)
@@ -94,18 +112,21 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
 
         buydf_final = pd.concat(buy_date_list, keys=ticker_list, names=["tickers", "날짜"])
         # multiindex가 ticker, 날짜이고, 날짜, 수량, 가격 3개의 column을 가진듯 하다 .. .
-        print(buydf_final)
-        print("buydf end")
         selldf_final = pd.concat(sell_date_list, keys=ticker_list, names=["tickers", "날짜"])
         totalmonitordf_final = pd.concat(total_monitoring_list, keys=ticker_list, names=["tickers", "날짜"])
         multi_ret_list = []
-        multi_ret_list.append(prepare_data(buydf_final))
-        print(prepare_data(buydf_final))
-        multi_ret_list.append(prepare_data(selldf_final))
-        multi_ret_list.append(prepare_data(totalmonitordf_final))
-        multi_ret_list.append(total_onlymoney_df.to_json(orient="table", date_format="iso", index=True))
-        multi_ret_list.append(failed_ticker_list)
-        multi_ret_list.append(ticker_list)
+        multi_ret_list.append(prepare_data(buydf_final)) #0
+        multi_ret_list.append(prepare_data(selldf_final)) #1
+        multi_ret_list.append(prepare_data(totalmonitordf_final)) #2
+        multi_ret_list.append(total_onlymoney_df.to_json(orient="table", date_format="iso", index=True)) #3
+        multi_ret_list.append(failed_ticker_list) #4
+        multi_ret_list.append(ticker_list) #5
+        multi_ret_list.append(buydatedict_collect)
+        multi_ret_list.append(selldatedict_collect)
+        multi_ret_list.append(totalmonitoringdict_collect)
+        multi_ret_list.append(date_list)
+
+        #Exception 발생시, stock_data에 exec code를 넣게 해놓음, 나머지는 그냥 빈 리스트.
 
     return multi_ret_list
 
@@ -419,10 +440,10 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
     elif chart_draw_ornot==2:
         print("chart num==2")
         ret_list=[]
-        ret_list.append(stock_data)
-        ret_list.append(buy_date_dict)
-        ret_list.append(sell_date_dict)
-        ret_list.append(total_monitoring_dict)
+        ret_list.append(stock_data) #0
+        ret_list.append(buy_date_dict) #1
+        ret_list.append(sell_date_dict) #2
+        ret_list.append(total_monitoring_dict) #3
     else:
         print("passed")
         pass

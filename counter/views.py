@@ -4,12 +4,37 @@ from django.views.decorators.csrf import csrf_exempt
 
 from counter.paradigm_shift_gptanswer import gpt_call
 from counter.paradigm_shift_gptanswer import gpt_call_multi
+from counter.booleanway_new import chart_draw
+from coin_data_collect import upbit_coinlist
 from pykrx import stock
 from django.http import JsonResponse
 import os
 from counter.models import FileLog
 from datetime import datetime
 import json
+
+def multi_chart(request):
+    buydict=request.session.get('buy_final')
+    selldict=request.session.get('sell_final')
+    totaldict=request.session.get('total_monitor_final')
+    ticker=request.GET.get('ticker')
+    date_list=request.session.get('date_list')
+
+    stock_data=stock.get_market_ohlcv(date_list[0], date_list[1], str(ticker))
+    html_txt = chart_draw(stock_data,buydict,selldict,totaldict)
+
+    # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
+    user_ip = get_ip(request)  # IP 주소
+
+    # 파일명 조합
+    file_name = f"chart_{user_ip}.html"
+    html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
+
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_txt)
+
+    return render(request, 'counter/' + file_name)
+
 
 
 def multi_result(request):
@@ -42,22 +67,40 @@ def multi_result(request):
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
                 error_list_json=json.dumps(error_list,ensure_ascii=False)
+
                 FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_callmulti_len==0")
+                # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
 
 
 
             else:
                 buy_final = ret_list[0]
                 sell_final = ret_list[1]
+                total_monitor_final=ret_list[2]
                 total_final=ret_list[3]
                 error_list=ret_list[4]
                 ticker_list =ret_list[5]
+                buydict=ret_list[6]
+                selldict=ret_list[7]
+                totaldict=ret_list[8]
+                date_list=ret_list[9]
+                #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
+                request.session['buy_final']=buydict
+                request.session['sell_final']=selldict
+                request.session['total_monitor_final']=totaldict
+                request.session['date_list'] = date_list
+
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
                 error_list_json = json.dumps(error_list, ensure_ascii=False)
                 FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_callmulti_success")
+
+
+
+
+
 
 
 
@@ -72,8 +115,7 @@ def multi_result(request):
             total_final_json = json.dumps(total_final, ensure_ascii=False)
             ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
             error_list_json = json.dumps(error_list, ensure_ascii=False)
-
-
+            # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
 
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed: "+str(e))
 
@@ -144,6 +186,17 @@ def count_characters(request):
         return render(request,'counter/result.html',{'ticker':ticker,'buy_navigate':final_earning_percent_str,'assistant_msg':assistant_msg})
 
     return render(request,'counter/form.html')
+
+def coin_ticker_data(request):
+    coin_ticker_name_df=upbit_coinlist()
+    name_ticker_dict={}
+    for i in range(coin_ticker_name_df):
+        name=coin_ticker_name_df.iloc[i]["korean_name"]
+        ticker=coin_ticker_name_df.iloc[i]["market"]
+        if ticker.split("-")[0]=="KRW":
+            name_ticker_dict[name]=ticker
+
+    return JsonResponse(name_ticker_dict)
 
 def stock_ticker_data(request):
     tickers = stock.get_market_ticker_list()

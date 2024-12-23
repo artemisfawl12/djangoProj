@@ -5,6 +5,7 @@
     <title>Multi_result page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
         .ticker-container {
@@ -171,6 +172,7 @@
     </div>
 
     <script>
+
         const buy_final = JSON.parse('{{ buy_final|safe|escapejs }}');
         const sell_final = JSON.parse('{{ sell_final|safe|escapejs }}');
         const total_final = JSON.parse(JSON.parse('{{ total_final|safe|escapejs }}'));
@@ -178,6 +180,7 @@
         const name_ticker_dict=JSON.parse('{{name_ticker_dict|safe|escapejs }}')
         console.log("total_final.data:", total_final?.data);
         console.log("total dinal data printed")
+        const url='/api/multichart'
 
         if (total_final?.data && Array.isArray(total_final.data)) {
             const labels = total_final.data.map(item => item["날짜"]);
@@ -263,7 +266,16 @@
         });
 
         // Ticker 데이터 표시
-        function displayData(ticker) {
+        async function displayData(ticker) {
+            try {
+            const response = await fetch(`/api/multichart/?ticker=${encodeURIComponent(ticker)}`);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error fetching ticker data:', error);
+        }
+
             selectedTicker.textContent = name_ticker_dict[ticker];
             selectedTicker_2.textContent = name_ticker_dict[ticker];
             dataTableBody_sell.innerHTML = ""; // 이전 데이터를 제거
@@ -289,6 +301,8 @@
                 dataTableBody_sell.appendChild(tr2);
                 console.log("sell 표 실행");
             });
+
+
         }
     </script>
 

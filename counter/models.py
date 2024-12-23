@@ -9,3 +9,8 @@ class FileLog(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} - {self.status} at {self.timestamp}"
+
+class review(models.Model):
+
+    def __str__(self):
+        return f"{self.ip_address} - {self.status}"
