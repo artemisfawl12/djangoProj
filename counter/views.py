@@ -191,7 +191,7 @@ def count_characters(request):
 def coin_ticker_data(request):
     coin_ticker_name_df=upbit_coinlist()
     name_ticker_dict={}
-    for i in range(coin_ticker_name_df):
+    for i in range(len(coin_ticker_name_df)):
         name=coin_ticker_name_df.iloc[i]["korean_name"]
         ticker=coin_ticker_name_df.iloc[i]["market"]
         if ticker.split("-")[0]=="KRW":
