@@ -24,17 +24,7 @@ def multi_chart(request):
     stock_data=stock.get_market_ohlcv(date_list[0], date_list[1], str(ticker))
     html_txt = chart_draw(stock_data,buydict[str(ticker)],selldict[str(ticker)],totaldict[str(ticker)])
 
-    # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
-    user_ip = get_ip(request)  # IP 주소
-
-    # 파일명 조합
-    file_name = f"chart_{user_ip}.html"
-    html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
-
-    with open(html_path, 'w', encoding='utf-8') as f:
-        f.write(html_txt)
-
-    return render(request, 'counter/' + file_name)
+    return HttpResponse(html_txt, content_type="text/html")
 
 
 
