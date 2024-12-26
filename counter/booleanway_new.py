@@ -335,9 +335,11 @@ def trade(start_date, end_date, ticker,exec_code, startmoney=100000000, chart_dr
 
     #여기서부터 필요한 지표들(ex)이동평균선) 만드는 영역 시작
 
+    """
     stock_data["5day_sma"]=stock_data['종가'].rolling(window=5).mean()
     stock_data["20day_sma"] = stock_data['종가'].rolling(window=20).mean()
     stock_data["150day_sma"] = stock_data['종가'].rolling(window=150).mean()
+    """
 
 
     condition_buy=[]
