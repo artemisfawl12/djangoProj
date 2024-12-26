@@ -32,6 +32,7 @@ def multi_chart(request):
         for ticker, data in totaldict.items()
     }
     ticker=request.GET.get('ticker')
+    user_ip = get_ip(request)
     FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="ticker received by GET:"+str(ticker))
 
     date_list=request.session.get('date_list')
