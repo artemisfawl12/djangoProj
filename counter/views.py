@@ -16,8 +16,21 @@ import json
 
 def multi_chart(request):
     buydict=request.session.get('buy_final')
+    buydict = {
+        ticker: {datetime.fromisoformat(key): value for key, value in data.items()}
+        for ticker, data in buydict.items()
+    }
+
     selldict=request.session.get('sell_final')
+    selldict = {
+        ticker: {datetime.fromisoformat(key): value for key, value in data.items()}
+        for ticker, data in selldict.items()
+    }
     totaldict=request.session.get('total_monitor_final')
+    totaldict={
+        ticker: {datetime.fromisoformat(key): value for key, value in data.items()}
+        for ticker, data in totaldict.items()
+    }
     ticker=request.GET.get('ticker')
     date_list=request.session.get('date_list')
 
