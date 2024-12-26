@@ -157,6 +157,7 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         name="Candlestick"
     ), row=1, col=1)
 
+    """
     # 이동평균선 추가
     fig.add_trace(go.Scatter(
         x=stock_data.index,
@@ -181,6 +182,7 @@ def chart_draw(stock_data,buy_date_dict, sell_date_dict, total_monitoring_dict):
         name='20-day SMA',
         line=dict(color='red')
     ), row=1, col=1)
+    """
 
     buy_signals = pd.DataFrame(list(buy_date_dict.items()), columns=['날짜', '수량'])
 
