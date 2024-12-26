@@ -22,7 +22,7 @@ def multi_chart(request):
     date_list=request.session.get('date_list')
 
     stock_data=stock.get_market_ohlcv(date_list[0], date_list[1], str(ticker))
-    html_txt = chart_draw(stock_data,buydict,selldict,totaldict)
+    html_txt = chart_draw(stock_data,buydict[str(ticker)],selldict[str(ticker)],totaldict[str(ticker)])
 
     # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성
     user_ip = get_ip(request)  # IP 주소
