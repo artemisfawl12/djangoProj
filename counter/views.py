@@ -86,9 +86,12 @@ def multi_result(request):
                 totaldict=ret_list[8]
                 date_list=ret_list[9]
                 #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
-                request.session['buy_final']=buydict
-                request.session['sell_final']=selldict
-                request.session['total_monitor_final']=totaldict
+                buy_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in buydict.items()}
+                sell_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in selldict.items()}
+                total_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in totaldict.items()}
+                request.session['buy_final']=buy_dict_iso
+                request.session['sell_final']=sell_dict_iso
+                request.session['total_monitor_final']=total_dict_iso
                 request.session['date_list'] = date_list
 
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
