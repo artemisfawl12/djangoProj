@@ -32,12 +32,18 @@ def multi_chart(request):
         for ticker, data in totaldict.items()
     }
     ticker=request.GET.get('ticker')
+    FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="ticker received by GET:"+str(ticker))
+
     date_list=request.session.get('date_list')
 
     stock_data=stock.get_market_ohlcv(date_list[0], date_list[1], str(ticker))
     html_txt = chart_draw(stock_data,buydict[str(ticker)],selldict[str(ticker)],totaldict[str(ticker)])
+    response = HttpResponse(html_txt, content_type="text/html")
+    response['Content-Disposition'] = 'attachment; filename="chart.html"'
 
-    return HttpResponse(html_txt, content_type="text/html")
+
+
+    return response
 
 
 
