@@ -34,13 +34,20 @@ def multi_chart(request):
     ticker=request.GET.get('ticker')
     user_ip = get_ip(request)
     FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="ticker received by GET:"+str(ticker))
+    #ticker는 참 잘 나오는데 왜 그 뒤는 안될까요?
 
     date_list=request.session.get('date_list')
 
     stock_data=stock.get_market_ohlcv(date_list[0], date_list[1], str(ticker))
     html_txt = chart_draw(stock_data,buydict[str(ticker)],selldict[str(ticker)],totaldict[str(ticker)])
+    file_name = f"chart_{user_ip}.html"
+    html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
+
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_txt)
+
     response = HttpResponse(html_txt, content_type="text/html")
-    response['Content-Disposition'] = 'attachment; filename="chart.html"'
+    response['Content-Disposition'] = 'inline'
 
 
 
