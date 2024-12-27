@@ -46,12 +46,9 @@ def multi_chart(request):
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(html_txt)
 
-    response = HttpResponse(html_txt, content_type="text/html")
-    response['Content-Disposition'] = 'inline'
+    show_chart(request)
 
-
-
-    return response
+    return render(request,'counter/'+file_name)
 
 
 
