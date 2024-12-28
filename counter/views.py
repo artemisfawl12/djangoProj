@@ -43,8 +43,8 @@ def multi_chart(request):
     file_name = f"chart_{user_ip}.html"
     html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
 
-    response = HttpResponse(html_txt, content_type='text/html')
-    response['Content-Disposition'] = f'attachment; filename="{ticker}"'
+    response = HttpResponse(html_txt, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment; filename="{ticker}.html"'
 
 
     #with open(html_path, 'w', encoding='utf-8') as f:
