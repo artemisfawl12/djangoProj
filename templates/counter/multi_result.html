@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
+
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
     .code-box {
         background-color: #f4f4f4;
         border: 1px solid #ddd;
@@ -147,54 +156,57 @@
 </head>
 
 <body>
+
     <div style="width: 80%; max-width: 800px; margin: auto;">
         <canvas id="assetChart"></canvas>
     </div>
-    <p><strong>아래는 코드에 적용된 로직 입니다.</strong></p>
-        <div class="code-box">
-            <pre>
-        <code>
-        {{ assistant_msg }}
-        </code>
-              </pre>
+    <main>
+        <p><strong>아래는 코드에 적용된 로직 입니다.</strong></p>
+            <div class="code-box">
+                <pre>
+            <code>
+            {{ assistant_msg }}
+            </code>
+                  </pre>
+            </div>
+        <div class="ticker-container">
+            <h3>Tickers</h3>
+            <ul id="tickerList" class="ticker-list">
+                <!-- Ticker 목록이 여기에 추가됨 -->
+            </ul>
         </div>
-    <div class="ticker-container">
-        <h3>Tickers</h3>
-        <ul id="tickerList" class="ticker-list">
-            <!-- Ticker 목록이 여기에 추가됨 -->
-        </ul>
-    </div>
-    <div class="content">
-        <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
+        <div class="content">
+            <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
 
-        <table id="dataTable_buy" class="dataTable">
-            <thead>
-                <tr>
-                    <th>날짜</th>
-                    <th>수량</th>
-                    <th>가격</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
-            </tbody>
-        </table>
-    </div>
-    <div class="content">
-        <h3><span id="selectedTicker_2">티커를 골라주세요</span> 의 매도 기록</h3>
-        <table id="dataTable_sell" class="dataTable">
-            <thead>
-                <tr>
-                    <th>날짜</th>
-                    <th>수량</th>
-                    <th>가격</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
-            </tbody>
-        </table>
-    </div>
+            <table id="dataTable_buy" class="dataTable">
+                <thead>
+                    <tr>
+                        <th>날짜</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+                </tbody>
+            </table>
+        </div>
+        <div class="content">
+            <h3><span id="selectedTicker_2">티커를 골라주세요</span> 의 매도 기록</h3>
+            <table id="dataTable_sell" class="dataTable">
+                <thead>
+                    <tr>
+                        <th>날짜</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+                </tbody>
+            </table>
+        </div>
+    </main>
 
     <script>
 
