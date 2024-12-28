@@ -6,6 +6,6 @@ urlpatterns = [
     path('', views.count_characters, name='count_characters'),  # 기본 URL과 views.home 연결
     path('api/stocks/', stock_ticker_data, name='stock_ticker_data'),
     path('api/coins/',coin_ticker_data, name="coin_ticker_data"),
-    path('api/multichart/',multi_chart, name="multichart_stock")
+    path('api/multichart/<str:ticker>/',multi_chart, name="multichart_stock")
 
 ]

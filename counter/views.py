@@ -14,7 +14,7 @@ from counter.models import FileLog
 from datetime import datetime
 import json
 
-def multi_chart(request):
+def multi_chart(request, ticker):
     buydict=request.session.get('buy_final')
     buydict = {
         ticker: {datetime.fromisoformat(key): value for key, value in data.items()}
@@ -31,7 +31,7 @@ def multi_chart(request):
         ticker: {datetime.fromisoformat(key): value for key, value in data.items()}
         for ticker, data in totaldict.items()
     }
-    ticker=request.GET.get('ticker')
+    #ticker=request.GET.get('ticker')
     user_ip = get_ip(request)
     FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="ticker received by GET:"+str(ticker))
     #ticker는 참 잘 나오는데 왜 그 뒤는 안될까요?
@@ -47,12 +47,12 @@ def multi_chart(request):
     response['Content-Disposition'] = f'attachment; filename="{ticker}.html"'
 
 
-    #with open(html_path, 'w', encoding='utf-8') as f:
-     #   f.write(html_txt)
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_txt)
 
 
 
-    #show_chart(request)
+    show_chart(request)
 
 
     return response

@@ -142,6 +142,7 @@
     </div>
     <div class="content">
         <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
+
         <table id="dataTable_buy" class="dataTable">
             <thead>
                 <tr>
@@ -262,19 +263,18 @@
             li.textContent = name_ticker_dict[ticker]+": ("+ticker+")";
             li.className = "ticker";
             li.onclick = () => displayData(ticker);
+            const link = document.createElement("a");
+            link.href = `/api/multichart/${ticker}/`;  // 백엔드 다운로드 API URL
+            link.textContent = "Show Chart";      // 링크 텍스트
+            link.className = "download-link";
+            link.style.marginLeft = "10px";           // 간격 추가 (옵션)
+            li.appendChild(link);
             tickerList.appendChild(li);
         });
 
         // Ticker 데이터 표시
         async function displayData(ticker) {
-            try {
-            const response = await fetch(`/api/multichart/?ticker=${encodeURIComponent(ticker)}`);
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('Error fetching ticker data:', error);
-        }
+
 
             selectedTicker.textContent = name_ticker_dict[ticker];
             selectedTicker_2.textContent = name_ticker_dict[ticker];
@@ -304,6 +304,8 @@
 
 
         }
+
+
     </script>
 
 </body>
