@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import time
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import webbrowser
@@ -18,6 +18,7 @@ response = requests.get(url, headers=headers)
 
 print(pd.DataFrame(response.json()))
 #가격만 gecko에서 받아오게 할까?
+하쉬발 빗썸으로 바꿔야되나?
 """
 
 
@@ -29,25 +30,7 @@ def upbit_coinlist():
     return coin_list
 
 
-"""
-market	종목 코드	String
-candle_date_time_utc	캔들 기준 시각(UTC 기준)
-    포맷: yyyy-MM-dd'T'HH:mm:ss	String
-candle_date_time_kst	캔들 기준 시각(KST 기준)
-    포맷: yyyy-MM-dd'T'HH:mm:ss	String
-opening_price	시가	Double
-high_price	고가	Double
-low_price	저가	Double
-trade_price	종가	Double
-timestamp	해당 캔들에서 마지막 틱이 저장된 시각	Long
-candle_acc_trade_price	누적 거래 금액	Double
-candle_acc_trade_volume	누적 거래량	Double
-unit	분 단위(유닛)	Integer
 
-모든 코인들의 데이터를 싹 한군데에 넣어놔서, 상대적인 수치도 사용할수 있게하면 어떨까?
-한 10개까지 선택 가능하게 한다음에, 이중에서 너맘대로 골라라 식으로 가는거지
-그리고 KRW 마켓, BTC 마켓도 구별해야할것.
-"""
 
 
 def request_minutedata_200(time_received, count, market="KRW-BTC"):
@@ -65,7 +48,7 @@ def request_minutedata_200(time_received, count, market="KRW-BTC"):
         df = pd.DataFrame(response.json())
         print(df.shape)
         if len(df) >= 1:
-            time.sleep(0.1)
+            time.sleep(0.05)
             return df
         else:
             print(response)
@@ -84,6 +67,7 @@ def request_minutedata_200(time_received, count, market="KRW-BTC"):
 def request_datedata_200(time_received, count, market="KRW-BTC"):
     url = "https://api.upbit.com/v1/candles/days"
     print(time_received)
+    #이거 KST시간으로 바꿔줘야되나...
     params = {
         'market': market,
         'count': count,
@@ -123,17 +107,17 @@ def chart_draw(stock_data, buy_date_dict, sell_date_dict, total_monitoring_dict)
     # Plotly 캔들차트 생성
 
     fig.add_trace(go.Candlestick(
-        x=stock_data['candle_date_time_kst'],
-        open=stock_data['opening_price'],
-        high=stock_data['high_price'],
-        low=stock_data['low_price'],
-        close=stock_data['trade_price'],
+        x=stock_data['날짜'],
+        open=stock_data['시가'],
+        high=stock_data['고가'],
+        low=stock_data['저가'],
+        close=stock_data['종가'],
         name="Candlestick"
     ), row=1, col=1)
 
     fig.add_trace(go.Scatter(
-        x=stock_data['candle_date_time_kst'],
-        y=stock_data['candle_acc_trade_volume'],
+        x=stock_data['날짜'],
+        y=stock_data['거래량'],
         name="Volume",
         mode='lines',
         line=dict(color='magenta')
@@ -208,9 +192,14 @@ def chart_draw(stock_data, buy_date_dict, sell_date_dict, total_monitoring_dict)
 
 
 def request_data_byminute(start_date, end_date, ticker="KRW-BTC"):
+    kst = timezone(timedelta(hours=9))
+
     # 문자열을 datetime 객체로 변환
     start_datetime = datetime.strptime(start_date, "%Y%m%d")
+    start_datetime = start_datetime.replace(tzinfo=kst)
+
     end_datetime = datetime.strptime(end_date, "%Y%m%d")
+    end_datetime = end_datetime.replace(tzinfo=kst)
 
     # 원하는 포맷으로 변환
     start_date_formatted = end_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -236,6 +225,10 @@ def request_data_byminute(start_date, end_date, ticker="KRW-BTC"):
 
         elif i == int(timediff / 200):
             interval = timediff - 200 * i
+            if i==0:
+                wanted_time=end_datetime
+            else:
+                pass
             requested_df = request_minutedata_200(wanted_time.strftime("%Y-%m-%d %H:%M:%S"), int(interval))
             if type(requested_df) == int:
                 pass
@@ -248,14 +241,26 @@ def request_data_byminute(start_date, end_date, ticker="KRW-BTC"):
         else:
             print("ended")
             break
+    stock_data = df_to_return.drop(columns=['market', 'timestamp'])
+    stock_data = stock_data.rename(
+        columns={'opening_price': '시가', 'high_price': '고가', 'low_price': '저가', 'trade_price': '종가',
+                 'candle_acc_trade_volume': '거래량', 'candle_acc_trade_price': '거래금액', 'candle_date_time_kst': '날짜',
+                 'candle_date_time_utc': 'UTC날짜'})
+
+    stock_data = stock_data.set_index('날짜')
 
 
-    return df_to_return
+    return stock_data
 
 def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
+    kst = timezone(timedelta(hours=9))
+
     # 문자열을 datetime 객체로 변환
     start_datetime = datetime.strptime(start_date, "%Y%m%d")
+    start_datetime=start_datetime.replace(tzinfo=kst)
+
     end_datetime = datetime.strptime(end_date, "%Y%m%d")
+    end_datetime=end_datetime.replace(tzinfo=kst)
 
     # 원하는 포맷으로 변환
     start_date_formatted = end_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -272,7 +277,7 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
             break
         if i < int(timediff / 200):
             wanted_time = end_datetime - timedelta(days=i * 200)
-            requested_df = request_datedata_200(wanted_time.strftime("%Y-%m-%d %H:%M:%S"), 200, market=ticker)
+            requested_df = request_datedata_200(wanted_time.isoformat(), 200, market=ticker)
             if type(requested_df) == int:
                 pass
                 print("passed")
@@ -286,7 +291,7 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
                 wanted_time=end_datetime
             else:
                 pass
-            requested_df = request_datedata_200(wanted_time.strftime("%Y-%m-%d %H:%M:%S"), int(interval))
+            requested_df = request_datedata_200(wanted_time.isoformat(), int(interval),market=ticker)
             if type(requested_df) == int:
                 pass
                 print("passed")
@@ -299,14 +304,47 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
             print("ended")
             break
 
+    stock_data = df_to_return.drop(columns=['market', 'timestamp', 'prev_closing_price', 'change_price', 'change_rate'])
+    stock_data = stock_data.rename(
+        columns={'opening_price': '시가', 'high_price': '고가', 'low_price': '저가', 'trade_price': '종가',
+                 'candle_acc_trade_volume': '거래량', 'candle_acc_trade_price': '거래금액', 'candle_date_time_kst': '날짜',
+                 'candle_date_time_utc': 'UTC날짜'})
 
-    return df_to_return
+    stock_data = stock_data.set_index('날짜')
 
-def column_select(df):
-    columns_to_select=['candle_date_time_kst','opening_price', 'high_price', 'low_price', 'trade_price', 'candle_acc_trade_price', 'candle_acc_trade_volume']
-    return df[columns_to_select]
+
+
+    return stock_data
+
+
+
+stock_data=request_data_byminute("20241201","20241228","KRW-BTC")
+print(stock_data.iloc[0])
+di={}
+chart_draw(stock_data,di,di,di)
+
+#원래 trade에서 쓰던대로 데이터를 가다듬는 함수를 만듭시다.
 """
-stock_data=request_data_bydate("20241201","20241220","KRW-BTC")
+market	종목 코드	String
+candle_date_time_utc	캔들 기준 시각(UTC 기준)
+    포맷: yyyy-MM-dd'T'HH:mm:ss	String
+candle_date_time_kst	캔들 기준 시각(KST 기준)
+    포맷: yyyy-MM-dd'T'HH:mm:ss	String
+opening_price	시가	Double
+high_price	고가	Double
+low_price	저가	Double
+trade_price	종가	Double
+timestamp	해당 캔들에서 마지막 틱이 저장된 시각	Long
+candle_acc_trade_price	누적 거래 금액	Double
+candle_acc_trade_volume	누적 거래량	Double
+unit	분 단위(유닛)	Integer
+
+모든 코인들의 데이터를 싹 한군데에 넣어놔서, 상대적인 수치도 사용할수 있게하면 어떨까?
+한 10개까지 선택 가능하게 한다음에, 이중에서 너맘대로 골라라 식으로 가는거지
+그리고 KRW 마켓, BTC 마켓도 구별해야할것.
+"""
+
+"""
 di={}
 chart_draw(stock_data,di,di,di)
 stock_data=column_select(stock_data)

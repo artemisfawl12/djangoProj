@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi_result page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    .code-box {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        font-family: monospace;
+        white-space: pre-wrap; /* 기본적으로 줄바꿈 */
+        overflow-x: auto; /* 스크롤 추가 */
+        word-wrap: break-word; /* 긴 단어 줄바꿈 */
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .code-box pre {
+        white-space: pre-wrap; /* 줄바꿈 허용 */
+        word-wrap: break-word; /* 긴 단어 줄바꿈 */
+    }
+    .ticker-container {
+        width: 80%;
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    .ticker-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #eeeeee;
+        border-radius: 8px;
+        overflow-y: scroll;
+        height: 150px; /* 스크롤 영역 */
+        font-family: Arial, sans-serif;
+    }
+
+    .ticker-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    .ticker-list li:hover {
+        background-color: #f0f8ff;
+    }
+
+    .ticker-list li.selected {
+        background-color: #007BFF;
+        color: #fff;
+    }
+    .content {
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    /* 제목 스타일 */
+    .content h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .content #selectedTicker {
+        color: #45a049;
+        font-weight: bold;
+    }
+
+    /* 테이블 스타일 */
+    .dataTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background-color: #fff;
+        border: 1px solid #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .dataTable thead th {
+        background-color: #007BFF;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        font-weight: bold;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .dataTable tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .dataTable tbody tr:nth-child(even) {
+        background-color: #f7f7f7;
+    }
+
+    .dataTable tbody td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Hover 스타일 */
+    .dataTable tbody tr:hover {
+        background-color: #f0f8ff;
+    }
+
+    /* 스크롤 가능한 테이블 */
+    .dataTable {
+        display: block;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .dataTable thead,
+    .dataTable tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .dataTable thead {
+        width: calc(100% - 1em); /* 스크롤바 보정 */
+    }
+
+    .dataTable tbody {
+        display: block;
+        max-height: 250px; /* 스크롤 영역 */
+        overflow-y: auto;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div style="width: 80%; max-width: 800px; margin: auto;">
+        <canvas id="assetChart"></canvas>
+    </div>
+    <main>
+        <p><strong>아래는 코드에 적용된 로직 입니다.</strong></p>
+            <div class="code-box">
+                <pre>
+            <code>
+            {{ assistant_msg }}
+            </code>
+                  </pre>
+            </div>
+        <div class="ticker-container">
+            <h3>Tickers</h3>
+            <ul id="tickerList" class="ticker-list">
+                <!-- Ticker 목록이 여기에 추가됨 -->
+            </ul>
+        </div>
+        <div class="content">
+            <h3><span id="selectedTicker">티커를 골라주세요</span> 의 매수 기록</h3>
+
+            <table id="dataTable_buy" class="dataTable">
+                <thead>
+                    <tr>
+                        <th>날짜</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+                </tbody>
+            </table>
+        </div>
+        <div class="content">
+            <h3><span id="selectedTicker_2">티커를 골라주세요</span> 의 매도 기록</h3>
+            <table id="dataTable_sell" class="dataTable">
+                <thead>
+                    <tr>
+                        <th>날짜</th>
+                        <th>수량</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 선택된 Ticker 데이터가 여기에 추가됨 -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+
+        const buy_final = JSON.parse('{{ buy_final|safe|escapejs }}');
+        const sell_final = JSON.parse('{{ sell_final|safe|escapejs }}');
+        const total_final = JSON.parse(JSON.parse('{{ total_final|safe|escapejs }}'));
+        const ticker_list = JSON.parse('{{ticker_list|safe|escapejs }}');
+        const name_ticker_dict=JSON.parse('{{name_ticker_dict|safe|escapejs }}')
+        console.log("total_final.data:", total_final?.data);
+        console.log("total dinal data printed")
+        const url='/api/multichart'
+
+        if (total_final?.data && Array.isArray(total_final.data)) {
+            const labels = total_final.data.map(item => item["날짜"]);
+            const prices = total_final.data.map(item => item["총 자산"]);
+
+            console.log("Labels:", labels);
+            console.log("Prices:", prices);
+        } else {
+            console.error("total_final.data가 배열이 아니거나 undefined입니다.");
+        }
+
+
+
+        // Ticker 목록 생성
+        const tickerList = document.getElementById("tickerList");
+        const dataTableBody_buy = document.getElementById("dataTable_buy").querySelector("tbody");
+        const dataTableBody_sell = document.getElementById("dataTable_sell").querySelector("tbody");
+        const selectedTicker = document.getElementById("selectedTicker");
+        const selectedTicker_2 = document.getElementById("selectedTicker_2");
+        const labels = total_final.data.map(item => item["날짜"]);
+        const prices = total_final.data.map(item => item["총 자산"]);
+
+        console.log("날짜:", labels);
+        console.log("총 자산:", prices);
+
+
+        // Chart.js로 그래프 그리기
+        const ctx = document.getElementById('assetChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line', // 선 그래프
+            data: {
+                labels: labels, // X축: 날짜
+                datasets: [{
+                    label: '총 자산',
+                    data: prices, // Y축: 총 자산
+                    borderColor: '#007BFF',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3, // 곡선의 매끄러움 조절
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '날짜'
+                        },
+                        type: 'time', // 날짜 타입
+                        time: {
+                            unit: 'day', // X축 단위
+                            tooltipFormat: 'yyyy-MM-DD' // 툴팁 형식
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '총 자산'
+                        },
+                        ticks: {
+                            callback: value => value.toLocaleString() // 천 단위 구분 추가
+                        }
+                    }
+                }
+            }
+        });
+
+
+        Object.keys(buy_final).forEach(ticker => {
+            const li = document.createElement("li");
+            li.textContent = name_ticker_dict[ticker]+": ("+ticker+")";
+            li.className = "ticker";
+            li.onclick = () => displayData(ticker);
+            const link = document.createElement("a");
+            link.href = `/api/multichart/${ticker}/`;  // 백엔드 다운로드 API URL
+            link.textContent = "Show Chart";      // 링크 텍스트
+            link.className = "download-link";
+            link.style.marginLeft = "10px";           // 간격 추가 (옵션)
+            li.appendChild(link);
+            tickerList.appendChild(li);
+        });
+
+        // Ticker 데이터 표시
+        async function displayData(ticker) {
+
+
+            selectedTicker.textContent = name_ticker_dict[ticker];
+            selectedTicker_2.textContent = name_ticker_dict[ticker];
+            dataTableBody_sell.innerHTML = ""; // 이전 데이터를 제거
+            dataTableBody_buy.innerHTML = "";
+
+            buy_final[ticker].forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.날짜}</td>
+                    <td>${row.수량}</td>
+                    <td>${row.가격}</td>
+                `;
+                dataTableBody_buy.appendChild(tr);
+                console.log("buy 표 실행");
+            });
+            sell_final[ticker].forEach(row => {
+                const tr2 = document.createElement("tr");
+                tr2.innerHTML = `
+                    <td>${row.날짜}</td>
+                    <td>${row.수량}</td>
+                    <td>${row.가격}</td>
+                `;
+                dataTableBody_sell.appendChild(tr2);
+                console.log("sell 표 실행");
+            });
+
+
+        }
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACKTOCKS.NET</title>
+    <style>
+        .hidden-text {
+                display: none; /* 기본적으로 숨김 */
+            }
+
+        .visible {
+            display: block; /* 보이게 변경 */
+        }
+        /*loader style*/
+        .loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3em;
+            position: relative;
+            vertical-align: middle;
+        }
+        .loader,
+    .loader:before,
+    .loader:after {
+        animation: 1s infinite ease-in-out;
+    }
+    .loader:before,
+    .loader:after {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+        .loader-3:before {
+        content: '';
+        border: 10px solid white;
+        top: -10px;
+        left: -10px;
+        animation-name: loader3;
+        }
+        .loader-black{
+            background-color: #333;
+        }
+        .loader.visible{
+            display: inline-block;
+        }
+
+        @keyframes loader3 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input_large {
+            width: 90%;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 30px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+
+        /* 반응형 처리 */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>코인 시뮬레이션</h1>
+    </header>
+    <h1> coin ticker 검색</h1>
+    <input type="text" id="searchInput" placeholder="Ticker 또는 주식 이름을 검색하세요">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>주식 이름</th>
+                    <th>Ticker</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable">
+                <!-- 데이터가 여기에 추가됩니다 -->
+            </tbody>
+        </table>
+    </div>
+    <p><i style="color: #808080;">ticker 데이터 받아오는데 4초정도 걸립니다. 쪼끔만 기다려주세요.</i></p>
+    <main>
+        <form id="wholeform" method="POST">
+            {% csrf_token %}
+            <label for="name">INPUT</label>
+            <input type="text" id="ticker" name="ticker" placeholder="coin ticker을 쉼표로 구분해 입력" required>
+            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
+            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
+            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
+            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
+            <label for="unit">시간 단위 선택:</label>
+            <select id="unit" name="unit" required>
+                <option value="0">DAY</option>
+                <option value="1">1 minute</option>
+                <option value="3">3 minute</option>
+                <option value="5">5 minute</option>
+                <option value="10">10 minute</option>
+                <option value="15">15 minute</option>
+                <option value="30">30 minute</option>
+                <option value="60">60 minute</option>
+                <option value="240">240 minute</option>
+            </select>
+            <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+        </form>
+
+
+            <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
+            <p id="loadtxt" class="hidden-text"><strong>시뮬레이션 하는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+            <p><strong> 현재 시뮬레이션에 사용가능한 지표는 아래와 같습니다. </strong> </p>
+            <p><strong> 시가, 고가, 저가, 종가, 거래량 </strong></p>
+            <p><strong>위 지표들로 만들 수 있는 지표라면 얼마든지 요청가능합니다.</strong></p>
+            <p>EX)5일 이평선이 100일 이평선을 상향돌파: 이평선은 종가 데이터 기반으로 계산하므로 사용가능</p>
+
+
+        </form>
+
+
+    </main>
+    <script>
+        const btn1 = document.getElementById("submitbtn");
+        const loader = document.getElementById("loading");
+        const loadtxt = document.getElementById("loadtxt");
+        const form=document.getElementById("wholeform");
+        const input_Field=document.getElementById("ticker")
+        function showLoading(){
+
+            loader.style.display="inline-block";
+            loadtxt.classList.add("visible");
+
+        };
+        function getCookie(name){
+            const cookies=document.cookie.split(';');
+            for (let cookie of cookies){
+                if (cookie.trim().startsWith(name + '=')){
+                    return cookie.trim().split('=')[1];
+                }
+            }
+            return null;
+        }
+        window.addEventListener('unload', () => {
+            const url = '/delete-file/';
+            const data = JSON.stringify({});
+
+            navigator.sendBeacon(url, data);
+        });
+
+
+        function renderTable(data) {
+            const resultsTable = document.getElementById("resultsTable");
+            resultsTable.innerHTML = ""; // 기존 데이터 삭제
+            Object.entries(data).forEach(([ticker, name]) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${ticker}</td><td>${name}</td>`;
+                row.onclick = () => {
+                    // 원하는 동작: 예를 들어, ticker를 input 필드에 추가
+                    const inputField = document.getElementById("ticker");
+
+                    const currentValues = inputField.value.split(',').map(v => v.trim());
+                    if (currentValues.includes(ticker)) {
+                        const updatedValues = currentValues.filter(value => value !== ticker);
+                        inputField.value = updatedValues.join(', ');
+                    } else {
+                        // 값이 없으면 추가
+                        inputField.value = [...currentValues, ticker].join(', ');
+                    }
+                };
+                resultsTable.appendChild(row);
+            });
+        }
+        let cachedData=null;
+        // API에서 데이터를 가져오기
+        fetch('/api/coins/') // Django API Endpoint 호출
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stock data');
+                }
+                return response.json(); // JSON 데이터를 반환
+            })
+            .then(data => {
+                console.log('Stock data:', data);
+                renderTable(data); // 데이터를 기반으로 테이블 렌더링
+                cachedData=data;
+            })
+            .catch(error => {
+                console.error('Error fetching stock data:', error);
+            });
+
+        // 테이블 렌더링 함수를 위로 옮겼다.
+
+        function fetchData(){
+            return Promise.resolve(cachedData);
+        }
+
+        // 검색 기능
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+
+            fetchData()
+                .then(data => {
+                    const filteredData = Object.entries(data).filter(([ticker, name]) =>
+                        ticker.includes(query) || name.toLowerCase().includes(query)
+                    );
+                    renderTable(Object.fromEntries(filteredData)); // 필터링된 데이터 렌더링
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+
+
+
+
+    </script>
+</body>
+</html>
+
+
