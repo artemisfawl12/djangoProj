@@ -43,12 +43,19 @@ def multi_chart(request):
     file_name = f"chart_{user_ip}.html"
     html_path = os.path.join(os.path.dirname(__file__), '..', 'templates', 'counter', file_name)
 
-    with open(html_path, 'w', encoding='utf-8') as f:
-        f.write(html_txt)
+    response = HttpResponse(html_txt, content_type='text/html')
+    response['Content-Disposition'] = f'attachment; filename="{ticker}"'
 
-    show_chart(request)
 
-    return render(request,'counter/'+file_name)
+    #with open(html_path, 'w', encoding='utf-8') as f:
+     #   f.write(html_txt)
+
+
+
+    #show_chart(request)
+
+
+    return response
 
 
 
