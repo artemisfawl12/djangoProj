@@ -85,6 +85,7 @@ def gpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_dat
     
 
     ret_list = trade_multiple(start_date, end_date, received_ticker_list, exec_code=execute_code)
+    ret_list.append(assistant_message)
 
 
     """
@@ -195,6 +196,7 @@ def gpt_call(try_count,buy_condition,sell_condition,start_date,end_date,received
 
     ret_list=[final_earning_percentage,assistant_message]
     ret_list.append(trade_received_list[1])
+
 
     return ret_list
 

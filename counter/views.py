@@ -89,6 +89,7 @@ def multi_result(request):
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
                 error_list_json=json.dumps(error_list,ensure_ascii=False)
+                assistant_msg="gpt multi call 중 오류 발생.\n"+ret_list[10]
 
                 FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_callmulti_len==0")
                 # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
@@ -114,6 +115,7 @@ def multi_result(request):
                 request.session['sell_final']=sell_dict_iso
                 request.session['total_monitor_final']=total_dict_iso
                 request.session['date_list'] = date_list
+                assistant_msg =ret_list[10]
 
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
@@ -141,6 +143,7 @@ def multi_result(request):
             ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
             error_list_json = json.dumps(error_list, ensure_ascii=False)
             # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
+            assistant_msg="gpt 시뮬레이션 함수를 실행하다가 뭔가 오류가 났어요. 재시도 해보세요"
 
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gpt_call_failed: "+str(e))
 
@@ -156,7 +159,7 @@ def multi_result(request):
             f.write(html_txt)
         """
         return render(request, 'counter/multi_result.html',
-                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list_json, "ticker_list":ticker_list_json, "name_ticker_dict": name_ticker_dict_json} )
+                      {'buy_final': buy_final_json, 'sell_final': sell_final_json,"total_final":total_final_json,"error_list":error_list_json, "ticker_list":ticker_list_json, "name_ticker_dict": name_ticker_dict_json, "assistant_msg":assistant_msg} )
 
     return render(request, 'counter/multi_form.html')
 
