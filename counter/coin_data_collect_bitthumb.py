@@ -30,7 +30,7 @@ def bithumb_coinlist():
     return coin_list
 
 
-print(bithumb_coinlist())
+
 
 
 def request_minutedata_200(time_received, count, unit, market="KRW-BTC"):
@@ -317,7 +317,7 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
 
     return stock_data
 
-print(request_data_byminute("20241201","20241210",1))
+#print(request_data_byminute("20241201","20241210",1))
 
 #원래 trade에서 쓰던대로 데이터를 가다듬는 함수를 만듭시다.
 """
