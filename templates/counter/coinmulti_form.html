@@ -271,9 +271,12 @@
                     if (currentValues.includes(ticker)) {
                         const updatedValues = currentValues.filter(value => value !== ticker);
                         inputField.value = updatedValues.join(', ');
+                        row.style.backgroundColor = "";
+
                     } else {
                         // 값이 없으면 추가
                         inputField.value = [...currentValues, ticker].join(', ');
+                        row.style.backgroundColor = "#d3d3d3";
                     }
                 };
                 resultsTable.appendChild(row);
