@@ -316,13 +316,6 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
 
     return stock_data
 
-
-
-stock_data=request_data_byminute("20241201","20241228","KRW-BTC")
-print(stock_data.iloc[0])
-di={}
-chart_draw(stock_data,di,di,di)
-
 #원래 trade에서 쓰던대로 데이터를 가다듬는 함수를 만듭시다.
 """
 market	종목 코드	String
