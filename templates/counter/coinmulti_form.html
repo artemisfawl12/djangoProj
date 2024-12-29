@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BACKTOCKS.NET</title>
     <style>
+        #searchInput {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .table-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            max-height: 400px; /* 테이블 최대 높이 지정 */
+            overflow-y: auto; /* 스크롤 가능하게 설정 */
+
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            position: sticky;
+            top: 0;
+        }
         .hidden-text {
                 display: none; /* 기본적으로 숨김 */
             }
@@ -137,6 +169,7 @@
     </style>
 </head>
 <body>
+    <main>
     <header>
         <h1>코인 시뮬레이션</h1>
     </header>
@@ -156,16 +189,13 @@
         </table>
     </div>
     <p><i style="color: #808080;">ticker 데이터 받아오는데 4초정도 걸립니다. 쪼끔만 기다려주세요.</i></p>
-    <main>
+
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
             <input type="text" id="ticker" name="ticker" placeholder="coin ticker을 쉼표로 구분해 입력" required>
             <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
             <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
-            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
-            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
-            <label for="unit">시간 단위 선택:</label>
             <select id="unit" name="unit" required>
                 <option value="0">DAY</option>
                 <option value="1">1 minute</option>
@@ -177,6 +207,10 @@
                 <option value="60">60 minute</option>
                 <option value="240">240 minute</option>
             </select>
+            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
+            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
+            <label for="unit">시간 단위 선택:</label>
+
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
         </form>
 
