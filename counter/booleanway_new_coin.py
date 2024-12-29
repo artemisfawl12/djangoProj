@@ -20,7 +20,7 @@ def prepare_data(df):
         grouped_data[ticker] = group.reset_index(level='시간').to_dict(orient='records')
     return grouped_data
 
-def trade_multiple(start_date, end_date, tickers, exec_code):
+def trade_multiple(start_date, end_date, unit, tickers, exec_code):
     #특정 범위 내 있는 티커들 전부에 대해서 trade를 돌린다
     #매수기록 매도기록을 티커별로 정리한 dataframe을 return 받는다. 매도수량까지 넣으면 3차원이 되는데, 음 ... 분할매매 기능을 넣을진 모르겠으나 그냥 살려두자
     #
@@ -42,7 +42,7 @@ def trade_multiple(start_date, end_date, tickers, exec_code):
     totalmonitoringdict_collect={}
     for ticker in tickers:
         try:
-            ret_list=trade(start_date,end_date,ticker,exec_code,100000000,2)
+            ret_list=trade(start_date,end_date,ticker,exec_code,unit,100000000,2)
             stock_data = ret_list[0]
             buy_date_dict = ret_list[1]
             sell_date_dict = ret_list[2]
@@ -328,8 +328,6 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     print("trade started:"+str(ticker))
 
     trader=position(startmoney)
-
-    stock_data = stock.get_market_ohlcv(str(start_date), str(end_date), ticker)
     if unit==0:
         stock_data=request_data_bydate(start_date,end_date,ticker)
     elif unit!=0:

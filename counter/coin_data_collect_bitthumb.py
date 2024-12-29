@@ -95,7 +95,7 @@ def request_datedata_200(time_received, count, market="KRW-BTC"):
         time.sleep(5)
         return 0
 
-    # return pd.DataFrame(response.json())
+    #return pd.DataFrame(response.json())
 
 def chart_draw(stock_data, buy_date_dict, sell_date_dict, total_monitoring_dict):
     print(stock_data.iloc[0])

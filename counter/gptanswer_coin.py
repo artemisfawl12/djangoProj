@@ -49,7 +49,7 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
 
             "stock_data는" +unit_txt+
             """
-            코인 가격 데이터가 들어있는 python dataframe이고, index는 "시간"이며 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "거래금액" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
+            코인 가격 candle이 들어있는 python dataframe이고, index는 "시간"이며 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "거래금액" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
             즉 절대 가상의 데이터를 생성하지 마라.
             이 dataframe을 가지고 
             <
@@ -103,7 +103,7 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
 
-    ret_list = trade_multiple(start_date, end_date, received_ticker_list, exec_code=execute_code)
+    ret_list = trade_multiple(start_date, end_date, unit, received_ticker_list, exec_code=execute_code)
     ret_list.append(assistant_message)
 
     """
