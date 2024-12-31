@@ -61,6 +61,8 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
             buydatedict_collect[ticker]=buy_date_dict
 
         else:
+            loggers.info("buy_date_dict length 0")
+            loggers.info(str(buy_date_dict))
             data = {
                 "수량": [0],
                 "가격": [0],
@@ -331,12 +333,15 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     trader=position(startmoney)
     if unit==0:
         stock_data=request_data_bydate(start_date,end_date,ticker)
+
     elif unit!=0:
         stock_data=request_data_byminute(start_date,end_date,unit,ticker)
         #여기에 너무 많으면 끊는 코드 추가 필요. timediff를 세도록 해야되나 로직 자체에서?
 
+    for i in stock_data:
+        print(i)
     print("stock_Data의 길이:" +str(len(stock_data)))
-    print(type(stock_data))
+
     #stock_data는 index를 시간로 갖는 dataframe이고, 각 행은 시가, 고가, 저가, 종가, 거래량, 등락률 순으로 데이터를 갖고있다.
 
     #여기서부터 필요한 지표들(ex)이동평균선) 만드는 영역 시작
@@ -359,6 +364,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     loggers.info("len of condition_buy: this value should be same as length of stock_data "+str(len(condition_buy)))
     loggers.info("sold count: " + str(len(condition_sell)))
 
+
     # 조건을 만족하는 행들 필터링
 
 
@@ -370,6 +376,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     total_monitoring_dict={}
     i=0
 
+
     for d_d in stock_data.index:
         print(d_d)
 
@@ -379,9 +386,6 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
             print("first day passed")
             prev_loc = loc
             i+=1
-        else:
-            prev_loc=loc-1
-            i+=1
         code_curpricedict = {}
         code_curpricedict[ticker]= stock_data.iloc[loc]["종가"]
         total_monitoring_dict[d_d]=trader.total(code_curpricedict)
@@ -389,6 +393,8 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
         #print( str(stock_data.iloc[loc]["5day_sma"])+" || "+ str(stock_data.iloc[loc]["150day_sma"]))
 
         #매수 조건
+
+
 
 
         if condition_buy[d_d]==True:

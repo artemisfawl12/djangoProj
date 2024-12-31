@@ -228,7 +228,8 @@ def request_data_byminute(start_date, end_date, unit, ticker="KRW-BTC"):
             if i==0:
                 wanted_time=end_datetime
             else:
-                pass
+                wanted_time = end_datetime - timedelta(minutes=i * 200 * unit)
+
             requested_df = request_minutedata_200(wanted_time.strftime("%Y-%m-%d %H:%M:%S"), int(interval), unit=unit,market=ticker)
             if type(requested_df) == int:
                 pass
@@ -280,6 +281,7 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
             break
         if i < int(timediff / 200):
             wanted_time = end_datetime - timedelta(days=i * 200)
+
             requested_df = request_datedata_200(wanted_time.isoformat(), 200, market=ticker)
             if type(requested_df) == int:
                 pass
@@ -293,8 +295,10 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
             if i==0:
                 wanted_time=end_datetime
             else:
-                pass
+                wanted_time = end_datetime - timedelta(days=i * 200)
             requested_df = request_datedata_200(wanted_time.isoformat(), int(interval),market=ticker)
+            print(wanted_time)
+            print(":wanted time")
             if type(requested_df) == int:
                 pass
                 print("passed")
@@ -320,8 +324,6 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
 
 
     return stock_data
-
-#print(request_data_byminute("20241201","20241210",1))
 
 #원래 trade에서 쓰던대로 데이터를 가다듬는 함수를 만듭시다.
 """

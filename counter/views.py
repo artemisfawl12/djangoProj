@@ -14,7 +14,9 @@ import os
 from counter.models import FileLog
 from datetime import datetime
 import json
+import logging
 
+logger=logging.getLogger('counter')
 def multi_chart(request, ticker):
     buydict=request.session.get('buy_final')
     buydict = {
@@ -83,6 +85,7 @@ def multi_result_coin(request):
         try:
             ret_list = coingpt_call_multi(0, buy_strat, sell_strat, start_date, end_date,unit,ticker_list)
             if len(ret_list[0])==0:
+                logger.info("buy final length is 0")
                 buy_final = "err"
                 sell_final = "err"
                 total_final = "err"
@@ -93,7 +96,7 @@ def multi_result_coin(request):
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
                 error_list_json=json.dumps(error_list,ensure_ascii=False)
-                assistant_msg="gpt multi call 중 오류 발생.\n"+ret_list[10]
+                assistant_msg="매수 횟수가 0입니다. 뭔가 이상해요!.\n"+ret_list[10]
 
                 FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_call multi_len==0")
                 # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
@@ -102,6 +105,7 @@ def multi_result_coin(request):
 
             else:
                 buy_final = ret_list[0]
+                print(buy_final)
                 sell_final = ret_list[1]
                 total_monitor_final=ret_list[2]
                 total_final=ret_list[3]
@@ -136,6 +140,7 @@ def multi_result_coin(request):
 
 
         except Exception as e:
+            logger.info("Exception at where?")
             buy_final = "err"
             sell_final = "err"
             total_final = "err"
@@ -147,7 +152,7 @@ def multi_result_coin(request):
             ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
             error_list_json = json.dumps(error_list, ensure_ascii=False)
             # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
-            assistant_msg="gpt 시뮬레이션 함수를 실행하다가 뭔가 오류가 났어요. 재시도 해보세요"
+            assistant_msg="gpt 시뮬레이션 함수를 실행하다가 뭔가 오류가 났어요. 관리자에게 문의해주세요: artemisfawl@naver.com"
 
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_call_failed: "+str(e))
 

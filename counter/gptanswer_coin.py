@@ -82,6 +82,8 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     response = client.chat.completions.create(model=model, messages=messages)
     logger.info("message to gpt received")
 
+    """
+
     # ChatGPT의 응답에서 코드만 추출하기
     assistant_message = response.choices[0].message.content
 
@@ -103,10 +105,15 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     else:
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
+        
+    """
+
+
 
 
 
     ret_list = trade_multiple(start_date, end_date, unit, received_ticker_list, exec_code=execute_code)
+    assistant_message=""
     ret_list.append(assistant_message)
 
     """
@@ -122,4 +129,3 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     """
 
     return ret_list
-
