@@ -116,24 +116,19 @@ def multi_result_coin(request):
                 totaldict=ret_list[8]
                 date_list=ret_list[9]
                 #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
-                buy_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in buydict.items()}
-                sell_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in selldict.items()}
-                total_dict_iso={ticker:{key.isoformat(): value for key, value in data.items()} for ticker,data in totaldict.items()}
+                buy_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in buydict.items()}
+                sell_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in selldict.items()}
+                total_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in totaldict.items()}
                 logger.info("session saving started")
                 request.session['buy_final']=buy_dict_iso
-                logger.info("buy final session done")
                 request.session['sell_final']=sell_dict_iso
-                logger.info("sell final session done")
                 request.session['total_monitor_final']=total_dict_iso
-                logger.info("toal final session done")
                 request.session['date_list'] = date_list
                 logger.info("date final session done")
                 assistant_msg =ret_list[10]
 
                 logger.info("json start")
-
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
-                logger.info("buy final json done")
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
