@@ -181,7 +181,7 @@
             <table id="dataTable_buy" class="dataTable">
                 <thead>
                     <tr>
-                        <th>날짜</th>
+                        <th>시간</th>
                         <th>수량</th>
                         <th>가격</th>
                     </tr>
@@ -196,7 +196,7 @@
             <table id="dataTable_sell" class="dataTable">
                 <thead>
                     <tr>
-                        <th>날짜</th>
+                        <th>시간</th>
                         <th>수량</th>
                         <th>가격</th>
                     </tr>
@@ -220,7 +220,7 @@
         const url='/api/multichart'
 
         if (total_final?.data && Array.isArray(total_final.data)) {
-            const labels = total_final.data.map(item => item["날짜"]);
+            const labels = total_final.data.map(item => item["시간"]);
             const prices = total_final.data.map(item => item["총 자산"]);
 
             console.log("Labels:", labels);
@@ -237,10 +237,10 @@
         const dataTableBody_sell = document.getElementById("dataTable_sell").querySelector("tbody");
         const selectedTicker = document.getElementById("selectedTicker");
         const selectedTicker_2 = document.getElementById("selectedTicker_2");
-        const labels = total_final.data.map(item => item["날짜"]);
+        const labels = total_final.data.map(item => item["시간"]);
         const prices = total_final.data.map(item => item["총 자산"]);
 
-        console.log("날짜:", labels);
+        console.log("시간:", labels);
         console.log("총 자산:", prices);
 
 
@@ -249,7 +249,7 @@
         new Chart(ctx, {
             type: 'line', // 선 그래프
             data: {
-                labels: labels, // X축: 날짜
+                labels: labels, // X축: 시간
                 datasets: [{
                     label: '총 자산',
                     data: prices, // Y축: 총 자산
@@ -272,9 +272,9 @@
                     x: {
                         title: {
                             display: true,
-                            text: '날짜'
+                            text: '시간'
                         },
-                        type: 'time', // 날짜 타입
+                        type: 'time', // 시간 타입
                         time: {
                             unit: 'day', // X축 단위
                             tooltipFormat: 'yyyy-MM-DD' // 툴팁 형식
@@ -300,7 +300,7 @@
             li.className = "ticker";
             li.onclick = () => displayData(ticker);
             const link = document.createElement("a");
-            link.href = `/api/multichart/${ticker}/`;  // 백엔드 다운로드 API URL
+            link.href = `/api/multicoinchart/${ticker}/`;  // 백엔드 다운로드 API URL
             link.textContent = "Show Chart";      // 링크 텍스트
             link.className = "download-link";
             link.style.marginLeft = "10px";           // 간격 추가 (옵션)
@@ -320,7 +320,7 @@
             buy_final[ticker].forEach(row => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${row.날짜}</td>
+                    <td>${row.시간}</td>
                     <td>${row.수량}</td>
                     <td>${row.가격}</td>
                 `;
@@ -330,7 +330,7 @@
             sell_final[ticker].forEach(row => {
                 const tr2 = document.createElement("tr");
                 tr2.innerHTML = `
-                    <td>${row.날짜}</td>
+                    <td>${row.시간}</td>
                     <td>${row.수량}</td>
                     <td>${row.가격}</td>
                 `;
