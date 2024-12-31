@@ -97,11 +97,14 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
         print("*************************************")
         print("여기서부턴 실제 실행될 코드들을 쓰겠습니다.")
         print(execute_code)
+        logger.info(execute_code)
         print("*************************************")
 
     else:
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
+
+
 
     ret_list = trade_multiple(start_date, end_date, unit, received_ticker_list, exec_code=execute_code)
     ret_list.append(assistant_message)
@@ -119,3 +122,4 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     """
 
     return ret_list
+

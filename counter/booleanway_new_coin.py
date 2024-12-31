@@ -41,75 +41,76 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
     selldatedict_collect={}
     totalmonitoringdict_collect={}
     for ticker in tickers:
-        try:
-            ret_list=trade(start_date,end_date,ticker,exec_code,unit,100000000,2)
-            stock_data = ret_list[0]
-            buy_date_dict = ret_list[1]
-            sell_date_dict = ret_list[2]
-            total_monitoring_dict = ret_list[3]
-            #이 3개 받은것을, chart draw를 위해서 좀 밖으로 빼내야 한다.
-            buy_price_list = []
-            sell_price_list = []
-            if len(buy_date_dict)!=0:
-                for d in buy_date_dict:
-                    buy_price_list.append(stock_data.loc[d, '종가'])
+        #try:
+        ret_list=trade(start_date,end_date,ticker,exec_code,unit,100000000,2)
+        stock_data = ret_list[0]
+        buy_date_dict = ret_list[1]
+        sell_date_dict = ret_list[2]
+        total_monitoring_dict = ret_list[3]
+        #이 3개 받은것을, chart draw를 위해서 좀 밖으로 빼내야 한다.
+        buy_price_list = []
+        sell_price_list = []
+        if len(buy_date_dict)!=0:
+            for d in buy_date_dict:
+                buy_price_list.append(stock_data.loc[d, '종가'])
 
-                buy_date_dict_str = {str(key): value for key, value in buy_date_dict.items()}
+            buy_date_dict_str = {str(key): value for key, value in buy_date_dict.items()}
 
-                buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict_str.items()), columns=['시간', '수량']).set_index('시간')
-                buy_date_price_df_temp['가격'] = buy_price_list
-                buydatedict_collect[ticker]=buy_date_dict
+            buy_date_price_df_temp = pd.DataFrame(list(buy_date_dict_str.items()), columns=['시간', '수량']).set_index('시간')
+            buy_date_price_df_temp['가격'] = buy_price_list
+            buydatedict_collect[ticker]=buy_date_dict
 
-            else:
-                data = {
-                    "수량": [0],
-                    "가격": [0],
-                }
+        else:
+            data = {
+                "수량": [0],
+                "가격": [0],
+            }
 
-                # DataFrame 생성
-                buy_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
+            # DataFrame 생성
+            buy_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
 
-                # Index 이름 설정
-                buy_date_price_df_temp.index.name = "시간"
-                buydatedict_collect[ticker]="err"
+            # Index 이름 설정
+            buy_date_price_df_temp.index.name = "시간"
+            buydatedict_collect[ticker]="err"
 
-            if len(sell_date_dict) != 0:
-                for d in sell_date_dict:
-                    sell_price_list.append(stock_data.loc[d, '종가'])
-                sell_date_dict_str = {str(key): value for key, value in sell_date_dict.items()}
-                sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict_str.items()), columns=['시간', '수량']).set_index(
-                    '시간')
-                sell_date_price_df_temp['가격'] = sell_price_list
-                selldatedict_collect[ticker] = sell_date_dict
+        if len(sell_date_dict) != 0:
+            for d in sell_date_dict:
+                sell_price_list.append(stock_data.loc[d, '종가'])
+            sell_date_dict_str = {str(key): value for key, value in sell_date_dict.items()}
+            sell_date_price_df_temp = pd.DataFrame(list(sell_date_dict_str.items()), columns=['시간', '수량']).set_index(
+                '시간')
+            sell_date_price_df_temp['가격'] = sell_price_list
+            selldatedict_collect[ticker] = sell_date_dict
 
-            else:
-                data = {
-                    "수량": [0],
-                    "가격": [0],
-                }
+        else:
+            data = {
+                "수량": [0],
+                "가격": [0],
+            }
 
-                # DataFrame 생성
-                sell_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
+            # DataFrame 생성
+            sell_date_price_df_temp = pd.DataFrame(data, index=["2000-01-01"])
 
-                # Index 이름 설정
-                sell_date_price_df_temp.index.name = "시간"
-                selldatedict_collect[ticker]="err"
+            # Index 이름 설정
+            sell_date_price_df_temp.index.name = "시간"
+            selldatedict_collect[ticker]="err"
 
 
-            total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),
-                                                    columns=["시간", "총 자산"]).set_index('시간')
+        total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),
+                                                columns=["시간", "총 자산"]).set_index('시간')
 
-            totalmonitoringdict_collect[ticker] = total_monitoring_dict
+        totalmonitoringdict_collect[ticker] = total_monitoring_dict
 
-            buy_date_list.append(buy_date_price_df_temp)
-            sell_date_list.append(sell_date_price_df_temp)
-            total_monitoring_list.append(total_monitoring_df_temp)
-            ticker_list.append(ticker)
-            total_onlymoney_df = total_onlymoney_df.add(total_monitoring_df_temp, fill_value=0)
-        except Exception as e:
-            failed_ticker_list.append(str(ticker)+": E || "+str(e))
-            print(str(ticker)+"failed :"+str(e))
-
+        buy_date_list.append(buy_date_price_df_temp)
+        sell_date_list.append(sell_date_price_df_temp)
+        total_monitoring_list.append(total_monitoring_df_temp)
+        ticker_list.append(ticker)
+        total_onlymoney_df = total_onlymoney_df.add(total_monitoring_df_temp, fill_value=0)
+        #except Exception as e:
+        #    failed_ticker_list.append(str(ticker)+": E || "+str(e))
+        #    print(str(ticker)+"failed :"+str(e))
+        print(buy_date_list)
+        print("list printed")
         buydf_final = pd.concat(buy_date_list, keys=ticker_list, names=["tickers", "시간"])
         # multiindex가 ticker, 시간이고, 시간, 수량, 가격 3개의 column을 가진듯 하다 .. .
         selldf_final = pd.concat(sell_date_list, keys=ticker_list, names=["tickers", "시간"])
@@ -368,7 +369,9 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     buy_date_dict = {}
     total_monitoring_dict={}
     i=0
+
     for d_d in stock_data.index:
+        print(d_d)
 
         #previous_d = d_d - timedelta(days=1)
         loc=stock_data.index.get_loc(d_d)
@@ -386,6 +389,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
         #print( str(stock_data.iloc[loc]["5day_sma"])+" || "+ str(stock_data.iloc[loc]["150day_sma"]))
 
         #매수 조건
+
 
         if condition_buy[d_d]==True:
             buy_percent=1
@@ -422,6 +426,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
     #최종 결과 프린트
     end_date_d=pd.to_datetime(str(end_date))
     if end_date_d not in stock_data.index:
+        print(type(stock_data.index[0]))
         loc = stock_data.index.get_indexer([end_date_d], method='pad')[0]
         end_date_d = stock_data.index[loc]
 

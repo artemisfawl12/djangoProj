@@ -249,6 +249,8 @@ def request_data_byminute(start_date, end_date, unit, ticker="KRW-BTC"):
                  'candle_date_time_utc': 'UTC시간'})
 
     stock_data = stock_data.set_index('시간')
+    stock_data.index=pd.to_datetime(stock_data.index)
+    stock_data=stock_data.iloc[::-1]
 
 
     return stock_data
@@ -312,6 +314,8 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
                  'candle_date_time_utc': 'UTC시간'})
 
     stock_data = stock_data.set_index('시간')
+    stock_data.index = pd.to_datetime(stock_data.index)
+    stock_data = stock_data.iloc[::-1]
 
 
 
