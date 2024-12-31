@@ -130,11 +130,15 @@ def multi_result_coin(request):
                 logger.info("date final session done")
                 assistant_msg =ret_list[10]
 
+                logger.info("json start")
+
                 buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+                logger.info("buy final json done")
                 sell_final_json = json.dumps(sell_final, ensure_ascii=False)
                 total_final_json = json.dumps(total_final, ensure_ascii=False)
                 ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
                 error_list_json = json.dumps(error_list, ensure_ascii=False)
+                logger.info("json done")
                 FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_callmulti_success")
 
 
