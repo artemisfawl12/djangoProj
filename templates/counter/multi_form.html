@@ -214,7 +214,6 @@
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
-            <a href="tickersearch/" class="link">ticker 찾기</a>
             <input type="text" id="ticker" name="ticker" placeholder="주식의 ticker을 쉼표로 구분해 입력하세요. EX)000660, 005930" required>
             <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
             <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
