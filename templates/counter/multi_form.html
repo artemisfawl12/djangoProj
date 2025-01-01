@@ -141,6 +141,22 @@
         <h1>주식 시뮬레이션</h1>
     </header>
     <main>
+        <h1> 주식 ticker 검색</h1>
+
+        <input type="text" id="searchInput" placeholder="코인 이름을 검색하세요">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>주식 이름</th>
+                        <th>Ticker</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTable">
+                    <!-- 데이터가 여기에 추가됩니다 -->
+                </tbody>
+            </table>
+        </div>
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
@@ -170,6 +186,7 @@
         const loader = document.getElementById("loading");
         const loadtxt = document.getElementById("loadtxt");
         const form=document.getElementById("wholeform");
+        const input_Field=document.getElementById("ticker")
         function showLoading(){
 
             loader.style.display="inline-block";
@@ -190,6 +207,71 @@
             const data = JSON.stringify({});
 
             navigator.sendBeacon(url, data);
+        });
+        function renderTable(data) {
+            const resultsTable = document.getElementById("resultsTable");
+            resultsTable.innerHTML = ""; // 기존 데이터 삭제
+            Object.entries(data).forEach(([name, ticker]) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${name}</td><td>${ticker}</td>`;
+                row.onclick = () => {
+                    // 원하는 동작: 예를 들어, ticker를 input 필드에 추가
+                    const inputField = document.getElementById("ticker");
+
+                    const currentValues = inputField.value.split(',').map(v => v.trim());
+                    if (currentValues.includes(ticker)) {
+                        const updatedValues = currentValues.filter(value => value !== ticker);
+                        inputField.value = updatedValues.join(', ');
+                        row.style.backgroundColor = "";
+
+                    } else {
+                        // 값이 없으면 추가
+                        inputField.value = [...currentValues, ticker].join(', ');
+                        row.style.backgroundColor = "#d3d3d3";
+                    }
+                };
+                resultsTable.appendChild(row);
+            });
+        }
+        let cachedData=null;
+        // API에서 데이터를 가져오기
+        fetch('/api/stocks/') // Django API Endpoint 호출
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch stock data');
+                }
+                return response.json(); // JSON 데이터를 반환
+            })
+            .then(data => {
+                console.log('Stock data:', data);
+                renderTable(data); // 데이터를 기반으로 테이블 렌더링
+                cachedData=data;
+            })
+            .catch(error => {
+                console.error('Error fetching stock data:', error);
+            });
+
+        // 테이블 렌더링 함수를 위로 옮겼다.
+
+        function fetchData(){
+            return Promise.resolve(cachedData);
+        }
+
+        // 검색 기능
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+
+            fetchData()
+                .then(data => {
+                    const filteredData = Object.entries(data).filter(([ticker, name]) =>
+                        ticker.includes(query) || name.toLowerCase().includes(query)
+                    );
+                    renderTable(Object.fromEntries(filteredData)); // 필터링된 데이터 렌더링
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
         });
 
 
