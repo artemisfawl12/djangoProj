@@ -460,8 +460,9 @@ def review_view(request):
         ip = request.POST.get('ip')
         id = request.POST.get('id', '')
         review_body = request.POST.get('review_body', '')
-        review_txt=str(id)+" : "+str(review_body)
-        FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status=review_txt)
+        review_txt=str(id)+" review: "+str(review_body)
+        logger.info(review_txt)
+        FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status="review:"+review_txt)
 
 
     return render(request,'counter/reviewpage.html')

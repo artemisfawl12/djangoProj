@@ -14,25 +14,7 @@ client = OpenAI(
 )
 
 model = "gpt-3.5-turbo"
-"""
-market	종목 코드	String
-candle_date_time_utc	캔들 기준 시각(UTC 기준)
-    포맷: yyyy-MM-dd'T'HH:mm:ss	String
-candle_date_time_kst	캔들 기준 시각(KST 기준)
-    포맷: yyyy-MM-dd'T'HH:mm:ss	String
-opening_price	시가	Double
-high_price	고가	Double
-low_price	저가	Double
-trade_price	종가	Double
-timestamp	해당 캔들에서 마지막 틱이 저장된 시각	Long
-candle_acc_trade_price	누적 거래 금액	Double
-candle_acc_trade_volume	누적 거래량	Double
-unit	분 단위(유닛)	Integer
 
-모든 코인들의 데이터를 싹 한군데에 넣어놔서, 상대적인 수치도 사용할수 있게하면 어떨까?
-한 10개까지 선택 가능하게 한다음에, 이중에서 너맘대로 골라라 식으로 가는거지
-그리고 KRW 마켓, BTC 마켓도 구별해야할것.
-"""
 
 
 def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end_date, unit, received_ticker_list):
@@ -42,14 +24,13 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     if unit==0:
         unit_txt="1일 단위의 "
     else:
-        unit_txt=str(unit)+"분 단위의 "
+        unit_txt=str(unit)+"minute 단위의 "
 
     query = (
 
 
             "stock_data는" +unit_txt+
-            """
-            코인 가격 candle이 들어있는 python dataframe이고, index는 "시간"이며 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "거래금액" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
+            """코인 가격 candle이 들어있는 python dataframe이고, index는 "시간"이며 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "거래금액" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
             즉 절대 가상의 데이터를 생성하지 마라.
             또한 코인 데이터이므로 주7일, 24시간의 데이터가 모두 다 들어있다는 점을 명심하라.
             이 dataframe을 가지고 
