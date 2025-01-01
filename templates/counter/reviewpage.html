@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #searchInput {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .table-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            max-height: 400px; /* 테이블 최대 높이 지정 */
+            overflow-y: auto; /* 스크롤 가능하게 설정 */
+
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            position: sticky;
+            top: 0;
+        }
+        .hidden-text {
+                display: none; /* 기본적으로 숨김 */
+            }
+
+        .visible {
+            display: block; /* 보이게 변경 */
+        }
+        /*loader style*/
+        .loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3em;
+            position: relative;
+            vertical-align: middle;
+        }
+        .loader,
+    .loader:before,
+    .loader:after {
+        animation: 1s infinite ease-in-out;
+    }
+    .loader:before,
+    .loader:after {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+        .loader-3:before {
+        content: '';
+        border: 10px solid white;
+        top: -10px;
+        left: -10px;
+        animation-name: loader3;
+        }
+        .loader-black{
+            background-color: #333;
+        }
+        .loader.visible{
+            display: inline-block;
+        }
+
+        @keyframes loader3 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input_large {
+            width: 90%;
+            height: 50px;
+            padding: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 30px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+
+        /* 반응형 처리 */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+    <header>
+        <h1>정성스런 리뷰를 써주면</h1>
+        <h3>제가 매우 고맙겠습니다.</h3>
+    </header>
+
+
+
+        <form id="wholeform" method="POST">
+            {% csrf_token %}
+            <label for="name">INPUT</label>
+            <input type="text" id="id" name="ticker" placeholder="원하시는 닉네임을 적어주세요" required>
+            <textarea class="input_large" type="text" id="review_body" name="buy_strat" placeholder="리뷰를 이자리에 적어주세요." required></textarea>
+            <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+        </form>
+    </main>
+
+</body>
+</html>

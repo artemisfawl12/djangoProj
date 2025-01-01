@@ -455,4 +455,16 @@ def statistic_view(request):
     logs=FileLog.objects.all()
     return render(request,'counter/statistic.html',{'logs':logs})
 
+def review_view(request):
+    if request.method=="POST":
+        ip = request.POST.get('ip')
+        id = request.POST.get('id', '')
+        review_body = request.POST.get('review_body', '')
+        review_txt=str(id)+" : "+str(review_body)
+        FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status=review_txt)
+
+
+    return render(request,'counter/reviewpage.html')
+
+
 
