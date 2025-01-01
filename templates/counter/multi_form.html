@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BACKTOCKS.NET</title>
     <style>
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            height: 30px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #searchInput {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .table-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            max-height: 400px; /* 테이블 최대 높이 지정 */
+            overflow-y: auto; /* 스크롤 가능하게 설정 */
+
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            position: sticky;
+            top: 0;
+        }
         .hidden-text {
                 display: none; /* 기본적으로 숨김 */
             }
@@ -143,7 +196,7 @@
     <main>
         <h1> 주식 ticker 검색</h1>
 
-        <input type="text" id="searchInput" placeholder="코인 이름을 검색하세요">
+        <input type="text" id="searchInput" placeholder="주식 이름을 검색하세요">
         <div class="table-container">
             <table>
                 <thead>
