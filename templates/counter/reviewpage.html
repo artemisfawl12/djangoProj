@@ -179,9 +179,9 @@
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
-            <input type="text" id="id" name="ticker" placeholder="원하시는 닉네임을 적어주세요" required>
-            <textarea class="input_large" type="text" id="review_body" name="buy_strat" placeholder="리뷰를 이자리에 적어주세요." required></textarea>
-            <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
+            <input type="text" id="id" name="id" placeholder="원하시는 닉네임을 적어주세요" required>
+            <textarea class="input_large" type="text" id="review_body" name="review_body" placeholder="리뷰를 이자리에 적어주세요." required></textarea>
+            <button id="submitbtn" type="submit">확인</button>
             <a href="/coinmulti/" class="link">첫 페이지로 돌아가기</a>
         </form>
     </main>
