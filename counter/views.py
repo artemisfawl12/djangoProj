@@ -50,14 +50,6 @@ def multi_chart(request, ticker):
     response['Content-Disposition'] = f'attachment; filename="{ticker}.html"'
 
 
-    with open(html_path, 'w', encoding='utf-8') as f:
-        f.write(html_txt)
-
-
-
-    show_chart(request)
-
-
     return response
 def multi_chart_coin(request, ticker):
     unit=request.session.get('unit')
