@@ -51,6 +51,7 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
             """
             코인 가격 candle이 들어있는 python dataframe이고, index는 "시간"이며 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "거래금액" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
             즉 절대 가상의 데이터를 생성하지 마라.
+            또한 코인 데이터이므로 주7일, 24시간의 데이터가 모두 다 들어있다는 점을 명심하라.
             이 dataframe을 가지고 
             <
             """

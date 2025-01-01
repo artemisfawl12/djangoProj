@@ -338,8 +338,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
         stock_data=request_data_byminute(start_date,end_date,unit,ticker)
         #여기에 너무 많으면 끊는 코드 추가 필요. timediff를 세도록 해야되나 로직 자체에서?
 
-    for i in stock_data:
-        print(i)
+
     print("stock_Data의 길이:" +str(len(stock_data)))
 
     #stock_data는 index를 시간로 갖는 dataframe이고, 각 행은 시가, 고가, 저가, 종가, 거래량, 등락률 순으로 데이터를 갖고있다.
@@ -378,7 +377,6 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
 
 
     for d_d in stock_data.index:
-        print(d_d)
 
         #previous_d = d_d - timedelta(days=1)
         loc=stock_data.index.get_loc(d_d)
