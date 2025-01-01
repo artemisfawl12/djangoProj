@@ -175,12 +175,12 @@
     </header>
     <h1> coin ticker 검색</h1>
 
-    <input type="text" id="searchInput" placeholder="Ticker 또는 주식 이름을 검색하세요">
+    <input type="text" id="searchInput" placeholder="코인 이름을 검색하세요">
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>주식 이름</th>
+                    <th>코인 이름</th>
                     <th>Ticker</th>
                 </tr>
             </thead>
@@ -219,6 +219,9 @@
 
             <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
             <p id="loadtxt" class="hidden-text"><strong>시뮬레이션 하는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
+            <p><strong>요청한 데이터가 너무 크면 런타임 에러가 발생할 수 있습니다.그러면 좀 나눠서 다시 시도해주세요.</strong></p>
+            <p><i style="color: #808080;">제가 돈이 없어서 좋은 서버를 못 쓴답니다.</i></p>
+            <p>요청한 가격 데이터가 크거나, 많은 코인을 한번에 돌린 경우</p>
             <p><strong> 현재 시뮬레이션에 사용가능한 지표는 아래와 같습니다. </strong> </p>
             <p><strong> 시가, 고가, 저가, 종가, 거래량 </strong></p>
             <p><strong>위 지표들로 만들 수 있는 지표라면 얼마든지 요청가능합니다.</strong></p>
