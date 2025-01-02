@@ -184,7 +184,7 @@ def multi_result_coin(request):
 
 
         except Exception as e:
-            logger.info("Exception at where?")
+            logger.info("Exception at where?"+str(e))
             buy_final = "err"
             sell_final = "err"
             total_final = "err"
