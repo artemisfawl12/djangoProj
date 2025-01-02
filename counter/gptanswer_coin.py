@@ -61,7 +61,7 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
     logger.info("query:" + query)
     logger.info("message to gpt sent")
 
-    """
+
 
     response = client.chat.completions.create(model=model, messages=messages)
     logger.info("message to gpt received")
@@ -90,27 +90,10 @@ def coingpt_call_multi(try_count, buy_condition, sell_condition, start_date, end
         print("python 코드를 찾을 수 없습니다.")
         logger.info("python code not found")
         
-    """
-    execute_code = """# 이동 평균 계산
-stock_data['2일이평선'] = stock_data['종가'].rolling(window=2, min_periods=2).mean()
-stock_data['30일이평선'] = stock_data['종가'].rolling(window=30, min_periods=30).mean()
-stock_data['3일이평선'] = stock_data['종가'].rolling(window=3, min_periods=3).mean()
-stock_data['20일이평선'] = stock_data['종가'].rolling(window=20, min_periods=20).mean()
 
-# 상향 돌파 (골든 크로스) 조건
-condition_buy = (
-(stock_data['2일이평선'].shift(1) <= stock_data['30일이평선'].shift(1)) & # 직전 시점에서 2일 이평선이 30일 이평선 이하
-(stock_data['2일이평선'] > stock_data['30일이평선']) # 현재 시점에서 2일 이평선이 30일 이평선 초과
-)
 
-# 하향 돌파 (데드 크로스) 조건
-condition_sell = (
-(stock_data['3일이평선'].shift(1) >= stock_data['20일이평선'].shift(1)) & # 직전 시점에서 3일 이평선이 20일 이평선 이상
-(stock_data['3일이평선'] < stock_data['20일이평선']) # 현재 시점에서 3일 이평선이 20일 이평선 미만
-)
-"""
     ret_list = trade_multiple(start_date, end_date, unit, received_ticker_list, exec_code=execute_code)
-    assistant_message=""
+
 
     ret_list.append(assistant_message)
 

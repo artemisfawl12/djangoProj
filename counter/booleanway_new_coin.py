@@ -73,7 +73,8 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
 
             # Index 이름 설정
             buy_date_price_df_temp.index.name = "시간"
-            buydatedict_collect[ticker]="err"
+            buydatedict_collect[ticker]="buy_zero"
+            failed_ticker_list.append(ticker)
 
         if len(sell_date_dict) != 0:
             for d in sell_date_dict:
@@ -95,7 +96,7 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
 
             # Index 이름 설정
             sell_date_price_df_temp.index.name = "시간"
-            selldatedict_collect[ticker]="err"
+            selldatedict_collect[ticker]="sell_zero"
 
 
         total_monitoring_df_temp = pd.DataFrame(list(total_monitoring_dict.items()),

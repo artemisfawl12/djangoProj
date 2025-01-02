@@ -155,9 +155,23 @@ def multi_result_coin(request):
             selldict=ret_list[7]
             totaldict=ret_list[8]
             date_list=ret_list[9]
+            assistant_msg = ret_list[10]
             #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
-            buy_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in buydict.items()}
-            sell_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in selldict.items()}
+            buy_dict_iso={}
+            sell_dict_iso={}
+            for ticker, data in buydict.items():
+                if data=="buy_zero":
+                    assistant_msg+"\n "+str(ticker)+"의 매수 횟수가 0회입니다. 조건을 만족하는 시점이 없었나봐요"
+                    buy_dict_iso[ticker]={}
+                else:
+                    buy_dict_iso[ticker] = {key.isoformat(): int(value) for key, value in data.items()}
+            #여기로 ticker에 대해서, 에러가 났을 경우 data자리에 err str이 들어온다. 그래서 str에 대해 item이 없다고 나오게됨. 원래는 key는 date, value는 수량일걸 ..
+            for ticker, data in selldict.items():
+                if data=="sell_zero":
+                    assistant_msg+"\n "+str(ticker)+"의 매도 횟수가 0회입니다. 조건을 만족하는 시점이 없었나봐요"
+                    sell_dict_iso[ticker]={}
+                else:
+                    sell_dict_iso[ticker] = {key.isoformat(): int(value) for key, value in data.items()}
             total_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in totaldict.items()}
             logger.info("session saving started")
             request.session['buy_final']=buy_dict_iso
@@ -165,7 +179,7 @@ def multi_result_coin(request):
             request.session['total_monitor_final']=total_dict_iso
             request.session['date_list'] = date_list
             logger.info("date final session done")
-            assistant_msg =ret_list[10]
+
 
             logger.info("json start")
             buy_final_json = json.dumps(buy_final, ensure_ascii=False)
