@@ -281,6 +281,8 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
             break
         if i < int(timediff / 200):
             wanted_time = end_datetime - timedelta(days=i * 200)
+            print(wanted_time)
+            print(":wanted time")
 
             requested_df = request_datedata_200(wanted_time.isoformat(), 200, market=ticker)
             if type(requested_df) == int:

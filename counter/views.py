@@ -122,67 +122,68 @@ def multi_result_coin(request):
         request.session['unit']=unit
         user_ip = get_ip(request)
 
-        try:
-            ret_list = coingpt_call_multi(0, buy_strat, sell_strat, start_date, end_date,unit,ticker_list)
-            if len(ret_list[0])==0:
-                logger.info("buy final length is 0")
-                buy_final = "err"
-                sell_final = "err"
-                total_final = "err"
-                error_list = ["gpt_call_multi error: "]
-                ticker_list = []
-                buy_final_json = json.dumps(buy_final, ensure_ascii=False)
-                sell_final_json = json.dumps(sell_final, ensure_ascii=False)
-                total_final_json = json.dumps(total_final, ensure_ascii=False)
-                ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
-                error_list_json=json.dumps(error_list,ensure_ascii=False)
-                assistant_msg="매수 횟수가 0입니다. 뭔가 이상해요!.\n"+ret_list[10]
+        #try:
+        ret_list = coingpt_call_multi(0, buy_strat, sell_strat, start_date, end_date,unit,ticker_list)
+        if len(ret_list[0])==0:
+            logger.info("buy final length is 0")
+            buy_final = "err"
+            sell_final = "err"
+            total_final = "err"
+            error_list = ["gpt_call_multi error: "]
+            ticker_list = []
+            buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+            sell_final_json = json.dumps(sell_final, ensure_ascii=False)
+            total_final_json = json.dumps(total_final, ensure_ascii=False)
+            ticker_list_json = json.dumps(ticker_list, ensure_ascii=False)
+            error_list_json=json.dumps(error_list,ensure_ascii=False)
+            assistant_msg="매수 횟수가 0입니다. 뭔가 이상해요!.\n"+ret_list[10]
 
-                FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_call multi_len==0")
-                # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
-
-
-
-            else:
-                buy_final = ret_list[0]
-                print(buy_final)
-                sell_final = ret_list[1]
-                total_monitor_final=ret_list[2]
-                total_final=ret_list[3]
-                error_list=ret_list[4]
-                ticker_list =ret_list[5]
-                buydict=ret_list[6]
-                selldict=ret_list[7]
-                totaldict=ret_list[8]
-                date_list=ret_list[9]
-                #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
-                buy_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in buydict.items()}
-                sell_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in selldict.items()}
-                total_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in totaldict.items()}
-                logger.info("session saving started")
-                request.session['buy_final']=buy_dict_iso
-                request.session['sell_final']=sell_dict_iso
-                request.session['total_monitor_final']=total_dict_iso
-                request.session['date_list'] = date_list
-                logger.info("date final session done")
-                assistant_msg =ret_list[10]
-
-                logger.info("json start")
-                buy_final_json = json.dumps(buy_final, ensure_ascii=False)
-                sell_final_json = json.dumps(sell_final, ensure_ascii=False)
-                total_final_json = json.dumps(total_final, ensure_ascii=False)
-                ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
-                error_list_json = json.dumps(error_list, ensure_ascii=False)
-                logger.info("json done")
-                FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_callmulti_success")
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_call multi_len==0")
+            # 에러났다고 알려주고 gpt 메시지 보여주는거 넣어야 합니다.
 
 
+
+        else:
+            buy_final = ret_list[0]
+            print(buy_final)
+            sell_final = ret_list[1]
+            total_monitor_final=ret_list[2]
+            total_final=ret_list[3]
+            error_list=ret_list[4]
+            ticker_list =ret_list[5]
+            buydict=ret_list[6]
+            selldict=ret_list[7]
+            totaldict=ret_list[8]
+            date_list=ret_list[9]
+            #이렇게하면 잘 됐을때만 차트 표시가 되는건데.
+            buy_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in buydict.items()}
+            sell_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in selldict.items()}
+            total_dict_iso={ticker:{key.isoformat(): int(value) for key, value in data.items()} for ticker,data in totaldict.items()}
+            logger.info("session saving started")
+            request.session['buy_final']=buy_dict_iso
+            request.session['sell_final']=sell_dict_iso
+            request.session['total_monitor_final']=total_dict_iso
+            request.session['date_list'] = date_list
+            logger.info("date final session done")
+            assistant_msg =ret_list[10]
+
+            logger.info("json start")
+            buy_final_json = json.dumps(buy_final, ensure_ascii=False)
+            sell_final_json = json.dumps(sell_final, ensure_ascii=False)
+            total_final_json = json.dumps(total_final, ensure_ascii=False)
+            ticker_list_json=json.dumps(ticker_list, ensure_ascii=False)
+            error_list_json = json.dumps(error_list, ensure_ascii=False)
+            logger.info("json done")
+            FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_callmulti_success")
 
 
 
 
 
 
+
+
+        """
         except Exception as e:
             logger.info("Exception at where?"+str(e))
             buy_final = "err"
@@ -199,6 +200,7 @@ def multi_result_coin(request):
             assistant_msg="gpt 시뮬레이션 함수를 실행하다가 뭔가 오류가 났어요. 관리자에게 문의해주세요: artemisfawl@naver.com"
 
             FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="gptcoin_call_failed: "+str(e))
+        """
 
 
         # 유저의 IP 주소 또는 세션 ID를 활용한 파일명 생성

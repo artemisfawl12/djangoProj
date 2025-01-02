@@ -111,8 +111,6 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
         #except Exception as e:
         #    failed_ticker_list.append(str(ticker)+": E || "+str(e))
         #    print(str(ticker)+"failed :"+str(e))
-        print(buy_date_list)
-        print("list printed")
         buydf_final = pd.concat(buy_date_list, keys=ticker_list, names=["tickers", "시간"])
         # multiindex가 ticker, 시간이고, 시간, 수량, 가격 3개의 column을 가진듯 하다 .. .
         selldf_final = pd.concat(sell_date_list, keys=ticker_list, names=["tickers", "시간"])
@@ -393,7 +391,7 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
         #매수 조건
 
 
-
+        print(condition_buy[d_d])
 
         if condition_buy[d_d]==True:
             buy_percent=1
