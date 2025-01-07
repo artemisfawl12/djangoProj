@@ -253,8 +253,13 @@ def request_data_byminute(start_date, end_date, unit, ticker="KRW-BTC"):
     stock_data.index=pd.to_datetime(stock_data.index)
     stock_data=stock_data.iloc[::-1]
 
+    #중복 제거
+    stock_data_unique = stock_data[~stock_data.index.duplicated(keep='first')]
 
-    return stock_data
+
+
+
+    return stock_data_unique
 
 def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
 
@@ -322,10 +327,12 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
     stock_data = stock_data.set_index('시간')
     stock_data.index = pd.to_datetime(stock_data.index)
     stock_data = stock_data.iloc[::-1]
+    stock_data_unique = stock_data[~stock_data.index.duplicated(keep='first')]
 
 
 
-    return stock_data
+
+    return stock_data_unique
 
 #원래 trade에서 쓰던대로 데이터를 가다듬는 함수를 만듭시다.
 """
@@ -380,4 +387,9 @@ for ticker in tickers:
     print(name)
 """
 
-
+"""
+data=request_data_byminute("20241208","20241220",5)
+is_duplicated = data.index.duplicated(keep=False)
+for index, row in data[is_duplicated].iterrows():
+    print(f"Index: {index}, Data: {row.to_dict()}")
+"""

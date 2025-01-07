@@ -394,36 +394,39 @@ def trade(start_date, end_date, ticker,exec_code,unit, startmoney=100000000, cha
 
         print(condition_buy[d_d])
 
-        if condition_buy[d_d]==True:
-            buy_percent=1
-            received_buy_count=trader.buy(ticker,stock_data.iloc[loc]["종가"],buy_percent)
+        try:
+            if condition_buy[d_d]==True:
+                buy_percent=1
+                received_buy_count=trader.buy(ticker,stock_data.iloc[loc]["종가"],buy_percent)
 
-            #살때마다 구매 시간 리스트를 만들어 추후 차트에 표기
-            if received_buy_count!=0 and received_buy_count!=None:
-                #이때 received_buy_count 자리에 0이 올수도, None 이 올수도 있으니 둘다 제외해줘야된다. 아래에서 sell count에서도 마찬가지
-                buy_date_dict[d_d]=received_buy_count
-                print("시간:" + str(d_d) + ", " + str(stock_data.iloc[loc]["종가"]) + "에 매수")
-                code_curpricedict = {}
-                code_curpricedict[ticker] = stock_data.iloc[loc]["종가"]
-                trader.current(code_curpricedict)
-
-
-        #매도 조건
-        elif condition_sell[d_d]==True:
-            #trader의 sell 함수의 return값은: 실제 매도가 이루어지면 1을 받고, 현재 보유한 주식이 없어 매도가 이루어지지 않았으면 0을 받음.
-            received_sell_count=trader.sell(ticker,stock_data.iloc[loc]["종가"],1)
-            if received_sell_count!=0 and received_sell_count!=None:
-                print("매도가격: " + str(stock_data.iloc[loc]["종가"]))
-                code_curpricedict = {}
-                code_curpricedict[ticker] = stock_data.iloc[loc]["종가"]
-                trader.current(code_curpricedict)
-
-                # 팔때마다 구매 시간 리스트를 만들어 추후 차트에 표기
-                sell_date_dict[d_d] = received_sell_count
+                #살때마다 구매 시간 리스트를 만들어 추후 차트에 표기
+                if received_buy_count!=0 and received_buy_count!=None:
+                    #이때 received_buy_count 자리에 0이 올수도, None 이 올수도 있으니 둘다 제외해줘야된다. 아래에서 sell count에서도 마찬가지
+                    buy_date_dict[d_d]=received_buy_count
+                    print("시간:" + str(d_d) + ", " + str(stock_data.iloc[loc]["종가"]) + "에 매수")
+                    code_curpricedict = {}
+                    code_curpricedict[ticker] = stock_data.iloc[loc]["종가"]
+                    trader.current(code_curpricedict)
 
 
-            else:
-                pass
+            #매도 조건
+            elif condition_sell[d_d]==True:
+                #trader의 sell 함수의 return값은: 실제 매도가 이루어지면 1을 받고, 현재 보유한 주식이 없어 매도가 이루어지지 않았으면 0을 받음.
+                received_sell_count=trader.sell(ticker,stock_data.iloc[loc]["종가"],1)
+                if received_sell_count!=0 and received_sell_count!=None:
+                    print("매도가격: " + str(stock_data.iloc[loc]["종가"]))
+                    code_curpricedict = {}
+                    code_curpricedict[ticker] = stock_data.iloc[loc]["종가"]
+                    trader.current(code_curpricedict)
+
+                    # 팔때마다 구매 시간 리스트를 만들어 추후 차트에 표기
+                    sell_date_dict[d_d] = received_sell_count
+
+
+                else:
+                    pass
+        except:
+            condition_buy_except=condition_buy[d_d].iloc[0]
 
 
     #최종 결과 프린트
