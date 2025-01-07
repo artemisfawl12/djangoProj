@@ -255,6 +255,7 @@ def request_data_byminute(start_date, end_date, unit, ticker="KRW-BTC"):
 
     #중복 제거
     stock_data_unique = stock_data[~stock_data.index.duplicated(keep='first')]
+    stock_data_unique = stock_data_unique.sort_index()
 
 
 
@@ -328,7 +329,7 @@ def request_data_bydate(start_date, end_date, ticker="KRW-BTC"):
     stock_data.index = pd.to_datetime(stock_data.index)
     stock_data = stock_data.iloc[::-1]
     stock_data_unique = stock_data[~stock_data.index.duplicated(keep='first')]
-
+    stock_data_unique=stock_data_unique.sort_index()
 
 
 
@@ -389,7 +390,11 @@ for ticker in tickers:
 
 """
 data=request_data_byminute("20241208","20241220",5)
+print(data)
 is_duplicated = data.index.duplicated(keep=False)
-for index, row in data[is_duplicated].iterrows():
-    print(f"Index: {index}, Data: {row.to_dict()}")
+#for index, row in data.iterrows():
+#    print(f"Index: {index}, Data: {row.to_dict()}")
+print(data.index.is_monotonic_increasing)  # True면 단조 증가
+print(data.index.is_monotonic_decreasing)  # True면 단조 감소
 """
+
