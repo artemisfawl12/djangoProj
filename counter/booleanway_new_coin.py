@@ -42,7 +42,8 @@ def trade_multiple(start_date, end_date, unit, tickers, exec_code):
     totalmonitoringdict_collect={}
     for ticker in tickers:
         #try:
-        ret_list=trade(start_date,end_date,ticker,exec_code,unit,100000000,2)
+        ret_list=trade(start_date,end_date,ticker,exec_code,unit,1000000000,2)
+        #스타트머니 10억으로 바꿈
         stock_data = ret_list[0]
         buy_date_dict = ret_list[1]
         sell_date_dict = ret_list[2]
