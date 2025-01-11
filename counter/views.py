@@ -128,7 +128,12 @@ def process(request):
                                status="author cacluator used: money is "+str(income_total))
 
         income_total=process_float_to_str(income_total)
-        surplus_month = process_float_to_str(surplus_month)
+        if surplus_month>=0:
+            surplus_month = process_float_to_str(surplus_month)
+        else:
+            temp_surplus=surplus_month*(-1)
+            temp_surplus=process_float_to_str(temp_surplus)
+            surplus_month="-"+temp_surplus
         income_month=process_float_to_str(income_month)
         loss_total=process_float_to_str(loss_total)
 
