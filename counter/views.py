@@ -16,6 +16,16 @@ from datetime import datetime
 import json
 import logging
 
+def process_float_to_str(value):
+    value=int(value)
+    man=value //10000
+    chon=value%10000
+    if man>0:
+        result=f"{man}만 {chon}원" if chon > 0 else f"{man}만 원"
+    else:
+        result = f"{chon}원"  # 만 원 단위가 없을 경우
+
+    return result
 def process(request):
     if request.method=='POST':
         rs_author=request.POST.get('rs_author','')
@@ -111,10 +121,16 @@ def process(request):
                     loss_total = (mg_money - total_money * author_share_pct)*period
                     income_month = mg_money
 
+
         user_ip = get_ip(request)
+
         FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(),
                                status="author cacluator used: money is "+str(income_total))
 
+        income_total=process_float_to_str(income_total)
+        surplus_month = process_float_to_str(surplus_month)
+        income_month=process_float_to_str(income_month)
+        loss_total=process_float_to_str(loss_total)
 
 
 
