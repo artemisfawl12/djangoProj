@@ -40,6 +40,7 @@ def process(request):
         publish_count=float(publish_count)
         mg_money=publish_count*mg_money # 월 연재횟수랑 곱해줍니다.
         total_money=revenue_1*total_share_pct #이게 에이전시랑 작가 수익 총합, 월별
+        income_total=0
         if mg==0:
             #월별 mg
             if subtract==0:
@@ -109,6 +110,10 @@ def process(request):
                     surplus_month=total_money*author_share_pct-mg_money
                     loss_total = (mg_money - total_money * author_share_pct)*period
                     income_month = mg_money
+
+        user_ip = get_ip(request)
+        FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(),
+                               status="author cacluator used: money is "+str(income_total))
 
 
 

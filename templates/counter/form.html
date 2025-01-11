@@ -172,6 +172,9 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
             <p id="loadtxt" class="hidden-text"><strong>mg만 가지고 받을 수 있는 돈은 딱히 제시하지 않겠습니다.</strong></p>
+            <div id="output">
+                <p>결과가 여기에 표시됩니다.</p>
+            </div>
             <p id="loadtxt" class="hidden-text"><strong>예상 총수익은:</strong></p>
             <div id="loss_total"></div>
             <div id="surplus_month"></div>
@@ -238,11 +241,15 @@
                         csrfmiddlewaretoken: '{{ csrf_token }}'  // CSRF 토큰 포함
                     },
                     success: function(response) {
+
+                        $('#output').html(`
+                            <p>연재기간 총수익: ${response.income_total}</p>
+                            <p>월수익: ${response.income_month}</p>
+                            <p>흑자: ${response.surplus_month}</p>
+                            <p>총loss: ${response.loss_total}</p>
+                        `);
                         // 결과 출력
-                        $('#income_total').text(response.income_total);
-                        $('#surplus_month').text(response.surplus_month);
-                        $('#income_month').text(response.income_month);
-                        $('#loss_total').text(response.loss_total);
+
                     },
                     error: function(xhr, status, error) {
                         console.error('Error:', error);
