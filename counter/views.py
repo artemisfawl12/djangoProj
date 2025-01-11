@@ -612,7 +612,7 @@ def review_view_auth(request):
         FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status="author review:"+review_txt)
 
 
-    return render(request,'counter/reviewpage_auth.html.html')
+    return render(request,'counter/reviewpage_auth.html')
 
 
 
