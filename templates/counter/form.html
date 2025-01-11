@@ -209,6 +209,9 @@
         });
         $(document).ready(function() {
             $('#submitbtn').click(function() {
+
+                event.preventDefault();
+
                 const rs_author = $('#rs_author').val();
                 const rs_company = $('#rs_company').val();
                 const rs_portal=$('#rs_portal').val();
