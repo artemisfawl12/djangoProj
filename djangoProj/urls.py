@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from counter.views import show_chart
-from counter.views import show_tickersearch, delete_file, statistic_view, file_del_byip, coin_tickersearch, multi_result_coin, review_view
+from counter.views import show_tickersearch, delete_file, statistic_view, file_del_byip, coin_tickersearch, multi_result_coin, review_view, review_view_auth
 from counter.views import multi_result
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,8 @@ urlpatterns = [
     path('multi/',multi_result, name="multi form"),
     path('cointickersearch/', coin_tickersearch, name="show_cointickersearch"),
     path('coinmulti/',multi_result_coin, name="multi_result_coin_form"),
-    path('review/',review_view,name="review page")
+    path('review/',review_view,name="review page"),
+    path('reviewauth/',review_view_auth,name="review page for author")
+
 
 ]

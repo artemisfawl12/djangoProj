@@ -511,6 +511,8 @@ def count_characters(request):
     return render(request,'counter/form.html')
 
 def author_count(request):
+    user_ip = get_ip(request)
+    FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="author page called")
     return render(request,'counter/form.html')
 
 def coin_ticker_data(request):
@@ -599,6 +601,19 @@ def review_view(request):
 
 
     return render(request,'counter/reviewpage.html')
+
+def review_view_auth(request):
+    if request.method=="POST":
+        ip = request.POST.get('ip')
+        id = request.POST.get('id', '')
+        review_body = request.POST.get('review_body', '')
+        review_txt=str(id)+" review: "+str(review_body)
+        logger.info(review_txt)
+        FileLog.objects.create(ip_address=ip, timestamp=datetime.now(), status="author review:"+review_txt)
+
+
+    return render(request,'counter/reviewpage_auth.html.html')
+
 
 
 
