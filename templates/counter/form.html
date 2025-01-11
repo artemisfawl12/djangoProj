@@ -144,13 +144,12 @@
     <main>
         <form id="wholeform" method="POST">
             {% csrf_token %}
-            <label for="name">INPUT</label>
+            <label for="name">아래 입력란을 작성해주세요.</label>
 
             <label for="mg">정산 방식 선택:</label>
             <select id="mg" name="mg" required>
-                <option value="0">월 MG</option>
                 <option value="1">누적MG</option>
-                <option value="2">통합MG</option>
+                <option value="0">월 MG</option>
             </select>
             <label for="subtract">차감 방식 선택:</label>
             <select id="subtract" name="subtract" required>
@@ -164,6 +163,8 @@
 
             <input type="text" id="revenue_1" name="revenue_1" placeholder="월 예상 수익" required>
 
+            <p><strong> 아래 3개의 수치는 작가-에이전시-포탈 순으로 수익 배분 비율을 적어주세요. </strong> </p>
+
             <div style="display: flex; gap: 10px; align-items: center;">
                 <input type="text" id="rs_author" name="rs_author" placeholder="작가 수익비율 입력:" required style="padding: 8px; font-size: 14px; flex: 1;">
                 <input type="text" id="rs_company" name="rs_company" placeholder="에이전시 수익비율:" required style="padding: 8px; font-size: 14px; flex: 1;">
@@ -173,14 +174,33 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
             <p id="loadtxt" class="hidden-text"><strong>mg만 가지고 받을 수 있는 돈은 딱히 제시하지 않겠습니다.</strong></p>
-            <div id="output">
-                <p>결과가 여기에 표시됩니다.</p>
-            </div>
+            <table id="resultTable" border="1">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>값</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>연재기간 총수익</td>
+                        <td id="value1"></td>
+                    </tr>
+                    <tr>
+                        <td>연재기간동안 한달수익</td>
+                        <td id="value2"></td>
+                    </tr>
+                    <tr>
+                        <td>MG 제외한 한달 추가수익</td>
+                        <td id="value3"></td>
+                    </tr>
+                    <tr>
+                        <td>연재기간 종료 후 남는 손실</td>
+                        <td id="value4"></td>
+                    </tr>
+                </tbody>
+            </table>
             <p id="loadtxt" class="hidden-text"><strong>예상 총수익은:</strong></p>
-            <div id="loss_total"></div>
-            <div id="surplus_month"></div>
-            <div id="income_total"></div>
-            <div id="income_month"></div>
             <p id="loadtxt" class="hidden-text">위는 mg 달성 못했을때 빠지는 돈까지 뺀겁니다.</p>
             <p id="loadtxt" class="hidden-text"><strong>mg와 비교했을때 월별 흑자/적자는 아래와 같습니다.</strong></p>
 
@@ -243,13 +263,10 @@
                     },
                     success: function(response) {
 
-                        $('#output').html(`
-                            <p>연재기간 총수익: ${response.income_total}</p>
-                            <p>월수익: ${response.income_month}</p>
-                            <p>흑자: ${response.surplus_month}</p>
-                            <p>총loss: ${response.loss_total}</p>
-                        `);
-                        // 결과 출력
+                        $('#value1').text(response.income_total);
+                        $('#value2').text(response.income_month);
+                        $('#value3').text(response.surplus_month);
+                        $('#value4').text(response.loss_total);
 
                     },
                     error: function(xhr, status, error) {
