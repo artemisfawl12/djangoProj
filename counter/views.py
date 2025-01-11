@@ -17,7 +17,7 @@ import json
 import logging
 
 def process_float_to_str(value):
-    value=int(value)
+    value=(int(value)//100)*100
     man=value //10000
     chon=value%10000
     if man>0:

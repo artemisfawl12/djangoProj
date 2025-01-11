@@ -32,11 +32,11 @@
             top: 0;
         }
         th:first-child, td:first-child {
-            width: 30%; /* 첫 번째 열: 30% */
+            width: 50%; /* 첫 번째 열: 30% */
         }
 
         th:last-child, td:last-child {
-            width: 70%; /* 마지막 열: 70% */
+            width: 50%; /* 마지막 열: 70% */
         }
 
         .hidden-text {
@@ -226,8 +226,9 @@
 
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
-            <p id="disappeartxt">결과는 아래 표에 제시됩니다.</p>
-            <p id="loadtxt" class="hidden-text"><strong>mg만 가지고 받을 수 있는 돈은 딱히 제시하지 않겠습니다.</strong></p>
+            <p class="disappeartxt" id="disappeartxt">결과는 아래 표에 제시됩니다.</p>
+            <p class="disappeartxt" id="disappeartxt">MG만으로 버는 금액은 딱히 제시하지 않았습니다.</p>
+            <p id="loadtxt" class="hidden-text"><strong>백원 이하 값은 버렸습니다.</strong></p>
             <div class="table-container">
                 <table id="resultTable" border="1">
                     <thead>
@@ -242,11 +243,11 @@
                             <td id="value1"></td>
                         </tr>
                         <tr>
-                            <td>연재기간동안 한달수익</td>
+                            <td>한달 수익</td>
                             <td id="value2"></td>
                         </tr>
                         <tr>
-                            <td>MG 제외한 한달 추가수익</td>
+                            <td>한달 추가수익(MG제외)</td>
                             <td id="value3"></td>
                         </tr>
                         <tr>
@@ -256,10 +257,6 @@
                     </tbody>
                 </table>
             </div>
-            <p id="loadtxt" class="hidden-text"><strong>예상 총수익은:</strong></p>
-            <p id="loadtxt" class="hidden-text">위는 mg 달성 못했을때 빠지는 돈까지 뺀겁니다.</p>
-            <p id="loadtxt" class="hidden-text"><strong>mg와 비교했을때 월별 흑자/적자는 아래와 같습니다.</strong></p>
-
         </form>
 
 
@@ -268,10 +265,12 @@
         const btn1 = document.getElementById("submitbtn");
         const loadtxt = document.getElementById("loadtxt");
         const form=document.getElementById("wholeform");
-        const distxt=document.getElementById("disappeartxt")
+        const distxtElements=document.querySelectorAll(".disappeartxt");
         function showLoading(){
             loadtxt.classList.add("visible");
-            distxt.classList.add("invisible");
+            distxtElements.forEach((element)=>{
+                element.classList.add("invisible");
+            })
 
 
         };
