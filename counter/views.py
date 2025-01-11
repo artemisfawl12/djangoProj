@@ -484,6 +484,9 @@ def count_characters(request):
 
     return render(request,'counter/form.html')
 
+def author_count(request):
+    return render(request,'counter/form.html')
+
 def coin_ticker_data(request):
     name_ticker_dict=coin_ticker_dict()
 
