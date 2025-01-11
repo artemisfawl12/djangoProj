@@ -49,42 +49,7 @@
         .invisible {
             display: none; /* 요소를 보이지 않게 하지만 레이아웃은 유지 */
         }
-        /*loader style*/
-        .loader {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin: 3em;
-            position: relative;
-            vertical-align: middle;
-        }
-        .loader,
-    .loader:before,
-    .loader:after {
-        animation: 1s infinite ease-in-out;
-    }
-    .loader:before,
-    .loader:after {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-        .loader-3:before {
-        content: '';
-        border: 10px solid white;
-        top: -10px;
-        left: -10px;
-        animation-name: loader3;
-        }
-        .loader-black{
-            background-color: #333;
-        }
-        .loader.visible{
-            display: inline-block;
-        }
+
 
         @keyframes loader3 {
             0% { transform: scale(0); }
@@ -118,12 +83,18 @@
             display: block;
             margin-bottom: 8px;
         }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         input {
-            width: 90%;
+            width: 80%;
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         .input_large {
             width: 90%;
@@ -197,26 +168,43 @@
     <main>
         <form id="wholeform" method="POST">
             {% csrf_token %}
-            <label for="name">입력수치들은 기본적으로 숫자만 넣어주세요.</label>
+            <label for="name" style="font-size: 12px"><i><strong>입력수치들은 기본적으로 숫자만 넣어주세요.</strong>ㄴ</i></label>
 
-            <label for="mg"><strong>정산 방식 선택:</strong></label>
+            <label for="mg"><strong>정산 방식</strong></label>
             <select id="mg" name="mg" class="selecter" required>
                 <option value="1">누적MG</option>
                 <option value="0">월 MG</option>
             </select>
-            <label for="subtract"><strong>차감 방식 선택:</strong></label>
+            <label for="subtract"><strong>차감 방식</strong></label>
             <select id="subtract" name="subtract" class="selecter" required>
                 <option value="0">선차감</option>
                 <option value="1">후차감</option>
             </select>
 
-            <input type="text" id="period" name="period" placeholder="연재기간 개월수를 숫자만 적어주세요." required>
-            <input type="text" id="mg_money" name="mg_money" placeholder="1화당 mg금액" required>
-            <input type="text" id="publish_count" name="publish_count" placeholder="1달기준 연재횟수" required>
+            <p><strong> 연재기간: </strong> </p>
+            <div style="display: flex; flex-direction: column; gap: 15px; justify-content: center;">
+                <input type="text" id="period" name="period" placeholder="연재기간 개월수를 숫자만 적어주세요." required style="box-sizing: border-box; align-self: center ; margin-bottom: 0px">
+                <p style="align-self: center; margin-bottom: 0px"><strong>1화당 MG금액</strong></p>
 
-            <input type="text" id="revenue_1" name="revenue_1" placeholder="월 예상 수익" required>
+                <div style="display: flex; gap: 5px; align-items: center;  align-self: center; max-width: 500px;">
+                    <input type="text" id="mg_money" name="mg_money" placeholder="1화당 mg금액" style="width:80%; box-sizing: border-box;align-self: center" required>
+                    <p style="align-self: center"><strong>만원</strong></p>
+                </div>
+            </div>
+            <p style="align-self: center; margin-bottom: 0px"><strong>1달 연재횟수</strong></p>
+            <input type="text" id="publish_count" name="publish_count" placeholder="1달기준 연재횟수" required style="margin-top: 10px; width: 40%">
 
-            <p><strong> 아래 3개의 수치는 작가-에이전시-포탈 순으로 수익 배분 비율을 적어주세요. </strong> </p>
+            <div style="display: flex; flex-direction: column; gap: 15px; justify-content: center;">
+
+                <p style="align-self: center; margin-bottom: 0px"><strong>월 순수익 예상치</strong></p>
+
+                <div style="display: flex; gap: 5px; align-items: center;  align-self: center; max-width: 500px;">
+                    <input type="text" id="revenue_1" name="revenue_1" placeholder="월 순수익 예상치" style="width:80%; box-sizing: border-box;align-self: center" required>
+                    <p style="align-self: center"><strong>만원</strong></p>
+                </div>
+            </div>
+
+            <p><strong> 아래 3칸에 작가-에이전시-포탈 순으로 수익 배분 비율을 적어주세요. </strong> </p>
 
             <div style="display: flex; gap: 10px; align-items: center;">
                 <input type="text" id="rs_author" name="rs_author" placeholder="작가 수익비율 입력:" required style="padding: 8px; font-size: 14px; flex: 1;">

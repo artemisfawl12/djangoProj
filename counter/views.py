@@ -41,11 +41,11 @@ def process(request):
         mg=int(mg)
         period=int(period)
         mg_money=request.POST.get('mg_money','')
-        mg_money=float(mg_money)
+        mg_money=float(mg_money)*10000
         subtract=request.POST.get('subtract','')
         subtract=int(subtract)
         revenue_1=request.POST.get('revenue_1','0')
-        revenue_1=float(revenue_1)
+        revenue_1=float(revenue_1)*10000
         publish_count = request.POST.get('publish_count', '')
         publish_count=float(publish_count)
         mg_money=publish_count*mg_money # 월 연재횟수랑 곱해줍니다.
