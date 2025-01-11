@@ -168,7 +168,7 @@
     <main>
         <form id="wholeform" method="POST">
             {% csrf_token %}
-            <label for="name" style="font-size: 12px"><i><strong>입력수치들은 기본적으로 숫자만 넣어주세요.</strong>ㄴ</i></label>
+            <label for="name" style="font-size: 12px"><i><strong>입력수치들은 기본적으로 숫자만 넣어주세요.</strong></i></label>
 
             <label for="mg"><strong>정산 방식</strong></label>
             <select id="mg" name="mg" class="selecter" required>
@@ -217,6 +217,7 @@
             <p class="disappeartxt" id="disappeartxt">결과는 아래 표에 제시됩니다.</p>
             <p class="disappeartxt" id="disappeartxt">MG만으로 버는 금액은 딱히 제시하지 않았습니다.</p>
             <p id="loadtxt" class="hidden-text"><strong>백원 이하 값은 버렸습니다.</strong></p>
+            <p id="loadtxt1" class="hidden-text"><i>쪼오끔 걸려요 잠시만요</i></p>
             <div class="table-container">
                 <table id="resultTable" border="1">
                     <thead>
@@ -247,15 +248,22 @@
             </div>
         </form>
 
+        <a href="/review/" class="link" style="margin-top: 0px">리뷰 작성하러 가기</a>
+        <p style="align-self: center"><strong>보완점 등을 제시해주시면 감사하겠습니다.</strong></p>
+        <p style="align-self: center; margin-bottom: 500px"><strong>만든이에게 큰 힘이 됩니다.</strong></p>
+
+
 
     </main>
     <script>
         const btn1 = document.getElementById("submitbtn");
         const loadtxt = document.getElementById("loadtxt");
+        const loadtxt1 = document.getElementById("loadtxt1");
         const form=document.getElementById("wholeform");
         const distxtElements=document.querySelectorAll(".disappeartxt");
         function showLoading(){
             loadtxt.classList.add("visible");
+            loadtxt1.classList.add("visible");
             distxtElements.forEach((element)=>{
                 element.classList.add("invisible");
             })
