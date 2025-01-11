@@ -16,6 +16,108 @@ from datetime import datetime
 import json
 import logging
 
+def process(request):
+    if request.method=='POST':
+        rs_author=request.POST.get('rs_author','')
+        rs_author=float(rs_author)
+        rs_company=request.POST.get('rs_company','')
+        rs_company=float(rs_company)
+        rs_portal=request.POST.get('rs_portal', '')
+        rs_portal=float(rs_portal)
+        total_share_pct=(rs_company+rs_author)/(rs_company+rs_author+rs_portal)
+        author_share_pct=rs_author/(rs_company+rs_author)
+        mg=request.POST.get('mg','')
+        period = request.POST.get('period', '')
+        mg=int(mg)
+        period=int(period)
+        mg_money=request.POST.get('mg_money','')
+        mg_money=float(mg_money)
+        subtract=request.POST.get('subtract','')
+        subtract=int(subtract)
+        revenue_1=request.POST.get('revenue_1','0')
+        revenue_1=float(revenue_1)
+        publish_count = request.POST.get('publish_count', '')
+        publish_count=float(publish_count)
+        mg_money=publish_count*mg_money # 월 연재횟수랑 곱해줍니다.
+        total_money=revenue_1*total_share_pct #이게 에이전시랑 작가 수익 총합, 월별
+        if mg==0:
+            #월별 mg
+            if subtract==0:
+                #선차감인경우.
+                if total_money>=mg_money:
+
+                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period
+                    income_month=mg_money + author_share_pct*(total_money-mg_money)
+                    #추가정산금 혹은 월별로 나오는 마이너스?
+                    surplus_month=author_share_pct*(total_money-mg_money)
+                    loss_total=0
+                else:
+                    income_total = mg_money * period + author_share_pct * (total_money - mg_money)
+                    #매출 부족 부분은 마지막 달만 들어간다.
+                    surplus_month=author_share_pct * (total_money - mg_money)
+                    loss_total=author_share_pct * (total_money - mg_money)
+
+
+            elif subtract==1:
+                #후차감인경우.
+                if total_money*author_share_pct>=mg_money:
+                    income_total=period*(total_money*author_share_pct)
+                    #여기선 mg보다 수익이 많으니까.
+                    income_month=total_money*author_share_pct
+                    # 추가정산금
+                    surplus_month = total_money*author_share_pct-mg_money
+                    loss_total=0
+                else:
+                    #이때는 받을돈이 더 적은거니까, 월별엠지인데 후차감이고 막달만 계산해주자.
+                    income_total=period*mg_money-(mg_money-total_money*author_share_pct)
+                    loss_total=(mg_money-total_money*author_share_pct)
+                    surplus_month=total_money*author_share_pct-mg_money
+
+
+
+        elif mg==1:
+            #누적 mg
+            if subtract==0:
+                #선차감인경우.
+                if total_money>=mg_money:
+                    #: 흑자면 월별 mg이랑 딱히 달라질것은 없다.
+                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period
+                    income_month=mg_money + author_share_pct*(total_money-mg_money)
+                    #추가정산금 혹은 월별로 나오는 마이너스?
+                    surplus_month=author_share_pct*(total_money-mg_money)
+                    loss_total=0
+                else:
+                    income_total = mg_money * period + author_share_pct * (total_money - mg_money)*period
+                    #매출 부족 부분이 전체 들어간다.
+                    surplus_month=author_share_pct * (total_money - mg_money)
+                    loss_total=author_share_pct * (mg_money-total_money)*period
+                    income_month=mg_money
+
+
+            elif subtract==1:
+                #후차감인경우.
+                if total_money*author_share_pct>=mg_money:
+                    income_total=period*(total_money*author_share_pct)
+                    #여기선 mg보다 수익이 많으니까. 딱히 달라질것이없다.
+                    income_month=total_money*author_share_pct
+                    # 추가정산금
+                    surplus_month = total_money*author_share_pct-mg_money
+                    loss_total=0
+                else:
+                    #모든달을 다 합쳐야한다. 사실상 최악의 경우임
+                    income_total=period*mg_money-(mg_money-total_money*author_share_pct)
+                    surplus_month=total_money*author_share_pct-mg_money
+                    loss_total = (mg_money - total_money * author_share_pct)*period
+                    income_month = mg_money
+
+
+
+
+        return JsonResponse({'income_total': income_total,'surplus_month': surplus_month, 'income_month':income_month, 'loss_total':loss_total})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+
 logger=logging.getLogger('counter')
 def multi_chart(request, ticker):
     buydict=request.session.get('buy_final')

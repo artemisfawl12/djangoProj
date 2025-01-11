@@ -138,28 +138,47 @@
 </head>
 <body>
     <header>
-        <h1>주식 시뮬레이션</h1>
+        <h1>작가 수익 계산기</h1>
     </header>
     <main>
         <form id="wholeform" method="POST">
             {% csrf_token %}
             <label for="name">INPUT</label>
-            <a href="tickersearch/" class="link">ticker 찾기</a>
-            <input type="text" id="ticker" name="ticker" placeholder="주식의 ticker을 입력하세요. EX)000660: sk하이닉스" required>
-            <input type="text" id="start_date" name="start_date" placeholder="시작 날짜 입력: YYYYMMDD" required>
-            <input type="text" id="end_date" name="end_date" placeholder="끝나는 날짜 입력: YYYYMMDD" required>
-            <textarea class="input_large" type="text" id="buy_strat" name="buy_strat" placeholder="매수전략" required></textarea>
-            <textarea class="input_large" type="text" id="sell_strat" name="sell_strat" placeholder="매도전략" required></textarea>
+
+            <label for="mg">정산 방식 선택:</label>
+            <select id="mg" name="mg" required>
+                <option value="0">월 MG</option>
+                <option value="1">누적MG</option>
+                <option value="2">통합MG</option>
+            </select>
+            <label for="subtract">차감 방식 선택:</label>
+            <select id="subtract" name="subtract" required>
+                <option value="0">선차감</option>
+                <option value="1">후차감</option>
+            </select>
+            <input type="text" id="period" name="period" placeholder="연재기간" required>
+            <input type="text" id="mg_money" name="mg_money" placeholder="1화당 mg금액" required>
+            <input type="text" id="publish_count" name="publish_count" placeholder="1달기준 연재횟수" required>
+            <p><strong> 아래 3개의 수치는 월 MG면 월별로 적어주시고, 누적/통합MG이면 연 수익 기준으로 적어주세요. </strong> </p>
+
+            <input type="text" id="revenue_1" name="revenue_1" placeholder="월 예상 수익" required>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="rs_author" name="rs_author" placeholder="작가 수익비율 입력:" required style="padding: 8px; font-size: 14px; flex: 1;">
+                <input type="text" id="rs_company" name="rs_company" placeholder="에이전시 수익비율:" required style="padding: 8px; font-size: 14px; flex: 1;">
+                <input type="text" id="rs_portal" name="rs_portal" placeholder="포털사이트 수익비율:" required style="padding: 8px; font-size: 14px; flex: 1;">
+            </div>
+
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <button id="submitbtn" type="submit" onclick="showLoading()">확인</button>
-
-
-            <div id="loading" class="loader loader-black loader-3" style="display: none;"> </div>
-            <p id="loadtxt" class="hidden-text"><strong>시뮬레이션 하는데 시간이 걸려요. 잠시만 기다려주세요.</strong></p>
-            <p><strong> 현재 시뮬레이션에 사용가능한 지표는 아래와 같습니다. </strong> </p>
-            <p><strong> 시가, 고가, 저가, 종가, 거래량 </strong></p>
-            <p><strong>위 지표들로 만들 수 있는 지표라면 얼마든지 요청가능합니다.</strong></p>
-            <p>EX)5일 이평선이 100일 이평선을 상향돌파: 이평선은 종가 데이터 기반으로 계산하므로 사용가능</p>
-
+            <p id="loadtxt" class="hidden-text"><strong>mg만 가지고 받을 수 있는 돈은 딱히 제시하지 않겠습니다.</strong></p>
+            <p id="loadtxt" class="hidden-text"><strong>예상 총수익은:</strong></p>
+            <div id="loss_total"></div>
+            <div id="surplus_month"></div>
+            <div id="income_total"></div>
+            <div id="income_month"></div>
+            <p id="loadtxt" class="hidden-text">위는 mg 달성 못했을때 빠지는 돈까지 뺀겁니다.</p>
+            <p id="loadtxt" class="hidden-text"><strong>mg와 비교했을때 월별 흑자/적자는 아래와 같습니다.</strong></p>
 
         </form>
 
@@ -167,12 +186,9 @@
     </main>
     <script>
         const btn1 = document.getElementById("submitbtn");
-        const loader = document.getElementById("loading");
         const loadtxt = document.getElementById("loadtxt");
         const form=document.getElementById("wholeform");
         function showLoading(){
-
-            loader.style.display="inline-block";
             loadtxt.classList.add("visible");
 
         };
@@ -190,6 +206,46 @@
             const data = JSON.stringify({});
 
             navigator.sendBeacon(url, data);
+        });
+        $(document).ready(function() {
+            $('#submitbtn').click(function() {
+                const rs_author = $('#rs_author').val();
+                const rs_company = $('#rs_company').val();
+                const rs_portal=$('#rs_portal').val();
+                const mg = $('#mg').val();
+                const period=$('#period').val();
+                const subtract = $('#subtract').val();
+                const mg_money=$('#mg_money').val();
+                const revenue_1 = $('#revenue_1').val();
+                const publish_count=$('#publish_count').val();
+
+                $.ajax({
+                    url: '/process/',  // Django URL (views.py에 연결된 경로)
+                    type: 'POST',
+                    data: {
+                        rs_author: rs_author,
+                        rs_company: rs_company,
+                        mg:mg,
+                        subtract:subtract,
+                        mg_money:mg_money,
+                        revenue_1:revenue_1,
+                        period:period,
+                        rs_portal:rs_portal,
+                        publish_count:publish_count,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'  // CSRF 토큰 포함
+                    },
+                    success: function(response) {
+                        // 결과 출력
+                        $('#income_total').text(response.income_total);
+                        $('#surplus_month').text(response.surplus_month);
+                        $('#income_month').text(response.income_month);
+                        $('#loss_total').text(response.loss_total);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
         });
 
 
