@@ -203,6 +203,13 @@ def process(request):
             surplus_month="-"+temp_surplus
         income_month=process_float_to_str(income_month)
         loss_total=process_float_to_str(loss_total)
+        firstmth_income=process_float_to_str(firstmth_income)
+        if firsmth_surplus>=0:
+            firsmth_surplus = process_float_to_str(firsmth_surplus)
+        else:
+            temp_surplus=firsmth_surplus*(-1)
+            temp_surplus=process_float_to_str(temp_surplus)
+            firsmth_surplus="-"+temp_surplus
 
 
 
