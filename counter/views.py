@@ -30,12 +30,13 @@ def process(request):
     if request.method=='POST':
         rs_author=request.POST.get('rs_author','')
         rs_author=float(rs_author)
-        rs_company=request.POST.get('rs_company','')
-        rs_company=float(rs_company)
-        rs_portal=request.POST.get('rs_portal', '')
-        rs_portal=float(rs_portal)
-        total_share_pct=(rs_company+rs_author)/(rs_company+rs_author+rs_portal)
-        author_share_pct=rs_author/(rs_company+rs_author)
+        #rs_company=request.POST.get('rs_company','')
+        #rs_company=float(rs_company)
+        #rs_portal=request.POST.get('rs_portal', '')
+        #rs_portal=float(rs_portal)
+        #total_share_pct=(rs_company+rs_author)/(rs_company+rs_author+rs_portal)
+        #author_share_pct=rs_author/(rs_company+rs_author)
+        author_share_pct=rs_author/100
         mg=request.POST.get('mg','')
         period = request.POST.get('period', '')
         mg=int(mg)
@@ -46,42 +47,82 @@ def process(request):
         subtract=int(subtract)
         revenue_1=request.POST.get('revenue_1','0')
         revenue_1=float(revenue_1)*10000
+        revenue_first = request.POST.get('revenue_first', '')
+        if revenue_first=='':
+            revenue_first=revenue_1
         publish_count = request.POST.get('publish_count', '')
         publish_count=float(publish_count)
         mg_money=publish_count*mg_money # 월 연재횟수랑 곱해줍니다.
-        total_money=revenue_1*total_share_pct #이게 에이전시랑 작가 수익 총합, 월별
+        #total_money=revenue_1*total_share_pct #이게 에이전시랑 작가 수익 총합, 월별
+        total_money = revenue_1
         income_total=0
         if mg==0:
             #월별 mg
             if subtract==0:
                 #선차감인경우.
                 if total_money>=mg_money:
+                    #그냥 첫달매출이 평시 매출보다는 무조건 높다고 가정하고 합시다.
+                    firstmth_income=(revenue_first-mg_money)*author_share_pct+mg_money
 
-                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period
+
+                    income_total=mg_money*(period-1) + author_share_pct*(total_money-mg_money)*(period-1)+firstmth_income
                     income_month=mg_money + author_share_pct*(total_money-mg_money)
                     #추가정산금 혹은 월별로 나오는 마이너스?
                     surplus_month=author_share_pct*(total_money-mg_money)
+                    firstmth_surplus = author_share_pct * (revenue_first - mg_money)
                     loss_total=0
+
                 else:
-                    income_total = mg_money * period + author_share_pct * (total_money - mg_money)
+                    if revenue_first>=mg_money:
+                        firstmth_income=(revenue_first-mg_money)*author_share_pct+mg_money
+                        firstmth_surplus = author_share_pct * (revenue_first - mg_money)
+                        income_total = mg_money * period + author_share_pct * (total_money - mg_money)+firstmth_surplus
+                    else:
+                        firstmth_income=mg_money
+                        firstmth_surplus=author_share_pct * (revenue_first - mg_money)
+                        income_total = mg_money * period + author_share_pct * (total_money - mg_money)
+
                     #매출 부족 부분은 마지막 달만 들어간다.
                     surplus_month=author_share_pct * (total_money - mg_money)
                     loss_total=author_share_pct * (total_money - mg_money)
 
 
+
             elif subtract==1:
                 #후차감인경우.
                 if total_money*author_share_pct>=mg_money:
-                    income_total=period*(total_money*author_share_pct)
+                    firstmth_surplus = author_share_pct * revenue_first -mg_money
+                    firstmth_income=firstmth_surplus+mg_money
+                    income_total=(period-1)*(total_money*author_share_pct)+firstmth_income
                     #여기선 mg보다 수익이 많으니까.
                     income_month=total_money*author_share_pct
-                    # 추가정산금
+                    #평달의 추가정산금
                     surplus_month = total_money*author_share_pct-mg_money
                     loss_total=0
                 else:
+                    if revenue_first*author_share_pct >= mg_money:
+                        firstmth_surplus = author_share_pct * revenue_first - mg_money
+                        firstmth_income = firstmth_surplus + mg_money
+                        income_total = (period-1) * mg_money - (mg_money - total_money * author_share_pct)+firstmth_income
+                        loss_total = (mg_money - total_money * author_share_pct)
+                        #근데여기서 loss_total을 계약기간이 끝나고 남는 미정산금이라고 봐버리자. 이러면 상관이 없어요!
+                        #income_total과 mg_money*period의 비교를 따로 해야되나. surplus total으로.
+                        #if firstmth_surplus>=loss_total:
+                        #    loss_total=0
+                        #else:
+                        #    loss_total=loss_total-firstmth_surplus
+                    else:
+                        #첫달의 수익도 망했어. mg를 못넘어!
+                        firstmth_surplus = author_share_pct * revenue_first - mg_money
+                        #얘가 음수인것.
+                        firstmth_income = mg_money
+                        income_total = period * mg_money - (mg_money - total_money * author_share_pct)
+                        loss_total = (mg_money - total_money * author_share_pct)
+
+
+
                     #이때는 받을돈이 더 적은거니까, 월별엠지인데 후차감이고 막달만 계산해주자.
-                    income_total=period*mg_money-(mg_money-total_money*author_share_pct)
-                    loss_total=(mg_money-total_money*author_share_pct)
+
                     surplus_month=total_money*author_share_pct-mg_money
 
 
@@ -91,24 +132,39 @@ def process(request):
             if subtract==0:
                 #선차감인경우.
                 if total_money>=mg_money:
+
                     #: 흑자면 월별 mg이랑 딱히 달라질것은 없다.
-                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period
+                    firstmth_income=(revenue_first-mg_money)*author_share_pct+mg_money
+                    firsmth_surplus=(revenue_first-mg_money)*author_share_pct
+                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period+firsmth_surplus
                     income_month=mg_money + author_share_pct*(total_money-mg_money)
                     #추가정산금 혹은 월별로 나오는 마이너스?
                     surplus_month=author_share_pct*(total_money-mg_money)
                     loss_total=0
                 else:
-                    income_total = mg_money * period + author_share_pct * (total_money - mg_money)*period
+                    if revenue_first>=mg_money:
+                        firstmth_income = (revenue_first - mg_money) * author_share_pct + mg_money
+                        firsmth_surplus = (revenue_first - mg_money) * author_share_pct
+                        income_total=mg_money * period + author_share_pct * (total_money - mg_money)*(period-1)+firsmth_surplus
+                        loss_total = author_share_pct * (mg_money - total_money) * (period - 1)
+                    else:
+                        firstmth_income = mg_money
+                        firsmth_surplus = (revenue_first - mg_money) * author_share_pct
+                        income_total=mg_money*period+firsmth_surplus+(total_money - mg_money)*(period-1)
+                        loss_total = author_share_pct * (mg_money - total_money) * (period - 1) + firsmth_surplus
+
+
                     #매출 부족 부분이 전체 들어간다.
                     surplus_month=author_share_pct * (total_money - mg_money)
-                    loss_total=author_share_pct * (mg_money-total_money)*period
                     income_month=mg_money
 
 
             elif subtract==1:
                 #후차감인경우.
                 if total_money*author_share_pct>=mg_money:
-                    income_total=period*(total_money*author_share_pct)
+                    firstmth_income = revenue_first * author_share_pct
+                    firsmth_surplus = firstmth_income - mg_money
+                    income_total=(period-1)*(total_money*author_share_pct)+firstmth_income
                     #여기선 mg보다 수익이 많으니까. 딱히 달라질것이없다.
                     income_month=total_money*author_share_pct
                     # 추가정산금
@@ -116,9 +172,20 @@ def process(request):
                     loss_total=0
                 else:
                     #모든달을 다 합쳐야한다. 사실상 최악의 경우임
-                    income_total=period*mg_money-(mg_money-total_money*author_share_pct)
+                    if revenue_first*author_share_pct>=mg_money:
+                        firstmth_income = revenue_first * author_share_pct
+                        firsmth_surplus = firstmth_income - mg_money
+                        income_total = (period-1) * mg_money - (mg_money - total_money * author_share_pct) * (period-1)+firstmth_income
+                        loss_total=(mg_money - total_money * author_share_pct)*(period-1)
+
+                    else:
+                        #첫달도 안됐어.
+                        firstmth_income=mg_money
+                        firsmth_surplus = revenue_first * author_share_pct - mg_money
+                        income_total=(period-1) * mg_money - (mg_money - total_money * author_share_pct) * (period-1)+revenue_first * author_share_pct
+                        loss_total=(mg_money - total_money * author_share_pct)*(period-1)-firsmth_surplus #firstmth surplus가 음수니까 빼주자. 로스 토탈은 잃어버린거 양으로 표현..
+
                     surplus_month=total_money*author_share_pct-mg_money
-                    loss_total = (mg_money - total_money * author_share_pct)*period
                     income_month = mg_money
 
 
@@ -139,7 +206,7 @@ def process(request):
 
 
 
-        return JsonResponse({'income_total': income_total,'surplus_month': surplus_month, 'income_month':income_month, 'loss_total':loss_total})
+        return JsonResponse({'income_total': income_total,'surplus_month': surplus_month, 'income_month':income_month, 'loss_total':loss_total, 'firstmth_income':firstmth_income,'firsmth_surplus':firsmth_surplus})
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
