@@ -137,8 +137,8 @@ def process(request):
 
                     #: 흑자면 월별 mg이랑 딱히 달라질것은 없다.
                     firstmth_income=(revenue_first-mg_money)*author_share_pct+mg_money
-                    firsmth_surplus=(revenue_first-mg_money)*author_share_pct
-                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period+firsmth_surplus
+                    firstmth_surplus=(revenue_first-mg_money)*author_share_pct
+                    income_total=mg_money*period + author_share_pct*(total_money-mg_money)*period+firstmth_surplus
                     income_month=mg_money + author_share_pct*(total_money-mg_money)
                     #추가정산금 혹은 월별로 나오는 마이너스?
                     surplus_month=author_share_pct*(total_money-mg_money)
@@ -146,14 +146,14 @@ def process(request):
                 else:
                     if revenue_first>=mg_money:
                         firstmth_income = (revenue_first - mg_money) * author_share_pct + mg_money
-                        firsmth_surplus = (revenue_first - mg_money) * author_share_pct
-                        income_total=mg_money * period + author_share_pct * (total_money - mg_money)*(period-1)+firsmth_surplus
+                        firstmth_surplus = (revenue_first - mg_money) * author_share_pct
+                        income_total=mg_money * period + author_share_pct * (total_money - mg_money)*(period-1)+firstmth_surplus
                         loss_total = author_share_pct * (mg_money - total_money) * (period - 1)
                     else:
                         firstmth_income = mg_money
-                        firsmth_surplus = (revenue_first - mg_money) * author_share_pct
-                        income_total=mg_money*period+firsmth_surplus+(total_money - mg_money)*(period-1)
-                        loss_total = author_share_pct * (mg_money - total_money) * (period - 1) + firsmth_surplus
+                        firstmth_surplus = (revenue_first - mg_money) * author_share_pct
+                        income_total=mg_money*period+firstmth_surplus+(total_money - mg_money)*(period-1)
+                        loss_total = author_share_pct * (mg_money - total_money) * (period - 1) + firstmth_surplus
 
 
                     #매출 부족 부분이 전체 들어간다.
@@ -165,7 +165,7 @@ def process(request):
                 #후차감인경우.
                 if total_money*author_share_pct>=mg_money:
                     firstmth_income = revenue_first * author_share_pct
-                    firsmth_surplus = firstmth_income - mg_money
+                    firstmth_surplus = firstmth_income - mg_money
                     income_total=(period-1)*(total_money*author_share_pct)+firstmth_income
                     #여기선 mg보다 수익이 많으니까. 딱히 달라질것이없다.
                     income_month=total_money*author_share_pct
@@ -176,16 +176,16 @@ def process(request):
                     #모든달을 다 합쳐야한다. 사실상 최악의 경우임
                     if revenue_first*author_share_pct>=mg_money:
                         firstmth_income = revenue_first * author_share_pct
-                        firsmth_surplus = firstmth_income - mg_money
+                        firstmth_surplus = firstmth_income - mg_money
                         income_total = (period-1) * mg_money - (mg_money - total_money * author_share_pct) * (period-1)+firstmth_income
                         loss_total=(mg_money - total_money * author_share_pct)*(period-1)
 
                     else:
                         #첫달도 안됐어.
                         firstmth_income=mg_money
-                        firsmth_surplus = revenue_first * author_share_pct - mg_money
+                        firstmth_surplus = revenue_first * author_share_pct - mg_money
                         income_total=(period-1) * mg_money - (mg_money - total_money * author_share_pct) * (period-1)+revenue_first * author_share_pct
-                        loss_total=(mg_money - total_money * author_share_pct)*(period-1)-firsmth_surplus #firstmth surplus가 음수니까 빼주자. 로스 토탈은 잃어버린거 양으로 표현..
+                        loss_total=(mg_money - total_money * author_share_pct)*(period-1)-firstmth_surplus #firstmth surplus가 음수니까 빼주자. 로스 토탈은 잃어버린거 양으로 표현..
 
                     surplus_month=total_money*author_share_pct-mg_money
                     income_month = mg_money
@@ -206,16 +206,16 @@ def process(request):
         income_month=process_float_to_str(income_month)
         loss_total=process_float_to_str(loss_total)
         firstmth_income=process_float_to_str(firstmth_income)
-        if firsmth_surplus>=0:
-            firsmth_surplus = process_float_to_str(firsmth_surplus)
+        if firstmth_surplus>=0:
+            firstmth_surplus = process_float_to_str(firstmth_surplus)
         else:
-            temp_surplus=firsmth_surplus*(-1)
+            temp_surplus=firstmth_surplus*(-1)
             temp_surplus=process_float_to_str(temp_surplus)
-            firsmth_surplus="-"+temp_surplus
+            firstmth_surplus="-"+temp_surplus
 
 
 
-        return JsonResponse({'income_total': income_total,'surplus_month': surplus_month, 'income_month':income_month, 'loss_total':loss_total, 'firstmth_income':firstmth_income,'firsmth_surplus':firsmth_surplus})
+        return JsonResponse({'income_total': income_total,'surplus_month': surplus_month, 'income_month':income_month, 'loss_total':loss_total, 'firstmth_income':firstmth_income,'firstmth_surplus':firstmth_surplus})
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
