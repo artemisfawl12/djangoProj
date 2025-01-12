@@ -261,6 +261,30 @@
         const loadtxt1 = document.getElementById("loadtxt1");
         const form=document.getElementById("wholeform");
         const distxtElements=document.querySelectorAll(".disappeartxt");
+        window.onload = function() {
+            // 폼 데이터 복원
+            const savedFormData = JSON.parse(localStorage.getItem('formData'));
+            if (savedFormData) {
+                $('#rs_author').val(savedFormData.rs_author);
+                $('#rs_company').val(savedFormData.rs_company);
+                $('#rs_portal').val(savedFormData.rs_portal);
+                $('#mg').val(savedFormData.mg);
+                $('#subtract').val(savedFormData.subtract);
+                $('#mg_money').val(savedFormData.mg_money);
+                $('#revenue_1').val(savedFormData.revenue_1);
+                $('#period').val(savedFormData.period);
+                $('#publish_count').val(savedFormData.publish_count);
+            }
+
+            // 결과 데이터 복원
+            const savedResultData = JSON.parse(localStorage.getItem('resultData'));
+            if (savedResultData) {
+                $('#value1').text(savedResultData.income_total);
+                $('#value2').text(savedResultData.income_month);
+                $('#value3').text(savedResultData.surplus_month);
+                $('#value4').text(savedResultData.loss_total);
+            }
+        };
         function showLoading(){
             loadtxt.classList.add("visible");
             loadtxt1.classList.add("visible");
@@ -288,17 +312,19 @@
         $(document).ready(function() {
             $('#wholeform').submit(function(event) {
 
-                event.preventDefault();
-
-                const rs_author = $('#rs_author').val();
-                const rs_company = $('#rs_company').val();
-                const rs_portal=$('#rs_portal').val();
-                const mg = $('#mg').val();
-                const period=$('#period').val();
-                const subtract = $('#subtract').val();
-                const mg_money=$('#mg_money').val();
-                const revenue_1 = $('#revenue_1').val();
-                const publish_count=$('#publish_count').val();
+                //event.preventDefault();
+                const formData = {
+                    rs_author: $('#rs_author').val(),
+                    rs_company: $('#rs_company').val(),
+                    rs_portal: $('#rs_portal').val(),
+                    mg: $('#mg').val(),
+                    subtract: $('#subtract').val(),
+                    mg_money: $('#mg_money').val(),
+                    revenue_1: $('#revenue_1').val(),
+                    period: $('#period').val(),
+                    publish_count: $('#publish_count').val(),
+                };
+                localStorage.setItem('formData', JSON.stringify(formData));
 
                 $.ajax({
                     url: '/process/',  // Django URL (views.py에 연결된 경로)
@@ -321,6 +347,8 @@
                         $('#value2').text(response.income_month);
                         $('#value3').text(response.surplus_month);
                         $('#value4').text(response.loss_total);
+                        localStorage.setItem('resultData', JSON.stringify(response));
+                        form.submit();
 
                     },
                     error: function(xhr, status, error) {
