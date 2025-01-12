@@ -50,6 +50,8 @@ def process(request):
         revenue_first = request.POST.get('revenue_first', '')
         if revenue_first=='':
             revenue_first=revenue_1
+        else:
+            revenue_first=float(revenue_first)*10000
         publish_count = request.POST.get('publish_count', '')
         publish_count=float(publish_count)
         mg_money=publish_count*mg_money # 월 연재횟수랑 곱해줍니다.
