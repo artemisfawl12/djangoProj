@@ -327,11 +327,11 @@
             const revenue1_val=parseFloat(revenue1_field.value)||0;
 
             if (source==portalpct&&portal_pct_val!==0){
-                revenue1_field.value=(wholemoney_val*(portal_pct_val/100)).toFixed(0);
+                revenue1_field.value=(wholemoney_val*(1-portal_pct_val/100)).toFixed(0);
             }else if (source==wholemoney&&wholemoney_val!==0){
-                revenue1_field.value=(wholemoney_val*(portal_pct_val/100)).toFixed(0);
+                revenue1_field.value=(wholemoney_val*(1-portal_pct_val/100)).toFixed(0);
             }else if(source==revenue1_field&&revenue1_val!==0){
-                wholemoney.value=(100*revenue1_val/portal_pct_val).toFixed(0);
+                wholemoney.value=(100*revenue1_val/(100-portal_pct_val)).toFixed(0);
             }
 
         }
