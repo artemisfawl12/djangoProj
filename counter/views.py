@@ -17,7 +17,7 @@ import json
 import logging
 
 def return_num(request):
-    num=42
+    num=40
     return HttpResponse(num) #42를 반환
 
 def process_float_to_str(value):
