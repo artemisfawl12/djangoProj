@@ -16,6 +16,10 @@ from datetime import datetime
 import json
 import logging
 
+def return_num(request):
+    num=42
+    return HttpResponse(num) #42를 반환
+
 def process_float_to_str(value):
     value=(int(value)//100)*100
     man=value //10000

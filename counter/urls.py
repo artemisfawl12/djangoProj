@@ -8,6 +8,7 @@ urlpatterns = [
     path('api/coins/',coin_ticker_data, name="coin_ticker_data"),
     path('api/multichart/<str:ticker>/',multi_chart, name="multichart_stock"),
     path('api/multicoinchart/<str:ticker>/',multi_chart_coin, name="multichart_coin"),
-    path('process/', process, name="author_revenue_calculate")
+    path('process/', process, name="author_revenue_calculate"),
+    path('returnnum/', views.return_num , name="return number")
 
 ]
