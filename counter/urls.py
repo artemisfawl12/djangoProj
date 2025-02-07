@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/multichart/<str:ticker>/',multi_chart, name="multichart_stock"),
     path('api/multicoinchart/<str:ticker>/',multi_chart_coin, name="multichart_coin"),
     path('process/', process, name="author_revenue_calculate"),
-    path('returnnum/', views.return_num , name="return number")
+    path('returnnum/', views.return_num , name="return number"),
+    path('returnnum_bubang/', views.return_num_bubang , name="return number")
 
 ]
