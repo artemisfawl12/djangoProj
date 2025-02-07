@@ -20,7 +20,7 @@ def return_num(request):
     num=40
     return HttpResponse(num) #42를 반환
 def return_num_bubang(request):
-    num=40
+    num=41
     return HttpResponse(num) #42를 반환
 
 def process_float_to_str(value):
