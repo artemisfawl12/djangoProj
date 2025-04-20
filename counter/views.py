@@ -1,3 +1,5 @@
+import pickle
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -15,7 +17,43 @@ from counter.models import FileLog
 from datetime import datetime
 import json
 import logging
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser
+from rest_framework.response import Response
+import numpy as np
+import cv2
+from image_process import find_best
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def drf_upload_view(request):
+    #일단은 image랑 img 레인지만 주게 해놨다.
+    image_file = request.FILES.get('image')
+    # 텍스트 필드 받기
+    img_range = request.data.get('img_range')
 
+    #1년치 비교할지 얼마치 비교할지. 지금은 뭐 선택권이 없다 일단 1년으로 !
+    #compare_range = request.data.get('compare_range')
+
+    #s&p 500일지, 나스닥일지
+    #target_group = request.data.get('target_group')
+
+    if not all([img_range]):
+        return Response({'error': '필수 필드 누락'}, status=400)
+
+    if not image_file:
+        return Response({'error': 'No image uploaded'}, status=400)
+
+    npimg = np.frombuffer(image_file.read(), np.uint8)
+    image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
+    with open("sp500_ohlcv_1y.pkl", "rb") as f:
+        data = pickle.load(f)
+
+    top5=find_best(image,img_range,data,img_range,5)
+
+    return Response({
+        'status': 'success',
+        'top': top5,
+    })
 def return_num(request):
     num=40
     return HttpResponse(num) #42를 반환
