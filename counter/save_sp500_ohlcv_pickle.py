@@ -41,5 +41,5 @@ def download_and_save_sp500_data(save_path="sp500_data.pkl"):
 
 
 # 실행
-#if __name__ == "__main__":
-#    download_and_save_sp500_data("sp500_ohlcv_1y.pkl")
+if __name__ == "__main__":
+    download_and_save_sp500_data("sp500_ohlcv_1y.pkl")
