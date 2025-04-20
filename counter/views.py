@@ -22,7 +22,7 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 import numpy as np
 import cv2
-from image_process import find_best
+from .image_process import find_best
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def drf_upload_view(request):
