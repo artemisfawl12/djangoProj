@@ -58,7 +58,9 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
     stride = 1
     result_list=[]
     total = len(data_dict)+1
+    j=0
     for key, df in data_dict.items():
+        j+=1
         df_new = df[["hl_mean"]].dropna().reset_index(drop=True)
         # dropna()로 제거되지 않은 날짜들만 따로 추출
         valid_dates = df[["High", "Low"]].dropna().index.to_list()
@@ -82,7 +84,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
                 "best_score": np.min(scores),
             }
             result_list.append(result)
-            progress_callback(i + 1, total)
+            progress_callback(j, total)
 
         except:
             print("passed")

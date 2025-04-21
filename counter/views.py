@@ -45,6 +45,7 @@ def get_progress(request):
     task_id = request.query_params.get('task_id')  # Flutter가 준 task_id
 
     print(str(task_id)+": task_id received")
+    print(f"[PROGRESS] progress_map ID: {id(progress_map)}")
 
     # 유효한 ID인지 확인
     if task_id not in progress_map:
@@ -103,6 +104,7 @@ def drf_upload_view(request):
     thread = Thread(target=run_find_best_async, args=(image, img_range, task_id))
     thread.start()
     print("top5 made done")
+    print(f"[UPLOAD] progress_map ID: {id(progress_map)}")
 
     return Response({"task_id": task_id, "status": "started"})
 
