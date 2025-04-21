@@ -48,7 +48,7 @@ def get_progress(request):
     print(f"[PROGRESS] progress_map ID: {id(progress_map)}")
 
     # 유효한 ID인지 확인
-    if task_id not in progress_map:
+    if str(task_id) not in progress_map:
         print("no task id")
         return Response({'error': '잘못된 task_id입니다'}, status=404)
 
