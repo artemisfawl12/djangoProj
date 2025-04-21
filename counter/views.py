@@ -23,6 +23,44 @@ from rest_framework.response import Response
 import numpy as np
 import cv2
 from .image_process import find_best
+from threading import Thread
+import uuid
+progress_map = {}
+result_map={}
+
+@api_view(['GET'])
+def get_result(request):
+    task_id = request.query_params.get('task_id')
+
+    # 결과가 아직 없으면
+    if task_id not in result_map:
+        return Response({'error': '아직 작업이 완료되지 않았습니다'}, status=202)
+
+    return Response({"result": result_map[task_id]})
+@api_view(['GET'])
+def get_progress(request):
+    task_id = request.query_params.get('task_id')  # Flutter가 준 task_id
+
+    # 유효한 ID인지 확인
+    if task_id not in progress_map:
+        return Response({'error': '잘못된 task_id입니다'}, status=404)
+
+    # 현재 상태 전달
+    return Response(progress_map[task_id])
+
+
+def run_find_best_async(image, img_range, task_id):
+    with open("sp500_ohlcv_1y.pkl", "rb") as f:
+        data = pickle.load(f)
+
+    def progress_callback(current, total):
+        progress_map[task_id]["current"] = current
+        progress_map[task_id]["total"] = total
+
+    result = find_best(image, img_range, data, 120, 5, progress_callback=progress_callback)
+
+    result_map[task_id] = result
+    progress_map[task_id]["done"] = True
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def drf_upload_view(request):
@@ -52,12 +90,15 @@ def drf_upload_view(request):
     with open(pkl_path, "rb") as f:
         data = pickle.load(f)
 
-    top5=find_best(image,img_range,data,img_range,5)
+    task_id = str(uuid.uuid4())
+    progress_map[task_id] = {"current": 0, "total": 500, "done": False}
 
-    return Response({
-        'status': 'success',
-        'top': top5,
-    })
+    thread = Thread(target=run_find_best_async, args=(image, img_range, task_id))
+    thread.start()
+    print("top5 made done")
+
+    return Response({"task_id": task_id, "status": "started"})
+
 def return_num(request):
     num=40
     return HttpResponse(num) #42를 반환

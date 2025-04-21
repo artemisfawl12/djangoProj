@@ -48,13 +48,14 @@ def image_process(image,img_range):
     return resampled_y
 def minmax_normalize(x):
     return (x - np.min(x)) / (np.max(x) - np.min(x) + 1e-8)
-def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5):
+def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, progress_callback=None):
     #data_dict에 티커별 가격 dataframe 들어오게.
     #resampled에 resampled_y 들어오게
     resampled=image_process(image_name,img_range_num)
     query_series = minmax_normalize(resampled)
     stride = 1
     result_list=[]
+    total = len(data_dict)+1
     for key, df in data_dict.items():
         df_new = df[["hl_mean"]].dropna().reset_index(drop=True)
         # dropna()로 제거되지 않은 날짜들만 따로 추출
@@ -79,7 +80,8 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5):
                 "best_score": np.min(scores),
             }
             result_list.append(result)
-            print(str(key)+" done")
+            progress_callback(i + 1, total)
+
         except:
             print("passed")
             pass

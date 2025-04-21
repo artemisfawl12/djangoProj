@@ -12,5 +12,7 @@ urlpatterns = [
     path('returnnum/', views.return_num , name="return number"),
     path('returnnum_bubang/', views.return_num_bubang , name="return number"),
     path('api/upload/', drf_upload_view),
+    path('api/progress/', views.get_progress),
+    path('api/result/', views.get_result),
 
 ]
