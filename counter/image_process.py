@@ -101,6 +101,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5):
     return top5_list
 
 # 이미지 경로
+"""
 image_path = "C:/Users/82109/Documents/chartex_2.jpg"
 
 # 이미지 불러오기 및 HSV 변환
@@ -108,7 +109,7 @@ image = cv2.imread(image_path)
 with open("sp500_ohlcv_1y.pkl", "rb") as f:
     data = pickle.load(f)
 top5=find_best(image,120,data,120,5)
-print(top5)
+print(top5)"""
 
 
 
