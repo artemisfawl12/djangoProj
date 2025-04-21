@@ -25,7 +25,8 @@ import cv2
 from .image_process import find_best
 from threading import Thread
 import uuid
-progress_map = {}
+from .shared_state import progress_map
+
 result_map={}
 
 @api_view(['GET'])
@@ -61,6 +62,7 @@ def run_find_best_async(image, img_range, task_id):
         data = pickle.load(f)
 
     def progress_callback(current, total):
+        print(progress_map)
         progress_map[task_id]["current"] = current
         progress_map[task_id]["total"] = total
 

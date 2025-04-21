@@ -4,6 +4,8 @@ from scipy.signal import resample
 from scipy.spatial.distance import euclidean
 import numpy as np
 import pandas as pd
+from .shared_state import progress_map
+
 
 def image_process(image,img_range):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
