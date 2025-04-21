@@ -26,34 +26,39 @@ from .image_process import find_best
 from threading import Thread
 import uuid
 from .shared_state import progress_map
+from django.core.cache import cache
 
 result_map={}
 
 @api_view(['GET'])
 def get_result(request):
     task_id = request.query_params.get('task_id')
+    progress = cache.get(task_id)
 
     # 결과가 아직 없으면
-    if task_id not in result_map:
+    if not progress or not progress.get("done"):
 
         return Response({'error': '아직 작업이 완료되지 않았습니다'}, status=202)
 
-    return Response({"result": result_map[task_id]})
+    return Response({'result': progress.get("result")})
 @api_view(['GET'])
 def get_progress(request):
     print("get_process 진입")
     task_id = request.query_params.get('task_id')  # Flutter가 준 task_id
+    progress = cache.get(task_id)
+
 
     print(str(task_id)+": task_id received")
     print(f"[PROGRESS] progress_map ID: {id(progress_map)}")
 
     # 유효한 ID인지 확인
-    if str(task_id) not in progress_map:
+    if not progress:
+
         print("no task id")
         return Response({'error': '잘못된 task_id입니다'}, status=404)
 
     # 현재 상태 전달
-    return Response(progress_map[task_id])
+    return Response(progress)
 
 
 def run_find_best_async(image, img_range, task_id):
@@ -63,14 +68,12 @@ def run_find_best_async(image, img_range, task_id):
         data = pickle.load(f)
 
     def progress_callback(current, total):
-        print(progress_map)
-        progress_map[task_id]["current"] = current
-        progress_map[task_id]["total"] = total
+        cache.set(task_id, {"current": current, "total": total, "done": False}, timeout=3600)
+
 
     result = find_best(image, img_range, data, img_range, 5, progress_callback=progress_callback)
+    cache.set(task_id, {"current": "done", "total": "done", "done": True, "result": result}, timeout=3600)
 
-    result_map[task_id] = result
-    progress_map[task_id]["done"] = True
     print("map에 넣고 done 상태 True로 변경 완료")
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
@@ -99,7 +102,7 @@ def drf_upload_view(request):
     image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
 
     task_id = str(uuid.uuid4())
-    progress_map[task_id] = {"current": 0, "total": 500, "done": False}
+    cache.set(task_id, {"current": 0, "total": 500, "done": False}, timeout=3600)  # 1시간 유지
 
     thread = Thread(target=run_find_best_async, args=(image, img_range, task_id))
     thread.start()
