@@ -1,9 +1,9 @@
-import pickle
-
+import os
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from django.conf import settings
+import pickle
 from counter.paradigm_shift_gptanswer import gpt_call
 from counter.paradigm_shift_gptanswer import gpt_call_multi
 from counter.booleanway_new import chart_draw
@@ -45,7 +45,8 @@ def drf_upload_view(request):
 
     npimg = np.frombuffer(image_file.read(), np.uint8)
     image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-    with open("sp500_ohlcv_1y.pkl", "rb") as f:
+    pkl_path = os.path.join(settings.BASE_DIR, "counter", "sp500_ohlcv_1y.pkl")
+    with open(pkl_path, "rb") as f:
         data = pickle.load(f)
 
     top5=find_best(image,img_range,data,img_range,5)
