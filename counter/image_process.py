@@ -99,6 +99,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
 
     df_sorted["best_window"] = df_sorted.apply(get_best_window, axis=1)
     top5_list = df_sorted.to_dict(orient="records")
+    print("find_best done")
 
     return top5_list
 

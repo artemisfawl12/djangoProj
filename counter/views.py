@@ -34,12 +34,16 @@ def get_result(request):
 
     # 결과가 아직 없으면
     if task_id not in result_map:
+
         return Response({'error': '아직 작업이 완료되지 않았습니다'}, status=202)
 
     return Response({"result": result_map[task_id]})
 @api_view(['GET'])
 def get_progress(request):
+    print("get_process 진입")
     task_id = request.query_params.get('task_id')  # Flutter가 준 task_id
+
+    print(str(task_id)+": task_id received")
 
     # 유효한 ID인지 확인
     if task_id not in progress_map:
@@ -50,17 +54,20 @@ def get_progress(request):
 
 
 def run_find_best_async(image, img_range, task_id):
-    with open("sp500_ohlcv_1y.pkl", "rb") as f:
+    print("rfba 함수 진입 성공")
+    pkl_path = os.path.join(settings.BASE_DIR, "counter", "sp500_ohlcv_1y.pkl")
+    with open(pkl_path, "rb") as f:
         data = pickle.load(f)
 
     def progress_callback(current, total):
         progress_map[task_id]["current"] = current
         progress_map[task_id]["total"] = total
 
-    result = find_best(image, img_range, data, 120, 5, progress_callback=progress_callback)
+    result = find_best(image, img_range, data, img_range, 5, progress_callback=progress_callback)
 
     result_map[task_id] = result
     progress_map[task_id]["done"] = True
+    print("map에 넣고 done 상태 True로 변경 완료")
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def drf_upload_view(request):
@@ -86,9 +93,6 @@ def drf_upload_view(request):
 
     npimg = np.frombuffer(image_file.read(), np.uint8)
     image = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-    pkl_path = os.path.join(settings.BASE_DIR, "counter", "sp500_ohlcv_1y.pkl")
-    with open(pkl_path, "rb") as f:
-        data = pickle.load(f)
 
     task_id = str(uuid.uuid4())
     progress_map[task_id] = {"current": 0, "total": 500, "done": False}
