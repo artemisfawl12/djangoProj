@@ -97,12 +97,21 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
     # 4. 상위 top_n개 추출
 
     # best_window 열 추가
+    """
     def get_best_window(row):
         ticktempdf = data_dict[row["ticker"]]
         return ticktempdf["hl_mean"].iloc[row["best_index"]:row["best_index"] + window_size].values
 
-    df_sorted["best_window"] = df_sorted.apply(get_best_window, axis=1)
+    df_sorted["best_window"] = df_sorted.apply(get_best_window, axis=1)"""
+
+    def get_full_series(row):
+        ticktempdf = data_dict[row["ticker"]]
+        return ticktempdf["hl_mean"].dropna().tolist()
+
+    df_sorted["full_series"] = df_sorted.apply(get_full_series, axis=1)
+
     top5_list = df_sorted.to_dict(orient="records")
+
     print("find_best done")
 
     return top5_list

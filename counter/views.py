@@ -43,13 +43,8 @@ def get_result(request):
     return Response({'result': progress.get("result")})
 @api_view(['GET'])
 def get_progress(request):
-    print("get_process 진입")
     task_id = request.query_params.get('task_id')  # Flutter가 준 task_id
     progress = cache.get(task_id)
-
-
-    print(str(task_id)+": task_id received")
-    print(f"[PROGRESS] progress_map ID: {id(progress_map)}")
 
     # 유효한 ID인지 확인
     if not progress:
@@ -62,7 +57,6 @@ def get_progress(request):
 
 
 def run_find_best_async(image, img_range, task_id):
-    print("rfba 함수 진입 성공")
     pkl_path = os.path.join(settings.BASE_DIR, "counter", "sp500_ohlcv_1y.pkl")
     with open(pkl_path, "rb") as f:
         data = pickle.load(f)
