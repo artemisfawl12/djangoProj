@@ -47,6 +47,7 @@ def get_progress(request):
 
     # 유효한 ID인지 확인
     if task_id not in progress_map:
+        print("no task id")
         return Response({'error': '잘못된 task_id입니다'}, status=404)
 
     # 현재 상태 전달
