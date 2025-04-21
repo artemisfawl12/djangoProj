@@ -29,7 +29,10 @@ def drf_upload_view(request):
     #일단은 image랑 img 레인지만 주게 해놨다.
     image_file = request.FILES.get('image')
     # 텍스트 필드 받기
-    img_range = request.data.get('img_range')
+    try:
+        img_range = int(request.data.get('img_range'))
+    except (TypeError, ValueError):
+        return Response({'error': 'img_range 값이 유효한 숫자가 아닙니다.'}, status=400)
 
     #1년치 비교할지 얼마치 비교할지. 지금은 뭐 선택권이 없다 일단 1년으로 !
     #compare_range = request.data.get('compare_range')
