@@ -55,7 +55,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
     #resampled에 resampled_y 들어오게
     resampled=image_process(image_name,img_range_num)
     query_series = minmax_normalize(resampled)
-    stride = 1
+    stride = 3
     result_list=[]
     total = len(data_dict)+1
     j=0
