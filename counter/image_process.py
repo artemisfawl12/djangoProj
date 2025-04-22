@@ -89,6 +89,8 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
         except:
             print("passed")
             pass
+        if j>20:
+            break
 
     # 2. DataFrame으로 변환
     df = pd.DataFrame(result_list)
