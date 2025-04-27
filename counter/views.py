@@ -30,7 +30,7 @@ from django.core.cache import cache
 
 result_map={}
 def return_num_chartscanner(request):
-    num=100
+    num=10
     return HttpResponse(num) #100을 반환
 
 
