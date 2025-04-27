@@ -29,6 +29,10 @@ from .shared_state import progress_map
 from django.core.cache import cache
 
 result_map={}
+def return_num_chartscanner(request):
+    num=100
+    return HttpResponse(num) #100을 반환
+
 
 @api_view(['GET'])
 def get_result(request):

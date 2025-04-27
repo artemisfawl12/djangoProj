@@ -14,5 +14,6 @@ urlpatterns = [
     path('api/upload/', drf_upload_view),
     path('api/progress/', views.get_progress),
     path('api/result/', views.get_result),
+    path('returnnum_chartscan/', views.return_num_chartscanner , name="return number for chartscanner"),
 
 ]
