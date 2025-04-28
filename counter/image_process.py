@@ -66,8 +66,6 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
         j+=1
         df_new = df[["hl_mean"]].dropna().reset_index(drop=True)
         df_new = df_new.iloc[-search_range:] if len(df_new) > search_range else df_new
-        if j==1:
-            print(df_new)
 
         # dropna()로 제거되지 않은 날짜들만 따로 추출
         valid_dates = df[["High", "Low"]].dropna().index.to_list()
@@ -96,7 +94,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
                 progress_callback(j, total)
 
         except Exception as e:
-            print("passed"+str(j)  )
+            print("passed"+str(j))
 
             print(e)
             pass
