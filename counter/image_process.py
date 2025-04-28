@@ -129,7 +129,7 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
 image_path = "C:/Users/82109/Documents/chartex_2.jpg"
 
 # 이미지 불러오기 및 HSV 변환
-image = cv2.imread(image_path)"""
+image = cv2.imread(image_path)
 
 with open("sp500_ohlcv_1y.pkl", "rb") as f:
     data_dict = pickle.load(f)
@@ -144,7 +144,7 @@ for key, df in data_dict.items():
     print(len(valid_dates))
     if j==1:
         for i in range(len(valid_dates)):
-            print(valid_dates[i])
+            print(valid_dates[i])"""
 
 
 
