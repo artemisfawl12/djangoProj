@@ -4,7 +4,7 @@ from scipy.signal import resample
 from scipy.spatial.distance import euclidean
 import numpy as np
 import pandas as pd
-from .shared_state import progress_map
+#from .shared_state import progress_map
 
 
 def image_process(image,img_range):
@@ -50,9 +50,12 @@ def image_process(image,img_range):
     return resampled_y
 def minmax_normalize(x):
     return (x - np.min(x)) / (np.max(x) - np.min(x) + 1e-8)
-def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, progress_callback=None):
+def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, progress_callback=None, search_range=250):
     #data_dict에 티커별 가격 dataframe 들어오게.
     #resampled에 resampled_y 들어오게
+    #매우 중요한것: len(df_new)-window_size+1 <1이면 망한다.
+    #거래일 251일정도가 대략 1년이다.
+
     resampled=image_process(image_name,img_range_num)
     query_series = minmax_normalize(resampled)
     stride = 3
@@ -62,8 +65,11 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
     for key, df in data_dict.items():
         j+=1
         df_new = df[["hl_mean"]].dropna().reset_index(drop=True)
+        df_new = df_new.iloc[-search_range:] if len(df_new) > search_range else df_new
+
         # dropna()로 제거되지 않은 날짜들만 따로 추출
         valid_dates = df[["High", "Low"]].dropna().index.to_list()
+        valid_dates = valid_dates.iloc[-search_range:] if len(valid_dates) > search_range else valid_dates
 
         try:
             scores = []
@@ -123,11 +129,24 @@ def find_best(image_name,img_range_num, data_dict, window_size=120,top_n=5, prog
 image_path = "C:/Users/82109/Documents/chartex_2.jpg"
 
 # 이미지 불러오기 및 HSV 변환
-image = cv2.imread(image_path)
+image = cv2.imread(image_path)"""
+
 with open("sp500_ohlcv_1y.pkl", "rb") as f:
-    data = pickle.load(f)
-top5=find_best(image,120,data,120,5)
-print(top5)"""
+    data_dict = pickle.load(f)
+
+j=0
+for key, df in data_dict.items():
+    j+=1
+    df_new = df[["hl_mean"]].dropna().reset_index(drop=True)
+    # dropna()로 제거되지 않은 날짜들만 따로 추출
+    valid_dates = df[["High", "Low"]].dropna().index.to_list()
+    print(len(df_new))
+    print(len(valid_dates))
+    if j==1:
+        for i in range(len(valid_dates)):
+            print(valid_dates[i])
+
+
 
 
 

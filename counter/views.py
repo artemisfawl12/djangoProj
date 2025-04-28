@@ -60,7 +60,7 @@ def get_progress(request):
     return Response(progress)
 
 
-def run_find_best_async(image, img_range, task_id):
+def run_find_best_async(image, img_range, task_id, search_range=250):
     pkl_path = os.path.join(settings.BASE_DIR, "counter", "sp500_ohlcv_1y.pkl")
     with open(pkl_path, "rb") as f:
         data = pickle.load(f)
@@ -69,7 +69,7 @@ def run_find_best_async(image, img_range, task_id):
         cache.set(task_id, {"current": current, "total": total, "done": False}, timeout=3600)
 
 
-    result = find_best(image, img_range, data, img_range, 5, progress_callback=progress_callback)
+    result = find_best(image, img_range, data, img_range, 5, progress_callback=progress_callback, search_range=search_range)
     cache.set(task_id, {"current": "done", "total": "done", "done": True, "result": result}, timeout=3600)
 
     print("map에 넣고 done 상태 True로 변경 완료")
@@ -81,8 +81,9 @@ def drf_upload_view(request):
     # 텍스트 필드 받기
     try:
         img_range = int(request.data.get('img_range'))
+        search_range=int(request.data.get('search_range'))
     except (TypeError, ValueError):
-        return Response({'error': 'img_range 값이 유효한 숫자가 아닙니다.'}, status=400)
+        return Response({'error': 'img_range 혹은 search_range 값이 유효한 숫자가 아닙니다.'}, status=400)
 
     #1년치 비교할지 얼마치 비교할지. 지금은 뭐 선택권이 없다 일단 1년으로 !
     #compare_range = request.data.get('compare_range')
@@ -102,7 +103,7 @@ def drf_upload_view(request):
     task_id = str(uuid.uuid4())
     cache.set(task_id, {"current": 0, "total": 500, "done": False}, timeout=3600)  # 1시간 유지
 
-    thread = Thread(target=run_find_best_async, args=(image, img_range, task_id))
+    thread = Thread(target=run_find_best_async, args=(image, img_range, task_id, search_range))
     thread.start()
     print("top5 made done")
     print(f"[UPLOAD] progress_map ID: {id(progress_map)}")
