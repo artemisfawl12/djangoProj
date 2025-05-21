@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>수학 문제</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.8;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .question {
+      background: #f8f8f8;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+    }
+  </style>
+</head>
+<body>
+
+<h1>202511</h1>
+<h2>20251109</h2>
+<div class="question">
+  함수 \( f(x) = 3x^2 - 16x - 20 \)에 대하여<br><br>
+  \[
+  \int_{-2}^{a} f(x)\, dx = \int_{-2}^{0} f(x)\, dx
+  \]<br>
+  일 때, 양수 \( a \)의 값은? [4점]<br><br>
+  <strong>
+    ① 16 ② 14 ③ 12 ④ 10 ⑤ 8
+  </strong>
+</div>
+
+
+  <h2>20251110</h2>
+  <div class="question">
+    닫힌 구간 \( [0, 2\pi] \)에서 정의된 함수<br><br>
+    \[
+    f(x) = a\cos(bx) + 3
+    \]<br>
+    가 \( x = \frac{\pi}{3} \)에서 최댓값 \( 13 \)을 갖도록 하는<br>
+    두 자연수 \( a, b \)의 순서쌍 \( (a, b) \)에 대하여,<br>
+    \( a + b \)의 최솟값은?<br><br>
+    <strong>① 12 ② 17 ③ 16 ④ 18 ⑤ 20</strong>
+  </div>
+
+    <h2>20251111</h2>
+  <div class="question">
+    시각 \( t = 0 \)일 때 출발하여 수직선 위를 움직이는 점 \( P \)의<br>
+    시각 \( t \, (t \geq 0) \)에서의 위치 \( x \)가<br><br>
+    \[
+    x = t^3 - \frac{3}{2}t^2 - 6t
+    \]<br>
+    이다.<br><br>
+    출발한 후 점 \( P \)의 운동 방향이 바뀌는 시각에서의<br>
+    점 \( P \)의 가속도는?<br><br>
+    <strong>① 6 ② 8 ③ 12 ④ 14 ⑤ 18</strong>
+  </div>
+
+<h2>20251112</h2>
+<div class="question">
+  \( a_1 = 2 \)인 수열 \( \{a_n\} \)과 \( b_1 = 2 \)인 등차수열 \( \{b_n\} \)이<br>
+  모든 자연수 \( n \)에 대하여<br><br>
+  \[
+  \sum_{k=1}^{n} \frac{a_k}{b_{k+1}} = \frac{1}{2}n^2
+  \]<br>
+  을 만족시킬 때,
+  \[
+  \sum_{k=1}^{5} a_k
+  \]
+  의 값은? [4점]<br><br>
+  <strong>
+    ① 120 ② 125 ③ 130 ④ 135 ⑤ 140
+  </strong>
+</div>
+<h2>20251113</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)가<br>
+  \[
+  f(1) = f(2) = 0,\quad f'(0) = -7
+  \]<br>
+  을 만족시킨다. 원점 O와 점 \( P(3, f(3)) \)에 대하여 선분 OP가 곡선 \( y = f(x) \)와 만나는 점 중 \( P \)가 아닌 점을 \( Q \)라 하자.<br>
+  곡선 \( y = f(x) \)와 \( y \)축 및 선분 QQ로 둘러싸인 부분의 넓이를 \( A \),<br>
+  곡선 \( y = f(x) \)와 선분 PQ로 둘러싸인 부분의 넓이를 \( B \)라 할 때,<br>
+  \( B - A \)의 값은? [4점]
+</div>
+
+<img src="images/251113.png" alt="문제 13 그림" style="height: 200px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{37}{4} \) ② \( \frac{39}{4} \) ③ \( \frac{41}{4} \) ④ \( \frac{43}{4} \) ⑤ \( \frac{45}{4} \)
+  </strong>
+</div>
+<h2>20251114</h2>
+<div class="question">
+  그림과 같이 삼각형 ABC에서 선분 AB 위에 AD : DB = 3 : 2인 점 D를 잡고,<br>
+  점 A를 중심으로 하고 점 D를 지나는 원을 O, 원 O와 선분 AC가 만나는 점을 E라 하자.<br>
+  \( \sin 4 : \sin C = 8 : 5 \), 삼각형 ADE와 ABC의 넓이 비가 9 : 35이다.<br>
+  삼각형 ABC의 외접원의 반지름이 7일 때, 원 O 위의 점 P에 대하여 삼각형 PBC의 넓이의 최댓값은? (단, \( AB < AC \)) [4점]
+</div>
+
+<img src="images/251114.png" alt="문제 14 그림" style="height: 200px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( 18 + 15\sqrt{3} \) ② \( 24 + 20\sqrt{3} \) ③ \( 30 + 25\sqrt{3} \) ④ \( 36 + 30\sqrt{3} \) ⑤ \( 42 + 35\sqrt{3} \)
+  </strong>
+</div>
+
+
+<h2>20251115</h2>
+  <div class="question">
+    상수 \( a \) (\( a \ne 3\sqrt{5} \))와 최고차항의 계수가 음수인 이차함수 \( f(x) \)에 대하여,<br><br>
+
+    다음과 같은 함수 \( g(x) \)를 정의한다:<br><br>
+
+    \[
+    g(x) =
+    \begin{cases}
+      x^3 + ax^2 + 15x + 7 & \text{if } x \leq 0 \\
+      f(x) & \text{if } x > 0
+    \end{cases}
+    \]<br>
+
+    이 함수 \( g(x) \)가 다음 조건을 만족시킨다:<br><br>
+
+    (가) 함수 \( g(x) \)는 실수 전체의 집합에서 미분 가능하다.<br>
+    (나) 방정식
+    \[
+    g'(x) \cdot g'(x - 4) = 0
+    \]
+    의 서로 다른 실근의 개수는 4이다.<br><br>
+
+    이때,
+    \[
+    g(-2) + g(2)
+    \]
+    의 값은?<br><br>
+
+    <strong>
+      ① 30 ② 32 ③ 34 ④ 36 ⑤ 38
+    </strong>
+  </div>
+
+<h2>20251120</h2>
+<div class="question">
+  곡선 \( y = \left(\frac{1}{5}\right)^{x-3} \)과 직선 \( y = x \)가 만나는 점의 \( x \)좌표를 \( k \)라 하자.<br>
+  실수 전체의 집합에서 정의된 함수 \( f(x) \)가 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    \( x > k \)인 모든 실수 \( x \)에 대하여<br>
+    \( f(x) = \left(\frac{1}{5}\right)^{x-3} \)이고 \( f(f(x)) = 3x \)이다.
+  </div><br>
+  \[
+  f\left(\frac{1}{k^3 \times 5^{3k}}\right)
+  \]
+  의 값을 구하시오. [4점]
+</div>
+<h2>20251121</h2>
+<div class="question">
+  함수 \( f(x) = x^3 + ax^2 + bx + 4 \)가 다음 조건을 만족시키도록 하는<br>
+  두 정수 \( a, b \)에 대하여 \( f(1) \)의 최댓값을 구하시오. [4점]<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    모든 실수 \( \alpha \)에 대하여
+    \[
+    \lim_{x \to \alpha} \frac{f(2x + 1)}{f(x)}
+    \]
+    의 값이 존재한다.
+  </div>
+</div>
+<h2>20251122</h2>
+<div class="question">
+  모든 항이 정수이고 다음 조건을 만족시키는 모든 수열 \( \{a_n\} \)에 대하여 \( |a_1| \)의 값의 합을 구하시오. [4점]<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    (가) 모든 자연수 \( n \)에 대하여
+    \[
+    a_{n+1} =
+    \begin{cases}
+      a_n - 3 & (|a_n| \text{이 홀수인 경우}) \\
+      \frac{1}{2} a_n & (a_n = 0 \text{ 또는 } |a_n| \text{이 짝수인 경우})
+    \end{cases}
+    \]<br>
+    (나) \( |a_m| = |a_{m+2}| \)인 자연수 \( m \)의 최솟값은 3이다.
+  </div>
+</div>
+<h2>20251128</h2>
+<div class="question">
+  실수 전체의 집합에서 미분 가능한 함수 \( f(x) \)의 도함수 \( f'(x) \)가<br><br>
+  \[
+  f'(x) = -x + e^{1 - x^2}
+  \]<br>
+  이다. 양수 \( t \)에 대하여 곡선 \( y = f(x) \) 위의 점 \( (t, f(t)) \)에서의 접선과<br>
+  곡선 \( y = f(x) \) 및 \( y \)축으로 둘러싸인 부분의 넓이를 \( g(t) \)라 하자.<br>
+  \( g(1) + g'(1) \)의 값은? [4점]<br><br>
+  <strong>
+    ① \( \frac{1}{2}e + \frac{1}{2} \) ② \( \frac{1}{2}e + \frac{2}{3} \) ③ \( \frac{1}{2}e + \frac{5}{6} \) ④ \( \frac{2}{3}e + \frac{1}{2} \) ⑤ \( \frac{2}{3}e + \frac{2}{3} \)
+  </strong>
+</div>
+<h2>20251129</h2>
+<div class="question">
+  등비수열 \( \{a_n\} \)이<br><br>
+  \[
+  \sum_{n=1}^{\infty} (|a_n| + a_n) = \frac{40}{3},\quad \sum_{n=1}^{\infty} (|a_n| - a_n) = \frac{20}{3}
+  \]<br>
+  을 만족시킨다. 부등식<br>
+  \[
+  \lim_{n \to \infty} \sum_{k=1}^{2n} \left( -1 \right)^{\frac{k(k+1)}{2}} \times a_{m + k} > \frac{1}{700}
+  \]<br>
+  을 만족시키는 모든 자연수 \( m \)의 값의 합을 구하시오. [4점]
+</div>
+<h2>20251130</h2>
+<div class="question">
+  두 상수 \( a(1 \leq a \leq 2), b \)에 대하여 함수 \( f(x) = \sin(ax + b + \sin x) \)가 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    (가) \( f(0) = 0, \quad f(2\pi) = 2\pi a + b \)<br>
+    (나) \( f'(0) = f'(t) \)인 양수 \( t \)의 최솟값은 \( 4\pi \)이다.
+  </div><br>
+  함수 \( f(x) \)가 \( x = \alpha \)에서 극대인 \( \alpha \)의 값 중<br>
+  열린구간 \( (0, 4\pi) \)에 속하는 모든 값의 집합을 \( A \)라 하자.<br>
+  집합 \( A \)의 원소의 개수를 \( n \), 집합 \( A \)의 원소 중 가장 작은 값을 \( \alpha_1 \)이라 하면,<br>
+  \[
+  na\alpha_1 - ab = \frac{q}{p}\pi
+  \]
+  이다. \( p + q \)의 값을 구하시오.<br>
+  (단, \( p, q \)는 서로소인 자연수이다.) [4점]
+</div>
+
+
+<h1>202509</h1>
+
+<h2>20250909</h2>
+<div class="question">
+  함수 \( f(x) = x^2 + x \)에 대하여<br><br>
+  \[
+  5 \int_{0}^{1} f(x)\, dx - \int_{0}^{1} (5x + f(x))\, dx
+  \]
+  의 값은? [4점]<br><br>
+  <strong>① \( \frac{1}{6} \) ② \( \frac{1}{3} \) ③ \( \frac{1}{2} \) ④ \( \frac{2}{3} \) ⑤ \( \frac{5}{6} \)</strong>
+</div>
+
+<h2>20250910</h2>
+<div class="question">
+  \( \angle A > \frac{\pi}{2} \)인 삼각형 \( ABC \)의 꼭짓점 \( A \)에서 선분 \( BC \)에 내린 수선의 발을 \( H \)라 하자.<br><br>
+  \[
+  \overline{AB} : \overline{AC} = \sqrt{2} : 1,\quad \overline{AH} = 2
+  \]<br>
+  이고, 삼각형 \( ABC \)의 외접원의 넓이가 \( 50\pi \)일 때,<br>
+  선분 \( \overline{BH} \)의 길이는? [4점]<br><br>
+  <strong>
+    ① 6 ② \( \frac{25}{4} \) ③ \( \frac{13}{2} \) ④ \( \frac{27}{4} \) ⑤ 7
+  </strong>
+</div>
+<h2>20250911</h2>
+<div class="question">
+  수직선 위를 움직이는 두 점 \( P \), \( Q \)의 시각 \( t \, (t \geq 0) \)에서의 위치가 각각<br><br>
+  \[
+  x_1 = t^2 + t - 6,\quad x_2 = -t^3 + 7t^2
+  \]<br>
+  이다. 두 점 \( P, Q \)의 위치가 같아지는 순간 두 점 \( P, Q \)의 가속도를 각각 \( p, q \)라 할 때, \( p - q \)의 값은? [4점]<br><br>
+  <strong>
+    ① 24 ② 27 ③ 30 ④ 33 ⑤ 36
+  </strong>
+</div>
+<h2>20250912</h2>
+<div class="question">
+  수열 \( \{a_n\} \)은 등차수열이고, 수열 \( \{b_n\} \)은 모든 자연수 \( n \)에 대하여<br><br>
+  \[
+  b_n = \sum_{k=1}^{n} (-1)^{k+1} a_k
+  \]<br>
+  를 만족시킨다. \( b_2 = -2 \), \( b_3 + b_7 = 0 \)일 때, 수열 \( \{b_n\} \)의 첫째항부터 제9항까지의 합은? [4점]<br><br>
+  <strong>
+    ① -22 ② -20 ③ -18 ④ -16 ⑤ -14
+  </strong>
+</div>
+<h2>20250913</h2>
+<div class="question">
+  함수<br>
+  \[
+  f(x) =
+  \begin{cases}
+  -x^2 - 2x + 6 & (x < 0) \\
+  -x^2 + 2x + 6 & (x \geq 0)
+  \end{cases}
+  \]<br>
+  의 그래프가 \( x \)축과 만나는 서로 다른 두 점을 \( P, Q \)라 하고,<br>
+  상수 \( k(k > 4) \)에 대하여 직선 \( x = k \)가 \( x \)축과 만나는 점을 \( R \)이라 하자.<br>
+  곡선 \( y = f(x) \)와 선분 \( PQ \)로 둘러싸인 부분의 넓이를 \( A \),<br>
+  곡선 \( y = f(x) \)와 직선 \( x = k \) 및 선분 \( QR \)로 둘러싸인 부분의 넓이를 \( B \)라 하자.<br>
+  \( A = 2B \)일 때, \( k \)의 값은? (단, 점 \( P \)의 \( x \)좌표는 음수이다.) [4점]<br><br>
+  <strong>
+    ① \( \frac{9}{2} \) ② 5 ③ \( \frac{11}{2} \) ④ 6 ⑤ \( \frac{13}{2} \)
+  </strong>
+</div>
+<h2>20250914</h2>
+<div class="question">
+  자연수 \( n \)에 대하여 곡선 \( y = 2^x \) 위의 두 점 \( A_n, B_n \)이 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) 직선 \( A_nB_n \)의 기울기는 3이다.<br>
+    (나) \( \overline{A_nB_n} = n \times \sqrt{10} \)
+  </div><br><br>
+  중심이 직선 \( y = x \) 위에 있고 두 점 \( A_n, B_n \)를 지나는 원이<br>
+  곡선 \( y = \log_2 x \)와 만나는 두 점의 \( x \)좌표 중 큰 값을 \( x_n \)이라 하자.<br>
+  \( x_1 + x_2 + x_3 \)의 값은? [4점]<br><br>
+  <strong>
+    ① \( \frac{150}{7} \) ② \( \frac{155}{7} \) ③ \( \frac{160}{7} \) ④ \( \frac{165}{7} \) ⑤ \( \frac{170}{7} \)
+  </strong>
+</div>
+<h2>20250915</h2>
+<div class="question">
+  두 다항함수 \( f(x), g(x) \)는 모든 실수 \( x \)에 대하여 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) \( \displaystyle \int_{1}^{x} t f(t)\,dt + \int_{-1}^{x} t g(t)\,dt = 3x^4 + 8x^3 - 3x^2 \)<br>
+    (나) \( f(x) = x g'(x) \)
+  </div><br><br>
+  \( \displaystyle \int_{0}^{3} g(x)\, dx \)의 값은? [4점]<br><br>
+  <strong>
+    ① 72 ② 76 ③ 80 ④ 84 ⑤ 88
+  </strong>
+</div>
+<h2>20250920</h2>
+<div class="question">
+  닫힌구간 \( [0, 2\pi] \)에서 정의된 함수<br>
+  \[
+  f(x) = 
+  \begin{cases}
+    \sin x - 1 & (0 \leq x < \pi) \\
+    -\sqrt{2} \sin x - 1 & (\pi \leq x \leq 2\pi)
+  \end{cases}
+  \]
+  가 있다. \( 0 \leq t \leq 2\pi \)인 실수 \( t \)에 대하여<br>
+  \( f(x) = f(t) \)를 만족시키는 서로 다른 실근의 개수가 3이 되도록 하는<br>
+  모든 \( t \)의 값의 합은 \( \frac{q}{p} \pi \)이다. \( p + q \)의 값을 구하시오.<br>
+  (단, \( p \)와 \( q \)는 서로소인 자연수이다.) [4점]
+</div>
+<h2>20250921</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)가 모든 정수 \( k \)에 대하여<br><br>
+  \[
+  2k - 8 \leq \frac{f(k + 2) - f(k)}{2} \leq 4k^2 + 14k
+  \]<br>
+  를 만족시킬 때, \( f'(3) \)의 값을 구하시오. [4점]
+</div>
+<h2>20250922</h2>
+<div class="question">
+  양수 \( k \)에 대하여 \( a_1 = k \)인 수열 \( \{a_n\} \)이 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) \( a_2 \times a_3 < 0 \)<br>
+    (나) 모든 자연수 \( n \)에 대하여<br>
+    \[
+    \left(a_{n+1} - a_n + \frac{2}{3}k\right)\left(a_{n+1} + k a_n\right) = 0
+    \]
+  </div><br>
+  \( a_5 = 0 \)이 되도록 하는 서로 다른 모든 양수 \( k \)에 대하여 \( k^2 \)의 값의 합을 구하시오. [4점]
+</div>
+<h2>20250928</h2>
+<div class="question">
+  함수 \( f(x) \)는 실수 전체의 집합에서 연속인 이계도함수를 갖고,<br>
+  실수 전체의 집합에서 정의된 함수 \( g(x) = f'(2x) \sin \pi x + x \)를<br>
+  정의하자. 함수 \( g(x) \)는 역함수 \( g^{-1}(x) \)를 갖고,<br><br>
+  \[
+  \int_0^1 g^{-1}(x)\, dx = 2 \int_0^1 f'(2x) \sin \pi x\, dx + \frac{1}{4}
+  \]<br>
+  을 만족시킬 때,
+  \[
+  \int_0^2 f(x) \cos \frac{\pi}{2}x\, dx
+  \]
+  의 값을 구하시오. [4점]<br><br>
+  <strong>
+    ① \( -\frac{1}{\pi} \) ② \( -\frac{1}{2\pi} \) ③ \( -\frac{1}{3\pi} \) ④ \( -\frac{1}{4\pi} \) ⑤ \( -\frac{1}{5\pi} \)
+  </strong>
+</div>
+<h2>20250929</h2>
+<div class="question">
+  수열 \( \{a_n\} \)의 첫째항부터 제\( m \)항까지의 합을 \( S_m \)이라 하자.<br>
+  모든 자연수 \( m \)에 대하여<br><br>
+  \[
+  S_m = \sum_{n=1}^{\infty} \frac{m + 1}{n(n + m + 1)}
+  \]<br>
+  일 때, \( a_1 + a_{10} = \frac{q}{p} \)이다. \( p + q \)의 값을 구하시오.<br>
+  (단, \( p \)와 \( q \)는 서로소인 자연수이다.) [4점]
+</div>
+<h2>20250930</h2>
+<div class="question">
+  양수 \( k \)에 대하여 함수 \( f(x) = (k - |x|)e^{-x} \)이라 하자.<br>
+  실수 전체의 집합에서 미분 가능하고 다음 조건을 만족시키는 모든 함수 \( F(x) \)에 대하여<br>
+  \( F(0) \)의 최솟값을 \( g(k) \)라 하자.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    모든 실수 \( x \)에 대하여 \( F'(x) = f(x) \)이고 \( F(x) \geq f(x) \)이다.
+  </div><br>
+  \[
+  g\left(\frac{1}{4}\right) + g\left(\frac{3}{2}\right) = p e + q
+  \]
+  일 때, \( 100(p + q) \)의 값을 구하시오.<br>
+  (단, \( \lim_{x \to \infty} x e^{-x} = 0 \)이고, \( p, q \)는 유리수이다.) [4점]
+</div>
+
+
+<h1>202506</h1>
+<h2>20250609</h2>
+<div class="question">
+  함수
+  \[
+  f(x) =
+  \begin{cases}
+    x - \frac{1}{2} & (x < 0) \\
+    -x^2 + 3 & (x \geq 0)
+  \end{cases}
+  \]
+  에 대하여 함수 \( (f(x) + a)^2 \)이 실수 전체의 집합에서 연속일 때, 상수 \( a \)의 값은? [4점]<br><br>
+  <strong>
+    ① \( -\frac{9}{4} \) ② \( -\frac{7}{4} \) ③ \( -\frac{5}{4} \) ④ \( -\frac{3}{4} \) ⑤ \( -\frac{1}{4} \)
+  </strong>
+</div>
+<h2>20250610</h2>
+<div class="question">
+  다음 조건을 만족시키는 삼각형 \( ABC \)의 외접원의 넓이가 \( 9\pi \)일 때, 삼각형 \( ABC \)의 넓이는? [4점]<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) \( 3 \sin A = 2 \sin B \)<br>
+    (나) \( \cos B = \cos C \)
+  </div><br><br>
+  <strong>
+    ① \( \frac{32}{9} \sqrt{2} \) ② \( \frac{40}{9} \sqrt{2} \) ③ \( \frac{16}{3} \sqrt{2} \) ④ \( \frac{56}{9} \sqrt{2} \) ⑤ \( \frac{64}{9} \sqrt{2} \)
+  </strong>
+</div>
+<h2>20250611</h2>
+<div class="question">
+  최고차항의 계수가 1이고 \( f(0) = 0 \)인 삼차함수 \( f(x) \)가<br><br>
+  \[
+  \lim_{x \to a} \frac{f(x) - 1}{x - a} = 3
+  \]
+  을 만족시킨다. 곡선 \( y = f(x) \) 위의 점 \( (a, f(a)) \)에서의 접선의 \( y \)절편이 4일 때,<br>
+  \( f(1) \)의 값은? (단, \( a \)는 상수이다.) [4점]<br><br>
+  <strong>
+    ① -1 ② -2 ③ -3 ④ -4 ⑤ -5
+  </strong>
+</div>
+<h2>20250612</h2>
+<div class="question">
+  그림과 같이 곡선 \( y = 1 - 2^{-x} \) 위의 제1사분면에 있는 점 A를 지나고<br>
+  \( y \)축에 평행한 직선이 곡선 \( y = 2^x \)와 만나는 점을 B라 하자.<br>
+  점 A를 지나고 \( x \)축에 평행한 직선이 곡선 \( y = 2^x \)와 만나는 점을 C,<br>
+  점 C를 지나고 \( y \)축에 평행한 직선이 곡선 \( y = 1 - 2^{-x} \)와 만나는 점을 D라 하자.<br>
+  \( AB = 2 \cdot CD \)일 때, 사각형 ABCD의 넓이는? [4점]
+</div>
+
+<!-- 이미지 삽입 -->
+<img src="images/250612.png" alt="문제 12 그래프" style="height:250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{5}{2} \log_2 3 - \frac{5}{4} \) 
+    ② \( 3 \log_2 3 - \frac{3}{2} \) 
+    ③ \( \frac{7}{2} \log_2 3 - \frac{7}{4} \) 
+    ④ \( 4 \log_2 3 - 2 \) 
+    ⑤ \( \frac{9}{2} \log_2 3 - \frac{9}{4} \)
+  </strong>
+</div>
+<h2>20250613</h2>
+<div class="question">
+  곡선 \( y = \frac{1}{4}x^3 + \frac{1}{2}x \)와 직선 \( y = mx + 2 \) 및 \( y \)축으로<br>
+  둘러싸인 부분의 넓이를 \( A \), 곡선 \( y = \frac{1}{4}x^3 + \frac{1}{2}x \)와 두 직선<br>
+  \( y = mx + 2 \), \( x = 2 \)로 둘러싸인 부분의 넓이를 \( B \)라 하자.<br>
+  \( B - A = \frac{2}{3} \)일 때, 상수 \( m \)의 값은? (단, \( m < -1 \)) [4점]
+</div>
+
+<img src="images/250613.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( -\frac{3}{2} \) ② \( -\frac{17}{12} \) ③ \( -\frac{4}{3} \) ④ \( -\frac{5}{4} \) ⑤ \( -\frac{7}{6} \)
+  </strong>
+</div>
+<h2>20250614</h2>
+<div class="question">
+  다음 조건을 만족시키는 모든 자연수 \( k \)의 값의 합은? [4점]<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    \( \log_2 \sqrt{-n^2 + 10n + 75} - \log_4 (75 - kn) \)의 값이 양수가 되도록 하는<br>
+    자연수 \( n \)의 개수가 12이다.
+  </div><br><br>
+  <strong>
+    ① 6 ② 7 ③ 8 ④ 9 ⑤ 10
+  </strong>
+</div>
+<h2>20250615</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)와 상수 \( k(k \geq 0) \)에 대하여 함수<br><br>
+  \[
+  g(x) =
+  \begin{cases}
+    2x - k & (x \leq k) \\
+    f(x) & (x > k)
+  \end{cases}
+  \]
+  가 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) 함수 \( g(x) \)는 실수 전체의 집합에서 증가하고 미분 가능하다.<br>
+    (나) 모든 실수 \( x \)에 대하여<br>
+    \[
+    \int_{0}^{x} g(t)\left\{|(t-1)| + (t-1)\right\}dt \geq 0 \quad \text{이고}
+    \]<br>
+    \[
+    \int_{3}^{x} g(t)\left\{|(t-1)(t+2)| - (t-1)(t+2)\right\}dt \geq 0 \quad \text{이다.}
+    \]
+  </div><br><br>
+  \( g(k+1) \)의 최솟값은? [4점]<br><br>
+  <strong>
+    ① \( 4 - \sqrt{6} \) ② \( 5 - \sqrt{6} \) ③ \( 6 - \sqrt{6} \) ④ \( 7 - \sqrt{6} \) ⑤ \( 8 - \sqrt{6} \)
+  </strong>
+</div>
+<h2>20250620</h2>
+<div class="question">
+  5 이하의 두 자연수 \( a, b \)에 대하여 열린구간 \( (0, 2\pi) \)에서 정의된 함수<br>
+  \( y = a\sin x + b \)의 그래프가 직선 \( x = \pi \)와 만나는 점의 집합을 \( A \)라 하고,<br>
+  두 직선 \( y = 1, y = 3 \)과 만나는 점의 집합을 각각 \( B, C \)라 하자.<br>
+  \( n(A \cup B \cup C) = 3 \)이 되도록 하는 \( a, b \)의 순서쌍 \( (a, b) \)에 대하여<br>
+  \( a + b \)의 최댓값을 \( M \), 최솟값을 \( m \)이라 할 때, \( M \times m \)의 값을 구하시오. [4점]
+</div>
+
+<h2>20250621</h2>
+<div class="question">
+  최고차항의 계수가 1인 사차함수 \( f(x) \)가 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+    (가) \( f'(a) \leq 0 \)인 실수 \( a \)의 최댓값은 2이다.<br>
+    (나) 집합 \( \{x \mid f(x) = k\} \)의 원소의 개수가 3 이상이 되도록 하는 실수 \( k \)의 최솟값은 \( \frac{8}{3} \)이다.
+  </div><br><br>
+  \( f(0) = 0 \), \( f'(1) = 0 \)일 때, \( f(3) \)의 값을 구하시오. [4점]
+</div>
+
+
+<h2>20250622</h2>
+<div class="question">
+  수열 \( \{a_n\} \)은<br><br>
+  \[
+  a_2 = -a_1
+  \]<br>
+  이고, \( n \geq 2 \)인 모든 자연수 \( n \)에 대하여<br><br>
+  \[
+  a_{n+1} =
+  \begin{cases}
+    a_n - \sqrt{n} \times a_{\sqrt{n}} & (\sqrt{n} \text{이 자연수이고 } a_n > 0 \text{인 경우}) \\
+    a_n + 1 & \text{그 외의 경우}
+  \end{cases}
+  \]<br>
+  를 만족시킨다. \( a_{15} = 1 \)이 되도록 하는 모든 \( a_1 \)의 값의 곱을 구하시오. [4점]
+</div>
+
+<h2>20250628</h2>
+<div class="question">
+  함수 \( f(x) \)가<br><br>
+  \[
+  f(x) =
+  \begin{cases}
+    (x - a - 2)e^x & (x \geq a) \\
+    e^{2a}(x - a) + 4e^a & (x < a)
+  \end{cases}
+  \]<br>
+  일 때, 실수 \( t \)에 대하여 \( f(x) = t \)를 만족시키는 \( x \)의 최소값을 \( g(t) \)라 하자.<br>
+  함수 \( g(t) \)가 \( t = 12 \)에서만 불연속일 때,<br>
+  \[
+  \frac{g'(f(a+2))}{g'(f(a+6))}
+  \]
+  의 값은? (단, \( a \)는 상수이다.) [4점]<br><br>
+  <strong>
+    ① \( 6e^4 \) ② \( 9e^4 \) ③ \( 12e^4 \) ④ \( 8e^6 \) ⑤ \( 10e^6 \)
+  </strong>
+</div>
+
+<h2>20250629</h2>
+<div class="question">
+  함수 \( f(x) = \frac{1}{3}x^3 - x^2 + \ln(1 + x^2) + a \) (\( a \)는 상수)와<br>
+  두 양수 \( b, c \)에 대하여 함수<br><br>
+  \[
+  g(x) =
+  \begin{cases}
+    f(x) & (x \geq b) \\
+    -f(x - c) & (x < b)
+  \end{cases}
+  \]<br>
+  는 실수 전체의 집합에서 미분 가능하다.<br><br>
+  \( a + b + c = p + q \ln 2 \)일 때, \( 30(p + q) \)의 값을 구하시오.<br>
+  (단, \( p, q \)는 유리수이고, \( \ln 2 \)는 무리수이다.) [4점]
+</div>
+
+<h2>20250630</h2>
+<div class="question">
+  함수 \( y = \frac{\sqrt{x}}{10} \)의 그래프와 함수 \( y = \tan x \)의 그래프가<br>
+  만나는 모든 점의 \( x \)좌표를 작은 수부터 크기순으로 나열할 때,<br>
+  \( n \)번째 수를 \( a_n \)이라 하자.<br><br>
+  \[
+  \frac{1}{\pi^2} \times \lim_{n \to \infty} a_n^3 \tan^2 (a_{n+1} - a_n)
+  \]<br>
+  의 값을 구하시오. [4점]
+</div>
+<h1>202411</h1>
+<h2>20241109</h2>
+<div class="question">
+  수직선 위의 두 점 \( P(\log_5 3) \), \( Q(\log_5 12) \)에 대하여<br>
+  선분 PQ를 \( m : (1 - m) \)으로 내분하는 점의 좌표가 1일 때,<br>
+  \( 4^m \)의 값은? (단, \( m \)은 \( 0 < m < 1 \)인 상수이다.) [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{7}{6} \) ② \( \frac{4}{3} \) ③ \( \frac{3}{2} \) ④ \( \frac{5}{3} \) ⑤ \( \frac{11}{6} \)
+  </strong>
+</div>
+<h2>20241110</h2>
+<div class="question">
+  시각 \( t = 0 \)일 때 동시에 원점을 출발하여 수직선 위를 움직이는 두 점 P, Q의<br>
+  시각 \( t(t \geq 0) \)에서의 속도가 각각<br><br>
+  \[
+  v_1(t) = t^2 - 6t + 5,\quad v_2(t) = 2t - 7
+  \]<br>
+  이다. 시각 \( t \)에서의 두 점 P, Q 사이의 거리를 \( f(t) \)라 할 때,<br>
+  함수 \( f(t) \)는 구간 \( [0, a] \)에서 증가하고, 구간 \( [a, b] \)에서 감소하고,<br>
+  구간 \( [b, \infty) \)에서 증가한다. 시각 \( t = a \)에서 \( t = b \)까지 점 Q가 움직인 거리는?<br>
+  (단, \( 0 < a < b \)) [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{15}{2} \) ② \( \frac{17}{2} \) ③ \( \frac{19}{2} \) ④ \( \frac{21}{2} \) ⑤ \( \frac{23}{2} \)
+  </strong>
+</div>
+<h2>20241111</h2>
+<div class="question">
+  공차가 0이 아닌 등차수열 \( \{a_n\} \)에 대하여<br><br>
+  \[
+  |a_6| = a_8,\quad \sum_{k=1}^{5} \frac{1}{a_k a_{k+1}} = \frac{5}{96}
+  \]<br>
+  일 때,
+  \[
+  \sum_{k=1}^{15} a_k
+  \]
+  의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 60 ② 65 ③ 70 ④ 75 ⑤ 80
+  </strong>
+</div>
+<h2>20241112</h2>
+<div class="question">
+  함수 \( f(x) = \frac{1}{9}x(x - 6)(x - 9) \)와<br>
+  실수 \( t(0 < t < 6) \)에 대하여 함수 \( g(x) \)는<br><br>
+  \[
+  g(x) =
+  \begin{cases}
+    f(x) & (x < t) \\
+    -f(x - t) + f(t) & (x \geq t)
+  \end{cases}
+  \]<br>
+  이다. 함수 \( y = g(x) \)의 그래프와 \( x \)축으로 둘러싸인 영역의 넓이의 최댓값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{125}{4} \) ② \( \frac{127}{4} \) ③ \( \frac{129}{4} \) ④ \( \frac{131}{4} \) ⑤ \( \frac{133}{4} \)
+  </strong>
+</div>
+<h2>20241113</h2>
+<div class="question">
+  그림과 같이<br>
+  \( \overline{AB} = 3, \quad \overline{BC} = \sqrt{13}, \quad AD \times CD = 9, \quad \angle BAC = \frac{\pi}{3} \)<br>
+  인 사각형 ABCD가 있다. 삼각형 ABC의 넓이를 \( S_1 \), 삼각형 ACD의 넓이를 \( S_2 \)라 하고,<br>
+  삼각형 ACD의 외접원의 반지름의 길이를 \( R \)이라 하자.<br><br>
+  \( S_2 = \frac{5}{6} S_1 \)일 때,
+  \[
+  \frac{R}{\sin(\angle ADC)}
+  \]
+  의 값을 구하시오. [4점]
+</div>
+
+<img src="images/241113.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{54}{25} \) ② \( \frac{117}{50} \) ③ \( \frac{63}{25} \) ④ \( \frac{27}{10} \) ⑤ \( \frac{72}{25} \)
+  </strong>
+</div>
+<h2>20241114</h2>
+<div class="question">
+  두 자연수 \( a, b \)에 대하여 함수 \( f(x) \)는<br><br>
+  \[
+  f(x) =
+  \begin{cases}
+    2x^3 - 6x + 1 & (x \leq 2) \\
+    a(x - 2)(x - b) + 9 & (x > 2)
+  \end{cases}
+  \]<br>
+  이다. 실수 \( t \)에 대하여 함수 \( y = f(x) \)의 그래프와 직선 \( y = t \)가 만나는 점의 개수를 \( g(t) \)라 하자.<br>
+  \[
+  g(k) + \lim_{t \to k^-} g(t) + \lim_{t \to k^+} g(t) = 9
+  \]
+  를 만족시키는 실수 \( k \)의 개수가 1이 되도록 하는 두 자연수 \( a, b \)의 순서쌍 \( (a, b) \)에 대하여<br>
+  \( a + b \)의 최댓값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 51 ② 52 ③ 53 ④ 54 ⑤ 55
+  </strong>
+</div>
+<h2>20241115</h2>
+<div class="question">
+  첫째항이 자연수인 수열 \( \{a_n\} \)이 모든 자연수 \( n \)에 대하여<br><br>
+  \[
+  a_{n+1} =
+  \begin{cases}
+    2^{a_n} & (a_n \text{이 홀수인 경우}) \\
+    \frac{1}{2}a_n & (a_n \text{이 짝수인 경우})
+  \end{cases}
+  \]<br>
+  를 만족시킬 때, \( a_6 + a_7 = 3 \)이 되도록 하는 모든 \( a_1 \)의 값의 합은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 139 ② 146 ③ 153 ④ 160 ⑤ 167
+  </strong>
+</div>
+<h2>20241120</h2>
+<div class="question">
+  \( a > \sqrt{2} \)인 실수 \( a \)에 대하여 함수 \( f(x) \)를<br><br>
+  \[
+  f(x) = -x^3 + ax^2 + 2x
+  \]<br>
+  라 하자. 곡선 \( y = f(x) \) 위의 점 \( O(0, 0) \)에서의 접선이 곡선 \( y = f(x) \)와 만나는 점 중 O가 아닌 점을 A라 하고,<br>
+  곡선 \( y = f(x) \) 위의 점 A에서의 접선이 \( x \)축과 만나는 점을 B라 하자.<br>
+  점 A가 선분 OB를 지름으로 하는 원 위의 점일 때,<br>
+  \( \overline{OA} \times \overline{AB} \)의 값을 구하시오. [4점]
+</div>
+<h2>20241121</h2>
+<div class="question">
+  양수 \( a \)에 대하여 \( x \geq -1 \)에서 정의된 함수 \( f(x) \)는<br><br>
+  \[
+  f(x) =
+  \begin{cases}
+    -x^2 + 6x & (-1 \leq x < 6) \\
+    a \log_4(x - 5) & (x \geq 6)
+  \end{cases}
+  \]<br>
+  이다. \( t \geq 0 \)인 실수 \( t \)에 대하여 닫힌구간 \( [t - 1, t + 1] \)에서의 \( f(x) \)의 최댓값을 \( g(t) \)라 하자.<br>
+  구간 \( [0, \infty) \)에서 함수 \( g(t) \)의 최솟값이 5가 되도록 하는 양수 \( a \)의 최소값을 구하시오. [4점]
+</div>
+<h2>20241122</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)가 다음 조건을 만족시킨다.<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    함수 \( f(x) \)에 대하여<br>
+    \[
+    f(k - 1)f(k + 1) < 0
+    \]
+    을 만족시키는 정수 \( k \)는 존재하지 않는다.
+  </div><br>
+  \[
+  f'\left(-\frac{1}{4}\right) = -\frac{1}{4},\quad f'\left(\frac{1}{4}\right) < 0
+  \]
+  일 때, \( f(8) \)의 값을 구하시오. [4점]
+</div>
+<h2>20241128</h2>
+<div class="question">
+  실수 전체의 집합에서 연속인 함수 \( f(x) \)가 모든 실수 \( x \)에 대하여 \( f(x) \geq 0 \)이고, \( x < 0 \)일 때 \( f(x) = -4xe^{4x^2} \)이다.<br>
+  모든 양수 \( t \)에 대하여 방정식 \( f(x) = t \)의 서로 다른 실근의 개수는 2이고,<br>
+  이 방정식의 두 실근 중 작은 값을 \( g(t) \), 큰 값을 \( h(t) \)라 하자.<br>
+  두 함수 \( g(t), h(t) \)는 모든 양수 \( t \)에 대하여
+  \[
+  2g(t) + h(t) = k\quad(k \text{는 상수})
+  \]
+  를 만족시킨다. \[
+  \int_0^7 f(x)\, dx = e^4 - 1
+  \]일 때,
+  \[
+  \frac{f(9)}{f(8)}
+  \]
+  의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{3}{2}e^5 \) ② \( \frac{4}{3}e^7 \) ③ \( \frac{5}{4}e^9 \) ④ \( \frac{6}{5}e^{11} \) ⑤ \( \frac{7}{6}e^{13} \)
+  </strong>
+</div>
+<h2>20241129</h2>
+<div class="question">
+  첫째항과 공비가 각각 0이 아닌 두 등비수열 \( \{a_n\}, \{b_n\} \)에 대하여<br>
+  두 급수 \( \sum_{n=1}^{\infty} a_n \), \( \sum_{n=1}^{\infty} b_n \)이 각각 수렴하고,<br><br>
+  \[
+  \sum_{n=1}^{\infty} a_n b_n = \left( \sum_{n=1}^{\infty} a_n \right) \left( \sum_{n=1}^{\infty} b_n \right),\quad
+  3 \times \sum_{n=1}^{\infty} |a_{2n}| = 7 \times \sum_{n=1}^{\infty} |a_{3n}|
+  \]
+  이 성립한다.
+  \[
+  \sum_{n=1}^{\infty} \frac{b_{2n-1} + b_{3n+1}}{b_n} = S
+  \]
+  일 때, \( 120S \)의 값을 구하시오. [4점]
+</div>
+<h2>20241130</h2>
+<div class="question">
+  실수 전체의 집합에서 미분 가능한 함수 \( f(x) \)의 도함수 \( f'(x) \)가<br><br>
+  \[
+  f'(x) = |\sin x| \cos x
+  \]<br>
+  이다. 양수 \( a \)에 대하여 곡선 \( y = f(x) \) 위의 점 \( (a, f(a)) \)에서의 접선의 방정식을 \( y = g(x) \)라 하자.<br>
+  함수
+  \[
+  h(x) = \int_0^x \left\{ f(t) - g(t) \right\} dt
+  \]
+  가 \( x = a \)에서 극대 또는 극소가 되도록 하는 모든 양수 \( a \)를 작은 수부터 크기순으로 나열할 때,<br>
+  \( n \)번째 수를 \( a_n \)이라 하자.  
+  \[
+  \frac{100}{\pi} \times (a_6 - a_2)
+  \]
+  의 값을 구하시오. [4점]
+</div>
+<h1>202409</h1>
+<h2>20240909</h2>
+<div class="question">
+  \( 0 \leq x \leq 2\pi \)일 때, 부등식<br><br>
+  \[
+  \cos x \leq \sin \frac{\pi}{7}
+  \]<br>
+  을 만족시키는 모든 \( x \)의 값의 범위는 \( \alpha \leq x \leq \beta \)이다.<br>
+  \( \beta - \alpha \)의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{8}{7} \pi \) ② \( \frac{17}{14} \pi \) ③ \( \frac{9}{7} \pi \) ④ \( \frac{19}{14} \pi \) ⑤ \( \frac{10}{7} \pi \)
+  </strong>
+</div>
+<h2>20240910</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)에 대하여<br>
+  곡선 \( y = f(x) \) 위의 점 \( (-2, f(-2)) \)에서의 접선과<br>
+  곡선 \( y = f(x) \) 위의 점 \( (2, 3) \)에서의 접선이<br>
+  점 \( (1, 3) \)에서 만날 때, \( f(0) \)의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 31 ② 33 ③ 35 ④ 37 ⑤ 39
+  </strong>
+</div>
+<h2>20240911</h2>
+<div class="question">
+  두 점 P와 Q는 시각 \( t = 0 \)일 때 각각 점 A(1)과 점 B(8)에서 출발하여 수직선 위를 움직인다.<br>
+  두 점 P, Q의 시각 \( t(t \geq 0) \)에서의 속도는 각각<br><br>
+  \[
+  v_1(t) = 3t^2 + 4t - 7,\quad v_2(t) = 2t + 4
+  \]<br>
+  이다. 출발한 시각부터 두 점 P, Q 사이의 거리가 처음으로 4가 될 때까지 점 P가 움직인 거리는? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 10 ② 14 ③ 19 ④ 25 ⑤ 32
+  </strong>
+</div>
+<h2>20240912</h2>
+<div class="question">
+  첫째항이 자연수인 수열 \( \{a_n\} \)이 모든 자연수 \( n \)에 대하여<br><br>
+  \[
+  a_{n+1} =
+  \begin{cases}
+    a_n + 1 & (a_n \text{이 홀수인 경우}) \\
+    \frac{1}{2}a_n & (a_n \text{이 짝수인 경우})
+  \end{cases}
+  \]<br>
+  를 만족시킬 때, \( a_2 + a_4 = 40 \)이 되도록 하는 모든 \( a_1 \)의 값의 합은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 172 ② 175 ③ 178 ④ 181 ⑤ 184
+  </strong>
+</div>
+<h2>20240913</h2>
+<div class="question">
+  두 실수 \( a, b \)에 대하여 함수<br><br>
+  \[
+  f(x) =
+  \begin{cases}
+    -\frac{1}{3}x^3 - ax^2 - bx & (x < 0) \\
+    \frac{1}{3}x^3 + ax^2 - bx & (x \geq 0)
+  \end{cases}
+  \]<br>
+  이 구간 \( (-\infty, -1] \)에서 감소하고 구간 \( [-1, \infty) \)에서 증가할 때,<br>
+  \( a + b \)의 최댓값을 \( M \), 최솟값을 \( m \)이라 하자.<br>
+  \( M - m \)의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( \frac{3}{2} + 3\sqrt{2} \) ② \( 3 + 3\sqrt{2} \) ③ \( \frac{9}{2} + 3\sqrt{2} \) ④ \( 6 + 3\sqrt{2} \) ⑤ \( \frac{15}{2} + 3\sqrt{2} \)
+  </strong>
+</div>
+<h2>20240914</h2>
+<div class="question">
+  두 자연수 \( a, b \)에 대하여 함수<br><br>
+  \[
+  f(x) =
+  \begin{cases}
+    2^{x+a} + b & (x \leq -8) \\
+    -3^{x - 3} + 8 & (x > -8)
+  \end{cases}
+  \]<br>
+  이 다음 조건을 만족시킬 때, \( a + b \)의 값은? [4점]<br><br>
+  <div style="border: 1px solid #000; padding: 8px;">
+    집합 \( \{ f(x) \mid x \leq k \} \)의 원소 중 정수인 것의 개수가 2가 되도록 하는<br>
+    모든 실수 \( k \)의 값의 범위는 \( 3 \leq k < 4 \)이다.
+  </div>
+</div>
+<div class="options">
+  <strong>
+    ① 11 ② 13 ③ 15 ④ 17 ⑤ 19
+  </strong>
+</div>
+<h2>20240915</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)에 대하여 함수 \( g(x) \)를<br><br>
+  \[
+  g(x) =
+  \begin{cases}
+    \frac{f(x+3)\{f(x)+1\}}{f(x)} & (f(x) \neq 0) \\
+    3 & (f(x) = 0)
+  \end{cases}
+  \]<br>
+  이라 하자.
+  \[
+  \lim_{x \to 3} g(x) = g(3) - 1
+  \]
+  일 때, \( g(5) \)의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① 14 ② 16 ③ 18 ④ 20 ⑤ 22
+  </strong>
+</div>
+<h2>20240920</h2>
+<div class="question">
+<img src="images/240920.png" alt="문제 20 그림" style="height: 250px; width: auto; margin: 20px 0;"><br>
+  사각형 ABCD에서 삼각형 BCD의 외접원의 반지름의 길이를 \( R_1 \),<br>
+  삼각형 ABD의 외접원의 반지름의 길이를 \( R_2 \)라 하자.<br><br>
+  다음은 \( R_1 \times R_2 \)의 값을 구하는 과정이다.<br><br>
+  <div style="border:1px solid #000; padding:10px; margin:10px 0;">
+    삼각형 BCD에서 사인법칙에 의하여<br>
+    \( R_1 = \dfrac{\sqrt{2}}{2} \times BD \)<br><br>
+    이고, 삼각형 ABD에서 사인법칙에 의하여<br>
+    \( R_2 = (가) \times BD \)<br><br>
+    이다. 삼각형 ABD에서 코사인법칙에 의하여<br>
+    \( BD^2 = 2^2 + 1^2 - (나) \)<br><br>
+    이므로 \( R_1 \times R_2 = (다) \) 이다.
+  </div>
+  위의 (가), (나), (다)에 알맞은 수를 각각 \( p, q, r \)이라 할 때,<br>
+  \( 9 \times (p \times q \times r) \)의 값을 구하시오. [4점]
+</div>
+<h2>20240921</h2>
+<div class="question">
+  모든 항이 자연수인 등차수열 \( \{a_n\} \)의 첫째항부터 제\( n \)항까지의 합을 \( S_n \)이라 하자.<br>
+  \( a_7 \)이 13의 배수이고,<br><br>
+  \[
+  \sum_{k=1}^{7} S_k = 644
+  \]
+  일 때, \( a_2 \)의 값을 구하시오. [4점]
+</div>
+<h2>20240922</h2>
+<div class="question">
+  두 다항함수 \( f(x), g(x) \)에 대하여<br>
+  \( f(x) \)의 한 부정적분을 \( F(x) \), \( g(x) \)의 한 부정적분을 \( G(x) \)라 할 때,<br><br>
+
+  <div style="border:1px solid #000; padding:10px; margin:10px 0;">
+    (가) \( \int_1^x f(t)\,dt = x f(x) - 2x^2 - 1 \)<br>
+    (나) \( f(x)G(x) + F(x)g(x) = 8x^3 + 3x^2 + 1 \)
+  </div>
+
+  \[
+  \int_1^3 g(x)\,dx
+  \]
+  의 값을 구하시오. [4점]
+</div>
+<h2>20240928</h2>
+<div class="question">
+  실수 \( a \ (0 < a < 2) \)에 대하여 함수 \( f(x) \)를<br><br>
+
+  \[
+  f(x) =
+  \begin{cases}
+  2|\sin 4x| & (x < 0) \\
+  -\sin ax & (x \geq 0)
+  \end{cases}
+  \]
+  이라 하자. 함수
+  \[
+  g(x) = \left| \int_{-a\pi}^{x} f(t)\,dt \right|
+  \]
+  가 실수 전체의 집합에서 미분가능할 때, \( a \)의 최소값은? [4점]
+</div>
+<h2>20240929</h2>
+<div class="question">
+  두 실수 \( a, b \ (a > 1, b > 1) \)이<br><br>
+
+  \[
+  \lim_{n \to \infty} \frac{3^n + a^{n+1}}{3^{n+1} + a^n} = a,\quad
+  \lim_{n \to \infty} \frac{a^n + b^{n+1}}{a^{n+1} + b^n} = \frac{9}{a}
+  \]
+  를 만족시킬 때, \( a + b \)의 값을 구하시오. [4점]
+</div>
+<h2>20240930</h2>
+<div class="question">
+  <img src="images/240930.png" style="height:250px; width: auto;"><br><br>
+  길이가 10인 선분 \( AB \)를 지름으로 하는 원과 선분 \( AB \) 위에 \( AC = 4 \)인 점 \( C \)가 있다. 이 원 위의 점 \( P \)를 \( \angle PCB = \theta \)가 되도록 잡고,<br>
+  점 \( P \)를 지나고 선분 \( AB \)에 수직인 직선이 이 원과 만나는 점 중 \( P \)가 아닌 점을 \( Q \)라 하자.<br><br>
+  삼각형 \( PCQ \)의 넓이를 \( S(\theta) \)라 할 때,
+  \[
+  -7 \times S'\left( \frac{\pi}{4} \right)
+  \]
+  의 값을 구하시오. (단, \( 0 < \theta < \frac{\pi}{2} \)) [4점]
+</div>
+<h1>202406</h1>
+<h2>20240609</h2>
+<div class="question">
+  수열 \( \{a_n\} \)이 모든 자연수 \( n \)에 대하여
+  \[
+  \sum_{k=1}^n \frac{1}{(2k-1)a_k} = n^2 + 2n
+  \]
+  을 만족시킬 때, \( \sum_{n=1}^{10} a_n \)의 값은? [4점]
+</div>
+<h2>20240610</h2>
+<div class="question">
+  <img src="images/240610.png" style="height:250px; width: auto;"><br><br>
+  양수 \( k \)에 대하여 함수 \( f(x) = kx(x-2)(x-3) \)이다.  
+  곡선 \( y=f(x) \)와 \( x \)-축이 원점 \( O \)와 두 점 \( P \), \( Q \) (\( OP < OQ \))에서 만난다.  
+  곡선 \( y=f(x) \)와 선분 \( OP \)로 둘러싸인 영역을 \( A \), 곡선 \( y=f(x) \)와 선분 \( PQ \)로 둘러싸인 영역을 \( B \)라 하자.  
+  \((A\text{의 넓이}) - (B\text{의 넓이}) = 3\)일 때, \( k \)의 값은? [4점]
+</div>
+<h2>20240611</h2>
+<div class="question">
+  <img src="images/240611.png" style="height:250px; width: auto;"><br><br>
+  그림과 같이 실수 \( t (0 < t < 1) \)에 대하여 곡선 \( y = x^2 \) 위의 점 중에서 직선 \( y = 2tx - 1 \)과의 거리가 최소인 점을 \( P \)라 하고,  
+  직선 \( OP \)가 직선 \( y = 2tx - 1 \)과 만나는 점을 \( Q \)라 할 때,
+  \[
+  \lim_{t \to 1} \frac{PQ}{1 - t}
+  \]
+  의 값은? (단, \( O \)는 원점이다.) [4점]
+</div>
+<h2>20240612</h2>
+<div class="question">
+  \( a_2 = -4 \)이고 공차가 0이 아닌 등차수열 \( \{a_n\} \)에 대하여 수열 \( \{b_n\} \)을 \( b_n = a_n + a_{n+1} (n \geq 1) \)이라 하고,  
+  두 집합 \( A = \{a_1, a_2, a_3, a_4, a_5\} \), \( B = \{b_1, b_2, b_3, b_4, b_5\} \)라 하자.  <br>
+  \( n(A \cap B) = 3 \)이 되도록 하는 모든 수열 \( \{a_n\} \)에 대하여 \( a_{20} \)의 값의 합은? [4점]
+</div>
+<h2>20240613</h2>
+<div class="question">
+  <img src="images/240613.png" style="height:250px; width: auto;"><br><br>
+  \( \overline{BC} = 3 \), \( \overline{CD} = 2 \), \( \cos(\angle BCD) = -\frac{1}{3} \), \( \angle DAB > \frac{\pi}{2} \)인 사각형 \( ABCD \)에서  
+  두 삼각형 \( ABC \)와 \( ACD \)는 모두 예각삼각형이다.  
+  선분 \( AC \)를 \( 1:2 \)로 내분하는 점 \( E \)에 대하여 선분 \( AE \)를 지름으로 하는 원이 두 선분 \( AB \), \( AD \)와 만나는 점 중 \( A \)가 아닌 점을 각각 \( P_1 \), \( P_2 \)라 하고,  
+  선분 \( CE \)를 지름으로 하는 원이 두 선분 \( BC \), \( CD \)와 만나는 점 중 \( C \)가 아닌 점을 각각 \( Q_1 \), \( Q_2 \)라 하자.  
+  \( P_1P_2 : Q_1Q_2 = 3 : 5\sqrt{2} \)이고, 삼각형 \( ABD \)의 넓이가 2일 때, \( AB + AD \)의 값은? (단, \( AB > AD \)) [4점]
+</div>
+<h2>20240614</h2>
+<div class="question">
+  실수 \( a (a \geq 0) \)에 대하여 수직선 위를 움직이는 점 \( P \)의 시각 \( t (t \geq 0) \)에서의 속도 \( v(t) \)를  
+  \[
+  v(t) = -t(t-1)(t-a)(t-2a)
+  \]
+  라 하자. 점 \( P \)가 시각 \( t=0 \)일 때 출발한 후 운동 방향을 한 번만 바꾸도록 하는 \( a \)에 대하여, 시각 \( t=0 \)에서 \( t=2 \)까지  
+  점 \( P \)의 위치의 변화량의 최댓값은? [4점]
+</div>
+<h2>20240615</h2>
+<div class="question">
+  자연수 \( k \)에 대하여 다음 조건을 만족시키는 수열 \( \{a_n\} \)이 있다.  
+  \[
+  a_1 = k \text{이고, 모든 자연수 } n \text{에 대하여} \\
+  a_{n+1} =
+  \begin{cases}
+  a_n + 2n - k & (a_n \leq 0) \\
+  a_n - 2n - k & (a_n > 0)
+  \end{cases}
+  \]
+  \( a_3 \times a_4 \times a_5 \times a_6 < 0 \)이 되도록 하는 모든 \( k \)의 값의 합은? [4점]
+</div>
+
+<h2>20240620</h2>
+<div class="question">
+  최고차항의 계수가 1인 이차함수 \( f(x) \)에 대하여 함수
+  \[
+  g(x) = \int_0^x f(t)\,dt
+  \]
+  가 다음 조건을 만족시킬 때, \( f(9) \)의 값을 구하시오. [4점]
+  <br><br>
+  \( x \geq 1 \)인 모든 실수 \( x \)에 대하여<br>
+  \( g(x) \geq g(4) \)이고 \( |g(x)| \geq |g(3)| \)이다.
+</div>
+<div class="options"></div>
+<h2>20240621</h2>
+<div class="question">
+  실수 \( t \)에 대하여 두 곡선 \( y = t - \log_2 x \)와 \( y = 2^{x - t} \)이 만나는 점의 \( x \)좌표를 \( f(t) \)라 하자.
+  <br><br>
+  &lt;보기&gt;의 각 명제에 대하여 다음 규칙에 따라 \( A, B, C \)의 값을 정할 때, \( A + B + C \)의 값을 구하시오. (단, \( A + B + C \neq 0 \)) [4점]
+  <ul>
+    <li>명제 ㄱ이 참이면 \( A = 100 \), 거짓이면 \( A = 0 \)이다.</li>
+    <li>명제 ㄴ이 참이면 \( B = 10 \), 거짓이면 \( B = 0 \)이다.</li>
+    <li>명제 ㄷ이 참이면 \( C = 1 \), 거짓이면 \( C = 0 \)이다.</li>
+  </ul>
+  <br>
+  &lt;보기&gt;
+  <ul>
+    <li>ㄱ. \( f(1) = 1 \)이고 \( f(2) = 2 \)이다.</li>
+    <li>ㄴ. 실수 \( t \)의 값이 증가하면 \( f(t) \)의 값도 증가한다.</li>
+    <li>ㄷ. 모든 양의 실수 \( t \)에 대하여 \( f(t) \geq t \)이다.</li>
+  </ul>
+</div>
+<div class="options"></div>
+<h2>20240622</h2>
+<div class="question">
+  정수 \( a (a \neq 0) \)에 대하여 함수 \( f(x) = x^3 - 2a x^2 \)이라 하자. 다음 조건을 만족시키는 모든 정수 \( k \)의 값의 곱이 \( -12 \)가 되도록 하는 \( a \)에 대하여 \( f'(10) \)의 값을 구하시오. [4점]
+  <br><br>
+  함수 \( f(x) \)에 대하여
+  \[
+  \left\{ \frac{f(x_1) - f(x_2)}{x_1 - x_2} \right\}
+  \times
+  \left\{ \frac{f(x_2) - f(x_3)}{x_2 - x_3} \right\}
+  &lt; 0
+  \]
+  를 만족시키는 세 실수 \( x_1, x_2, x_3 \)이 열린구간 \( \left( k, k + \frac{3}{2} \right) \)에 존재한다.
+</div>
+<div class="options"></div>
+<h2>20240628</h2>
+<div class="question">
+  두 상수 \( a (a &gt; 0) \), \( b \)에 대하여 실수 전체의 집합에서 연속인 함수 \( f(x) \)가 다음 조건을 만족시킬 때, \( a \times b \)의 값은? [4점]
+  <br><br>
+  (가) 모든 실수 \( x \)에 대하여
+  \[
+  \{ f(x) \}^2 + 2f(x) = a \cos^3 \pi x \cdot e^{\sin^2 \pi x} + b
+  \]
+  (나) \( f(0) = f(2) + 1 \)
+</div>
+<div class="options">
+  <strong>
+    ① \( -\frac{1}{16} \) ② \( -\frac{7}{64} \) ③ \( -\frac{5}{32} \) ④ \( -\frac{13}{64} \) ⑤ \( -\frac{1}{4} \)
+  </strong>
+</div>
+<h2>20240629</h2>
+<div class="question">
+  세 실수 \( a, b, k \)에 대하여 두 점 \( A(a, a + k), B(b, b + k) \)가 곡선 \( C : x^2 - 2xy + 2y^2 = 15 \) 위에 있다. 곡선 \( C \) 위의 점 \( A \)에서의 접선과 곡선 \( C \) 위의 점 \( B \)에서의 접선이 서로 수직일 때, \( k^2 \)의 값을 구하시오. (단, \( a + 2k \neq 0 \), \( b + 2k \neq 0 \)) [4점]
+</div>
+<div class="options"></div>
+<h2>20240630</h2>
+<div class="question">
+  수열 \( \{a_n\} \)은 등비수열이고, 수열 \( \{b_n\} \)을 모든 자연수 \( n \)에 대하여
+  \[
+  b_n =
+  \begin{cases}
+    -1 & (a_n \leq -1) \\
+    a_n & (a_n &gt; -1)
+  \end{cases}
+  \]
+  이라 할 때, 수열 \( \{b_n\} \)은 다음 조건을 만족시킨다.
+  <br><br>
+  (가) 급수 \( \sum_{n=1}^{\infty} b_{2n-1} \)은 수렴하고 그 합은 \( -3 \)이다.
+  <br>
+  (나) 급수 \( \sum_{n=1}^{\infty} b_{2n} \)은 수렴하고 그 합은 \( 8 \)이다.
+  <br><br>
+  \( b_3 = -1 \)일 때, \( \sum_{n=1}^{\infty} |a_n| \)의 값을 구하시오. [4점]
+</div>
+<h1>202311</h1>
+<h2>20231109</h2>
+<div class="question">
+  함수 \( f(x) = a - \sqrt{3} \tan 2x \) 가 닫힌구간 \( \left[ -\frac{\pi}{6}, b \right] \) 에서 최댓값 7, 최솟값 3을 가질 때, \( a \times b \)의 값은? (단, \( a, b \)는 상수이다.) [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① \( \frac{\pi}{2} \) ② \( \frac{5\pi}{12} \) ③ \( \frac{\pi}{3} \) ④ \( \frac{\pi}{4} \) ⑤ \( \frac{\pi}{6} \)
+  </strong>
+</div>
+<h2>20231110</h2>
+<div class="question">
+  두 곡선 \( y = x^3 + x^2 \), \( y = -x^2 + k \)와 \( y \)축으로 둘러싸인 부분의 넓이를 \( A \), 두 곡선 \( y = x^3 + x^2 \), \( y = -x^2 + k \)와 직선 \( x = 2 \)로 둘러싸인 부분의 넓이를 \( B \)라 하자.  
+  \( A = B \)일 때, 상수 \( k \)의 값은? (단, \( 4 < k < 5 \)) [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/231110.png" alt="문제 10 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{25}{6} \) ② \( \frac{13}{3} \) ③ \( \frac{9}{2} \) ④ \( \frac{14}{3} \) ⑤ \( \frac{29}{6} \)
+  </strong>
+</div>
+<h2>20231111</h2>
+<div class="question">
+  그림과 같이 사각형 \(ABCD\)가 한 원에 내접하고  
+  \( \overline{AB} = 5 \), \( \overline{AC} = 3\sqrt{5} \), \( \overline{AD} = 7 \), \( \angle BAC = \angle CAD \)일 때, 이 원의 반지름의 길이는? [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/231111.png" alt="문제 11 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{5\sqrt{2}}{2} \) ② \( \frac{8\sqrt{5}}{5} \) ③ \( \frac{5\sqrt{5}}{3} \) ④ \( \frac{8\sqrt{2}}{3} \) ⑤ \( \frac{9\sqrt{3}}{4} \)
+  </strong>
+</div>
+<h2>20231112</h2>
+<div class="question">
+  실수 전체의 집합에서 연속인 함수 \( f(x) \)가 다음 조건을 만족시킨다.  
+  \[
+    n - 1 \leq x < n \text{일 때, } |f(x)| = |6(x - n + 1)(x - n)|
+  \]
+  (단, \( n \)은 자연수이다.)
+
+  열린구간 \( (0, 4) \)에서 정의된 함수  
+  \[
+    g(x) = \int_0^x f(t) dt - \int_x^4 f(t) dt
+  \]  
+  가 \( x = 2 \)에서 최소값 0을 가질 때,  
+  \[
+    \int_{\frac{1}{2}}^4 f(x) dx
+  \]  
+  의 값은? [4점]
+</div>
+<div class="options">
+  <strong>
+    ① \( -\frac{3}{2} \) ② \( -\frac{1}{2} \) ③ \( \frac{1}{2} \) ④ \( \frac{3}{2} \) ⑤ \( \frac{5}{2} \)
+  </strong>
+</div>
+<h2>20231113</h2>
+<div class="question">
+  자연수 \( m(m \geq 2) \)에 대하여 \( m^{12} \)의 \( n \)제곱근 중에서 정수가 존재하도록 하는 \( 2 \) 이상의 자연수 \( n \)의 개수를 \( f(m) \)이라 할 때,  
+  \[
+  \sum_{m=2}^{9} f(m)
+  \]
+  의 값은? [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① 37 ② 42 ③ 47 ④ 52 ⑤ 57
+  </strong>
+</div>
+<h2>20231114</h2>
+<div class="question">
+  다항함수 \( f(x) \)에 대하여 함수 \( g(x) \)를 다음과 같이 정의한다.
+  \[
+  g(x) = 
+  \begin{cases}
+    x & (x < -1 \text{ 또는 } x > 1) \\
+    f(x) & (-1 \leq x \leq 1)
+  \end{cases}
+  \]
+  함수 \( h(x) = \lim_{t \to 0^+} g(x+t) \times \lim_{t \to 2^+} g(x+t) \)에 대하여  
+  &lt;보기&gt;에서 옳은 것만을 있는 대로 고른 것은? [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① ㄱ ② ㄴ ③ ㄷ ④ ㄱ, ㄷ ⑤ ㄴ, ㄷ
+  </strong>
+</div>
+<h2>20231115</h2>
+<div class="question">
+  모든 항이 자연수이고 다음 조건을 만족시키는 모든 수열 \( \{a_n\} \)에 대하여 \( a_9 \)의 최댓값과 최솟값을 각각 \( M, m \)이라 할 때,  
+  \( M + m \)의 값은? [4점]
+
+  <br><br>
+  (가) \( a_7 = 40 \)  
+  (나) 모든 자연수 \( n \)에 대하여  
+  \[
+  a_{n+2} = 
+  \begin{cases}
+    a_{n+1} + a_n & (a_{n+1} \text{이 3의 배수가 아닌 경우}) \\
+    \frac{1}{3} a_{n+1} & (a_{n+1} \text{이 3의 배수인 경우})
+  \end{cases}
+  \]
+</div>
+
+<div class="options">
+  <strong>
+    ① 216 ② 218 ③ 220 ④ 222 ⑤ 224
+  </strong>
+</div>
+<h2>20231120</h2>
+<div class="question">
+  수직선 위를 움직이는 점 \( P \)의 시각 \( t(t \geq 0) \)에서의  
+  속도 \( v(t) \)와 가속도 \( a(t) \)가 다음 조건을 만족시킨다.
+
+  <br><br>
+  (가) \( 0 \leq t \leq 2 \)일 때, \( v(t) = 2t^3 - 8t \)  
+  (나) \( t \geq 2 \)일 때, \( a(t) = 6t + 4 \)
+
+  <br><br>
+  시각 \( t = 0 \)에서 \( t = 3 \)까지 점 \( P \)가 움직인 거리를 구하시오. [4점]
+</div>
+<h2>20231121</h2>
+<div class="question">
+  자연수 \( n \)에 대하여 함수 \( f(x) \)를  
+  \[
+  f(x) = 
+  \begin{cases}
+    |3^{x+2} - n| & (x < 0) \\
+    |\log_2(x + 4) - n| & (x \geq 0)
+  \end{cases}
+  \]
+  이라 하자. 실수 \( t \)에 대하여 \( x \)에 대한 방정식 \( f(x) = t \)의 서로 다른 실근의 개수를 \( g(t) \)라 할 때,  
+  함수 \( g(t) \)의 최댓값이 4가 되도록 하는 모든 자연수 \( n \)의 값의 합을 구하시오. [4점]
+</div>
+<h2>20231122</h2>
+<div class="question">
+  최고차항의 계수가 1인 삼차함수 \( f(x) \)와 실수 전체의 집합에서 연속인 함수 \( g(x) \)가 다음 조건을 만족시킬 때,  
+  \( f(4) \)의 값을 구하시오. [4점]
+
+  <br><br>
+  (가) 모든 실수 \( x \)에 대하여  
+  \[
+  f(x) = f(1) + (x - 1)f'(g(x))
+  \]
+
+  (나) 함수 \( g(x) \)의 최솟값은 \( \frac{5}{2} \) 이다.  
+  (다) \( f(0) = -3, \quad f(g(1)) = 6 \)
+</div>
+<h2>20231128</h2>
+<div class="question">
+  그림과 같이 중심이 O이고 길이가 2인 선분 AB를 지름으로 하는 반원 위에 \( \angle AOC = \frac{\pi}{2} \)인 점 C가 있다.  
+  호 BC 위에 점 P와 호 CA 위에 점 Q를 \( PB = QC \)가 되도록 잡고, 선분 AP 위에 점 R을 \( \angle CQR = \frac{\pi}{2} \)가 되도록 잡는다.  
+  선분 AP와 선분 CO의 교점을 S라 하자. \( \angle PAB = \theta \)일 때,  
+  삼각형 POB의 넓이를 \( f(\theta) \), 사각형 CQRS의 넓이를 \( g(\theta) \)라 하자.  
+  \[
+  \lim_{\theta \to 0^+} \frac{3f(\theta) - 2g(\theta)}{\theta^2}
+  \]
+  의 값은? (단, \( 0 < \theta < \frac{\pi}{4} \)) [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/231128.png" alt="문제 28 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① 2 ② 3 ③ 4 ④ 5 ⑤ 6
+  </strong>
+</div>
+<h2>20231129</h2>
+<div class="question">
+  세 상수 \( a, b, c \)에 대하여 함수 \( f(x) = ae^{2x} + be^x + c \)가 다음 조건을 만족시킨다.  
+
+  <br><br>
+  (가) \( \displaystyle \lim_{x \to -\infty} \frac{f(x) + 6}{e^x} = 1 \)  
+  (나) \( f(\ln 2) = 0 \)
+
+  <br><br>
+  함수 \( f(x) \)의 역함수를 \( g(x) \)라 할 때,  
+  \[
+  \int_0^{14} g(x) \, dx = p + q \ln 2
+  \]
+  이다. \( p + q \)의 값을 구하시오.  
+  (단, \( p, q \)는 유리수이고, \( \ln 2 \)는 무리수이다.) [4점]
+</div>
+
+<div class="options">
+</div>
+<h2>20231130</h2>
+<div class="question">
+  최고차항의 계수가 양수인 삼차함수 \( f(x) \)와  
+  함수 \( g(x) = e^{\sin \pi x} - 1 \)에 대하여 실수 전체의 집합에서 정의된  
+  합성함수 \( h(x) = g(f(x)) \)가 다음 조건을 만족시킨다.
+
+  <br><br>
+  (가) 함수 \( h(x) \)는 \( x = 0 \)에서 극댓값 0을 갖는다.  
+  (나) 열린구간 \( (0, 3) \)에서 방정식 \( h(x) = 1 \)의 서로 다른 실근의 개수는 7이다.
+
+  <br><br>
+  \( f(3) = \frac{1}{2}, \quad f'(3) = 0 \)일 때, \( f(2) = \frac{q}{p} \)이다.  
+  \( p + q \)의 값을 구하시오. (단, \( p, q \)는 서로소인 자연수이다.) [4점]
+</div>
+<h1>202309</h1>
+<h2>20230909</h2>
+<div class="question">
+  닫힌구간 \([0, 12]\)에서 정의된 두 함수  
+  \[
+  f(x) = \cos\left(\frac{\pi x}{6}\right), \quad g(x) = -3\cos\left(\frac{\pi x}{6}\right) - 1
+  \]
+  이 있다.  
+  곡선 \( y = f(x) \)와 직선 \( y = k \)가 만나는 두 점의 \( x \)좌표를 \( \alpha_1, \alpha_2 \)라 할 때 \( |\alpha_1 - \alpha_2| = 8 \)이다.  
+  곡선 \( y = g(x) \)와 직선 \( y = k \)가 만나는 두 점의 \( x \)좌표를 \( \beta_1, \beta_2 \)라 할 때, \( |\beta_1 - \beta_2| \)의 값은?  
+  (단, \( -1 < k < 1 \)인 상수이다.) [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① 6 ② \( \frac{6}{2} \) ③ 7 ④ \( \frac{8}{2} \) ⑤ 8
+  </strong>
+</div>
+<h2>20230910</h2>
+<div class="question">
+  수직선 위의 점 \( A(6) \)과 시각 \( t = 0 \)일 때 원점을 출발하여 이 수직선 위를 움직이는 점 P가 있다.  
+  시각 \( t \) (\( t \geq 0 \))에서의 점 P의 속도 \( v(t) \)를
+  \[
+  v(t) = 6t^2 + at \quad (a > 0)
+  \]
+  라 하자.  
+  시각 \( t = 2 \)에서 점 P와 점 A 사이의 거리가 10일 때, 상수 \( a \)의 값은? [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① 1 ② 2 ③ 3 ④ 4 ⑤ 5
+  </strong>
+</div>
+<h2>20230911</h2>
+<div class="question">
+  함수 \( f(x) = -(x - 2)^2 + k \)에 대하여 다음 조건을 만족시키는 자연수 \( n \)의 개수가 2일 때, 상수 \( k \)의 값은?  
+  \[
+  \sqrt{3f(n)}
+  \]
+  의 네제곱근 중 실수인 것을 모두 곱한 값이 \(-8\)이다. [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① 8 ② 9 ③ 10 ④ 11 ⑤ 12
+  </strong>
+</div>
+<h2>20230912</h2>
+<div class="question">
+  실수 \( t (t > 0) \)에 대하여 직선 \( y = x + t \)와 곡선 \( y = x^2 \)이 만나는 두 점을 A, B라 하자.  
+  점 A를 지나고 x축에 평행한 직선이 곡선 \( y = x^2 \)과 만나는 점 중 A가 아닌 점을 C,  
+  점 B에서 선분 AC에 내린 수선의 발을 H라 하자.  
+  \[
+  \lim_{t \to 0^+} \frac{1}{t} \left( \frac{1}{AH} - \frac{1}{CH} \right)
+  \]
+  의 값을 구하시오. (단, 점 A의 x좌표는 양수이다.) [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/230912.png" alt="문제 12 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① 1 ② 2 ③ 3 ④ 4 ⑤ 5
+  </strong>
+</div>
+<h2>20230913</h2>
+<div class="question">
+  그림과 같이 선분 AB를 지름으로 하는 반원의 호 AB 위에 두 점 C, D가 있다.  
+  선분 AB의 중점 O에 대하여 두 선분 AD, CO가 점 E에서 만나고,  
+  \( CE = 4 \), \( ED = 6\sqrt{2} \), \( \angle CEA = \frac{3\pi}{7} \)일 때,  
+  \( AC \times CD \)의 값은? [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/230913.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( 6\sqrt{10} \) ② \( 10\sqrt{8} \) ③ \( 16\sqrt{2} \) ④ \( 12\sqrt{8} \) ⑤ \( 20\sqrt{2} \)
+  </strong>
+</div>
+<h2>20230914</h2>
+<div class="question">
+  최고차항의 계수가 1이고 \( f(0) = 0, f(1) = 0 \)인 삼차함수 \( f(x) \)에 대하여  
+  함수 \( g(t) \)를  
+  \[
+  g(t) = \int_t^{t+1} f(x)\,dx - \int_0^1 |f(x)|\,dx
+  \]
+  라 할 때, &lt;보기&gt;에서 옳은 것만을 있는 대로 고른 것은? [4점]
+  <br><br>
+  &lt;보기&gt;<br>
+  ㄱ. \( g(0) = 0 \)이면 \( g(-1) < 0 \)<br>
+  ㄴ. \( g(-1) > 0 \)이면 \( f(k) = 0 \)을 만족하는 \( k < -1 \)인 실수 \( k \)가 존재한다.<br>
+  ㄷ. \( g(-1) > 1 \)이면 \( g(0) < -1 \)
+</div>
+
+<div class="options">
+  <strong>
+    ① ㄱ ② ㄱ, ㄴ ③ ㄱ, ㄷ ④ ㄴ, ㄷ ⑤ ㄱ, ㄴ, ㄷ
+  </strong>
+</div>
+<h2>20230915</h2>
+<div class="question">
+  수열 \( \{a_n\} \)이 다음 조건을 만족한다.  
+  (가) 모든 자연수 \( k \)에 대하여 \( a_{3k} = r^k \), 단 \( 0 < |r| < 1 \)인 상수 \( r \)  
+  (나) \( a_1 < 0 \), 모든 자연수 \( n \)에 대하여
+  \[
+  a_{n+1} = 
+  \begin{cases}
+    a_n + 3 & (|a_n| < 8) \\
+    \frac{1}{2}a_n & (|a_n| \geq 8)
+  \end{cases}
+  \]
+  \( |a_m| \geq 8 \)를 만족하는 100 이하의 자연수 \( m \)의 개수를 \( p \)라 할 때, \( p + a_1 \)의 값은? [4점]
+</div>
+
+<div class="options">
+  <strong>
+    ① 8 ② 10 ③ 12 ④ 14 ⑤ 16
+  </strong>
+</div>
+<h2>20230920</h2>
+<div class="question">
+  상수 \( k(k \leq 0) \)에 대하여 두 함수  
+  \[
+  f(x) = x^3 + x^2 - x, \quad g(x) = 7|x| + k
+  \]
+  의 그래프가 만나는 점의 개수가 2일 때,  
+  두 함수의 그래프로 둘러싸인 부분의 넓이를 \( S \)라 하자.  
+  \( 60 \times S \)의 값을 구하시오. [4점]
+</div>
+<h2>20230921</h2>
+<div class="question">
+  그림과 같이 곡선 \( y = 2x \) 위에 두 점 \( P(a, 2a) \), \( Q(b, 2b) \)가 있다.  
+  직선 PQ의 기울기를 \( m \)이라 할 때, 점 P를 지나며 기울기 \( -m \)인 직선이 x축, y축과 만나는 점을 각각 A, B라 하고,  
+  점 Q를 지나며 기울기 \( -m \)인 직선이 x축과 만나는 점을 C라 하자.  
+  \[
+  AB = 3PB, \quad CQ = \frac{6}{AB}
+  \]
+  일 때, \( 60 \times (a + b) \)의 값을 구하시오. (단, \( 0 < a < b \)) [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/230921.png" alt="문제 21 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<h2>20230922</h2>
+<div class="question">
+  최고차항의 계수가 1이고 \( x = 3 \)에서 극댓값 8을 갖는 삼차함수 \( f(x) \)가 있다.  
+  실수 \( t \)에 대하여 함수 \( g(x) \)를
+  \[
+  g(x) =
+  \begin{cases}
+    f(x) & (x \geq t) \\
+    -f(x) + 2f(t) & (x < t)
+  \end{cases}
+  \]
+  라 할 때, 방정식 \( g(x) = 0 \)의 서로 다른 실근의 개수를 \( h(t) \)라 하자.  
+  함수 \( h(t) \)가 \( t = a \)에서 불연속인 \( a \)의 값이 두 개일 때, \( f(4) \)의 값을 구하시오. [4점]
+</div>
+<h2>20230928</h2>
+<div class="question">
+  그림과 같이 반지름의 길이가 1이고 중심각의 크기가 \( \frac{\pi}{2} \)인 부채꼴 OAB가 있다.  
+  호 AB 위의 점 P에 대하여 \( PA = PC = PD \)가 되도록 호 PB 위에 점 C와 선분 OA 위에 점 D를 잡는다.  
+  점 D를 지나고 선분 OP와 평행한 직선이 선분 PA와 만나는 점을 E라 하자.  
+  \( \angle POA = \theta \)일 때, 삼각형 CDP의 넓이를 \( f(\theta) \), 삼각형 EDA의 넓이를 \( g(\theta) \)라 하자.  
+  \[
+  \lim_{\theta \to 0^+} \frac{f(\theta)}{\theta^2 g(\theta)}
+  \]
+  의 값을 구하시오. (단, \( 0 < \theta < \frac{\pi}{7} \)) [4점]
+</div>
+
+<!-- 문제 그림 -->
+<img src="images/230928.png" alt="문제 28 그림" style="height:250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{1}{8} \) ② \( \frac{1}{7} \) ③ \( \frac{3}{8} \) ④ \( \frac{1}{2} \) ⑤ \( \frac{4}{8} \)
+  </strong>
+</div>
+<h2>20230929</h2>
+<div class="question">
+  함수 \( f(x) = e^x + x \)가 있다. 양수 \( t \)에 대하여 점 \( (t, 0) \)과 점 \( (x, f(x)) \) 사이의 거리가 \( x = s \)에서 최소일 때,  
+  실수 \( f(s) \)의 값을 \( g(t) \)라 하자. 함수 \( g(t) \)의 역함수를 \( h(t) \)라 할 때,  
+  \( h'(1) \)의 값을 구하시오. [4점]
+</div>
+<h2>20230930</h2>
+<div class="question">
+  최고차항의 계수가 1인 사차함수 \( f(x) \)와 구간 \( (0, \infty) \)에서 \( g(x) \geq 0 \)인 함수 \( g(x) \)가 다음 조건을 만족시킨다.  
+  (가) \( x \leq -3 \)인 모든 실수 \( x \)에 대하여 \( f(x) \geq f(-3) \)이다.  
+  (나) \( x > -3 \)인 모든 실수 \( x \)에 대하여
+  \[
+  g(x + 3)(f(x) - f(0))^2 = f'(x)
+  \]
+  이다.  
+  \[
+  \int_7^8 g(x)\,dx = \frac{q}{p}
+  \]
+  일 때, \( p + q \)의 값을 구하시오. (단, \( p, q \)는 서로소인 자연수이다.) [4점]
+</div>
+
+<h1>202306</h1>
+<h2>20230609</h2>
+<div class="question">
+  두 함수  
+  \[
+  f(x) = x^3 - x + 6, \quad g(x) = x^2 + a
+  \]
+  가 있다. \( x \geq 0 \)인 모든 실수 \( x \)에 대하여 부등식  
+  \[
+  f(x) \geq g(x)
+  \]
+  가 성립할 때, 실수 \( a \)의 최댓값은? [4점]
+</div>
+
+<div class="options">
+  <strong>① 1 ② 2 ③ 3 ④ 4 ⑤ 5</strong>
+</div>
+<h2>20230610</h2>
+<div class="question">
+  그림과 같이 \( AB = 6 \), \( BC = 2 \), \( AC > 6 \)이고  
+  \( \cos(\angle BAC) = \frac{6}{8} \)인 삼각형 ABC가 있다.  
+  선분 AC의 중점을 M, 삼각형 ABC의 외접원이 직선 BM과 만나는 점 중 B가 아닌 점을 D라 할 때,  
+  선분 MD의 길이는? [4점]
+</div>
+
+<img src="images/230610.png" alt="문제 10 그림" style="height:250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>
+    ① \( \frac{3\sqrt{10}}{4} \) ② \( \frac{7\sqrt{10}}{10} \) ③ \( \frac{7\sqrt{10}}{8} \) ④ \( \frac{9\sqrt{10}}{10} \) ⑤ \( \sqrt{10} \)
+  </strong>
+</div>
+<h2>20230611</h2>
+<div class="question">
+  시각 \( t = 0 \)일 때 동시에 원점을 출발하여 수직선 위를 움직이는 두 점 P, Q의  
+  시각 \( t (t \geq 0) \)에서의 속도는 각각  
+  \[
+  v_1(t) = 2 - t, \quad v_2(t) = 6t
+  \]
+  이다. 출발한 시각부터 점 P가 원점으로 돌아올 때까지 점 Q가 움직인 거리는? [4점]
+</div>
+
+<div class="options">
+  <strong>① 16 ② 18 ③ 20 ④ 22 ⑤ 27</strong>
+</div>
+<h2>20230612</h2>
+<div class="question">
+  공차가 3인 등차수열 \( \{a_n\} \)이 다음 조건을 만족시킬 때, \( a_{10} \)의 값은? [4점]  
+  (가) \( a_8 \times a_6 < 0 \)  
+  (나) \( \sum_{k=1}^{6} |a_k + 6| = 6 + \sum_{k=1}^{6} |a_{2k}| \)
+</div>
+
+<div class="options">
+  <strong>
+    ① \( \frac{21}{2} \) ② 11 ③ \( \frac{23}{2} \) ④ 12 ⑤ \( \frac{26}{2} \)
+  </strong>
+</div>
+<h2>20230613</h2>
+<div class="question">
+  두 곡선 \( y = 16x \), \( y = 2x \)과 한 점 \( A(64, 2048) \)이 있다.  
+  점 A를 지나며 x축과 평행한 직선이 곡선 \( y = 16x \)과 만나는 점을 \( P_1 \)이라 하고,  
+  \( P_1 \)을 지나며 y축과 평행한 직선이 \( y = 2x \)와 만나는 점을 \( Q_1 \)이라 한다.  
+  이 과정을 반복하여 얻는 점들을 \( P_n, Q_n \)이라 하고, 점 \( Q_n \)의 x좌표를 \( x_n \)이라 할 때,  
+  \( x_n < \frac{1}{k} \)을 만족하는 \( n \)의 최솟값이 6이 되도록 하는 자연수 \( k \)의 개수는? [4점]
+</div>
+
+<img src="images/230613.png" alt="문제 13 그림" style="height:250px; width: auto; margin: 20px 0;">
+
+<div class="options">
+  <strong>① 78 ② 81 ③ 83 ④ 84 ⑤ 90</strong>
+</div>
+<h2>20230614</h2>
+<div class="question">
+  실수 전체의 집합에서 연속인 함수 \( f(x) \)와  
+  최고차항의 계수가 1인 삼차함수 \( g(x) \)가  
+  \[
+  g(x) =
+  \begin{cases}
+    -\int_0^x f(t) dt & (x < 0) \\
+    \int_0^x f(t) dt & (x \geq 0)
+  \end{cases}
+  \]
+  를 만족시킬 때, &lt;보기&gt;에서 옳은 것만을 있는 대로 고른 것은? [4점]
+
+  <br><br>
+  <보 기><br>
+  ㄱ. \( f(0) = 0 \)<br>
+  ㄴ. 함수 \( f(x) \)는 극댓값을 갖는다.<br>
+  ㄷ. \( 2 < f(1) < 3 \)일 때, 방정식 \( f(x) = x \)의 서로 다른 실근의 개수는 3이다.
+</div>
+
+<div class="options">
+  <strong>① ㄱ ② ㄷ ③ ㄱ, ㄴ ④ ㄱ, ㄷ ⑤ ㄱ, ㄴ, ㄷ</strong>
+</div>
+<h2>20230615</h2>
+<div class="question">
+  자연수 \( k \)에 대하여 다음 조건을 만족하는 수열 \( \{a_n\} \)이 있다.  
+  \[
+  a_1 = 0, \quad a_{n+1} =
+  \begin{cases}
+    a_n + \frac{1}{k+1} & (a_n \leq 0) \\
+    a_n - \frac{1}{k} & (a_n > 0)
+  \end{cases}
+  \]
+  \( a_{25} = 0 \)이 되도록 하는 모든 \( k \)의 값의 합은? [4점]
+</div>
+
+<div class="options">
+  <strong>① 12 ② 17 ③ 16 ④ 18 ⑤ 20</strong>
+</div>
+<h2>20230620</h2>
+<div class="question">
+  최고차항의 계수가 2인 이차함수 \( f(x) \)에 대하여  
+  함수  
+  \[
+  g(x) = \int_x^{x+1} |f(t)| \, dt
+  \]
+  는 \( x = 1 \)과 \( x = 3 \)에서 극솟값을 갖는다.  
+  이때 \( f(0) \)의 값을 구하시오. [4점]
+</div>
+
+<div class="options"></div>
+
+<h2>20230621</h2>
+<div class="question">
+  자연수 \( n \)에 대하여  
+  \[
+  7 \log_6^7\left(\frac{36}{7n + 1}\right)
+  \]
+  의 값이 정수가 되도록 하는 1000 이하의 모든 \( n \)의 값의 합을 구하시오. [4점]
+</div>
+
+<div class="options"></div>
+
+<h2>20230622</h2>
+<div class="question">
+  두 양수 \( a, b \) (\( b > 6 \))와 최고차항의 계수가 1인 이차함수 \( f(x) \)에 대하여  
+  함수  
+  \[
+  g(x) =
+  \begin{cases}
+    (x + 6)f(x) & (x < 0) \\
+    (x + a)f(x - b) & (x \geq 0)
+  \end{cases}
+  \]
+  이 실수 전체의 집합에서 연속이고, 다음 조건을 만족시킬 때  
+  \[
+  g(7)
+  \]
+  의 값을 구하시오. [4점]
+
+  조건:  
+  \[
+  \lim_{x \to -6} \frac{\sqrt{|g(x)|} + \{g(t)\}^2 - |g(t)|} {(x + 6)^2}
+  \]
+  의 값이 존재하지 않는 실수 \( t \)의 값은 \( -6 \)과 \( 6 \)뿐이다.
+</div>
+
+<div class="options"></div>
+
+<h2>20230628</h2>
+<div class="question">
+  최고차항의 계수가 \( \frac{1}{2} \)인 삼차함수 \( f(x) \)에 대하여  
+  함수  
+  \[
+  g(x) =
+  \begin{cases}
+    \ln|f(x)| & (f(x) \ne 0) \\
+    1 & (f(x) = 0)
+  \end{cases}
+  \]
+  가 다음 조건을 만족시킬 때, 함수 \( g(x) \)의 극솟값은? [4점]
+
+  조건:  
+  (가) \( g(x) \)는 \( x \ne 1 \)인 모든 실수 \( x \)에서 연속이다.  
+  (나) \( g(x) \)는 \( x = 2 \)에서 극대이고, \( |g(x)| \)는 \( x = 2 \)에서 극소이다.  
+  (다) 방정식 \( g(x) = 0 \)의 서로 다른 실근의 개수는 3이다.
+</div>
+
+<div class="options">
+  <strong>
+    ① \( \ln\frac{13}{26} \) ② \( \ln\frac{16}{26} \) ③ \( \ln\frac{18}{26} \) ④ \( \ln\frac{22}{26} \) ⑤ \( \ln\frac{28}{26} \)
+  </strong>
+</div>
+
+<h2>20230629</h2>
+<div class="question">
+  그림과 같이 반지름의 길이가 1이고 중심각의 크기가 \( \frac{\pi}{2} \)인  
+  부채꼴 OAB가 있다. 호 AB 위의 점 P에서 선분 OA에 내린 수선의 발을 H라 하고,  
+  \( \angle OAP \)를 이등분하는 직선과 세 선분 \( HP, OP, OB \)의 교점을 각각  
+  Q, R, S라 하자. \( \angle APH = \theta \)일 때,  
+  삼각형 AQH의 넓이를 \( f(\theta) \), 삼각형 PSR의 넓이를 \( g(\theta) \)라 하자.  
+  \[
+  \lim_{\theta \to 0^+} \frac{\theta^3 g(\theta)}{f(\theta)} = k
+  \]
+  일 때, \( 100k \)의 값을 구하시오. (단, \( 0 < \theta < \frac{\pi}{7} \)) [4점]
+</div>
+
+<img src="images/230629.png" alt="문제 29 그림" style="height: 250px; width: auto; margin: 20px 0;">
+
+<div class="options"></div>
+
+<h2>20230630</h2>
+<div class="question">
+  양수 \( a \)에 대하여 함수  
+  \[
+  f(x) = \frac{x^2 - ax}{e^x}
+  \]
+  를 정의한다. 실수 \( t \)에 대하여 방정식  
+  \[
+  f(x) = f'(t)(x - t) + f(t)
+  \]
+  의 서로 다른 실근의 개수를 \( g(t) \)라 하자.  
+  \[
+  g(2) + \lim_{t \to 2} g(t) = 8
+  \]
+  일 때,  
+  \[
+  \lim_{t \to k^-} g(t) \ne \lim_{t \to k^+} g(t)
+  \]
+  를 만족시키는 모든 실수 \( k \)의 값의 합이 \( \frac{q}{p} \)일 때, \( p + q \)의 값을 구하시오.  
+  (단, \( p, q \)는 서로소인 자연수이다.) [4점]
+</div>
+
+<div class="options"></div>
+
+<h1>202211</h1>
+<h1>202209</h1>
+<h1>202206</h1>
+
+
+</body>
+</html>
