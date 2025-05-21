@@ -16,4 +16,6 @@ urlpatterns = [
     path('api/result/', views.get_result),
     path('returnnum_chartscan/', views.return_num_chartscanner , name="return number for chartscanner"),
 
+    path('index_prob/', views.index_prob , name="problem for hastag"),
+
 ]

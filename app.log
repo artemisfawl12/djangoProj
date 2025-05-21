@@ -1,0 +1,42 @@
+gpt_call_multi function started
+query:
+            stock_data는 index를 날짜로 갖는 python dataframe이고, 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "등락률" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
+            즉 절대 가상의 데이터를 생성하지 마라.
+            이 dataframe을 가지고 
+            <
+            5일 이평선이 100일 이평선 상향돌파>
+        에 대한 조건문을 python 수식으로 작성해서 condition_buy 라는 이름의 booleanseries를 얻는 코드를 작성하라.
+        condition_buy는 새로운 객체여야 한다.
+
+        동일 상황에서 5일 이평선이 20일 이평선 하향돌파
+            에 대한 조건문을 python 수식으로 작성하여 booleanseries를 얻는 코드도 같이 작성해라.
+            이번 boolean series의 이름은 condition_sell이다.
+            만약에 loc을 쓸 일이 있으면, 코딩할때 일주일은 5일이기때문에 loc을 이용하다간 없는 날짜를 호출할 수 있으니 iloc을 쓰도록 해.
+            지표 생성 코딩할 때 loc이 0인데 loc-1 데이터를 불러올려고하면 당연히 말이안돼. 이런식의 결측치 처리를 잘하도록 해
+
+            
+message to gpt sent
+message to gpt received
+trade func in booleanway _ py started
+len of condition_buy: this value should be same as length of stock_data 1191
+sold count: 1191
+gpt_call_multi function started
+query:
+            stock_data는 index를 날짜로 갖는 python dataframe이고, 각 column의 이름은 "시가", "고가", "저가", "종가", "거래량", "등락률" 순이다. 이미 내가 갖고 있는 데이터이니 새로 생성하지 마라.
+            즉 절대 가상의 데이터를 생성하지 마라.
+            이 dataframe을 가지고 
+            <
+            5일 이평선이 100일 이평선 상향돌파>
+        에 대한 조건문을 python 수식으로 작성해서 condition_buy 라는 이름의 booleanseries를 얻는 코드를 작성하라.
+        condition_buy는 새로운 객체여야 한다.
+
+        동일 상황에서 5일 이평선이 20일 이평선 하향돌파
+            에 대한 조건문을 python 수식으로 작성하여 booleanseries를 얻는 코드도 같이 작성해라.
+            이번 boolean series의 이름은 condition_sell이다.
+            만약에 loc을 쓸 일이 있으면, 코딩할때 일주일은 5일이기때문에 loc을 이용하다간 없는 날짜를 호출할 수 있으니 iloc을 쓰도록 해.
+            지표 생성 코딩할 때 loc이 0인데 loc-1 데이터를 불러올려고하면 당연히 말이안돼. 이런식의 결측치 처리를 잘하도록 해
+
+            
+message to gpt sent
+message to gpt received
+trade func in booleanway _ py started

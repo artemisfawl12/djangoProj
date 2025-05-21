@@ -33,6 +33,8 @@ def return_num_chartscanner(request):
     num=100
     return HttpResponse(num) #100을 반환
 
+def index_prob(request):
+    return render(request,'counter/index_prob.html')
 
 @api_view(['GET'])
 def get_result(request):

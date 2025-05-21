@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko" data-ui="hig" style="--vh: 5.0200000000000005px;">
+<link rel="stylesheet" href="./ebsforrealpacuri_files/style.css">
+<head>
+  <meta charset="UTF-8">
+  <title>카테고리 필터</title>
+
+  <!-- 파비콘 -->
+  <link rel="shortcut icon" href="https://ai-plus.ebs.co.kr/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://ai-plus.ebs.co.kr/favicon.png" type="image/x-icon">
+
+  <!-- 스타일 시트 -->
+  <link rel="stylesheet" href="./ebsforrealpacuri_files/style.css">
+  <link rel="stylesheet" href="./ebsforrealpacuri_files/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./ebsforrealpacuri_files/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="./ebsforrealpacuri_files/NotoSansKR-Hestia.css">
+<link rel="stylesheet" type="text/css" href="./ebsforrealpacuri_files/jquery-ui.min.css">
+
+  <!-- 스타일 추가 -->
+  <style>
+    .box-area { font-family: sans-serif; }
+    .sort_selection { list-style: none; padding: 0; }
+    .sort_selection li { margin-bottom: 20px; }
+    .sort button { margin: 5px; }
+    .item_sort.active { background-color: #ddd; }
+    .preview-panel {
+      display: block; /* 확실히 block으로 */
+      width: 100%;     /* 전체 너비로 */
+      margin-top: 12px;
+    }
+    .question {
+      background: #f8f8f8;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.8;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body class="dv_chrome dv_chrome136 dv_windows dv_windows10 dv_pc os_win b_chrome" style="opacity: 1;">
+
+<!-- 여기에 본문 삽입 -->
+<div class="ainew-wrap">
+<div class="container__body inner">
+    <div class="box-area">
+      <ul class="sort_selection">
+        <li id="cate2">
+          <p class="title">과목</p>
+          <div class="sort" id="subject-area">
+            <!-- 과목 버튼 자동 생성 -->
+          </div>
+        </li>
+        <li id="cate3">
+          <p class="title">대분류</p>
+          <div class="sort" id="main-area"></div>
+        </li>
+        <li id="cate4">
+          <p class="title">중분류</p>
+          <div class="sort" id="mid-area"></div>
+        </li>
+        <li id="cate5">
+          <p class="title">소분류</p>
+          <div class="sort" id="sub-area"></div>
+        </li>
+      </ul>
+    </div>
+  <ul class="question-list t-contain ui-sortable sortable-enabled">
+      <li class="item t-body ui-sortable-handle">
+
+
+		</li>
+
+    </ul>
+
+</div>
+</div>
+
+  <!-- 스크립트 (최대한 body 끝에) -->
+  <script type="text/javascript" src="./ebsforrealpacuri_files/wlo.js.다운로드"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/wlo.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery-3.7.1.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/swiper.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/chart.umd.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery-ui.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery.ui.touch-punch.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/uihi-common.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/ai.lib.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/ai.common.js.다운로드" defer=""></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/ui_common.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery.cookie.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/browser.js.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/polyfill.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/moment-with-locales.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/lib.ebs.xip.v2.js.다운로드" defer=""></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/commonUtil.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/stringUtils.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/objectUtils.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery.form.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery.blockUI.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/jquery.validate.min.js.다운로드"></script>
+<script type="text/javascript" src="./ebsforrealpacuri_files/common_item.js.다운로드"></script>
+  <script src="./ebsforrealpacuri_files/Utilities.js.다운로드"></script>
+<script src="./ebsforrealpacuri_files/jquery-ui(1).js.다운로드"></script>
+  <script>
+
+// 초기 로딩
+let data;  // 전역 변수로 선언
+let fullProblemText = "";
+
+window.onload = () => {
+  fetch("data.json")
+    .then(res => res.json())
+    .then(json => {
+
+      data = json; // 외부 JSON 파일을 data에 할당
+      console.log(data)
+      console.log("data json file 목록")
+      const subjectDiv = document.getElementById("subject-area");
+      Object.keys(data).forEach(subject => {
+        const btn = createButton(subject, () => selectSubject(subject));
+        subjectDiv.appendChild(btn);
+      });
+    })
+    .catch(err => {
+      console.error("데이터 로딩 실패:", err);
+    });
+};
+window.addEventListener("DOMContentLoaded", () => {
+  fetch("output_modified.txt")
+    .then(res => res.text())
+    .then(text => {
+      fullProblemText = text;
+    })
+    .catch(err => {
+      console.error("문제 텍스트 불러오기 실패:", err);
+    });
+});
+function selectSubject(subject) {
+  clear("main-area", "mid-area", "sub-area");
+  createButtons(data[subject], "main-area", main => selectMain(subject, main));
+}
+
+function selectMain(subject, main) {
+  clear("mid-area", "sub-area");
+  createButtons(data[subject][main], "mid-area", mid => selectMid(subject, main, mid));
+}
+
+function selectMid(subject, main, mid) {
+  clear("sub-area");
+  createButtons(data[subject][main][mid], "sub-area", sub => {
+    const problemList = data[subject][main][mid][sub];
+    if (problemList) {
+      appendProblemItems(problemList);
+    } else {
+      appendProblemItems([]); // 문제 없음 처리
+    }
+  });
+}
+
+// 도우미 함수들
+function createButtons(objOrArr, containerId, callback) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const items = Array.isArray(objOrArr) ? objOrArr : Object.keys(objOrArr);
+  items.forEach(item => {
+    const btn = createButton(item, callback ? () => callback(item) : null);
+    container.appendChild(btn);
+  });
+}
+
+function createButton(text, onClickFn) {
+  const btn = document.createElement("button");
+  btn.textContent = text;
+  btn.className = "item_sort";
+  if (onClickFn) btn.onclick = onClickFn;
+  return btn;
+}
+function problemShow(code, button) {
+  const panel = button.closest('.item').querySelector('.preview-panel');
+
+  if (!fullProblemText) {
+    panel.innerHTML = "<p>문제 데이터를 불러오는 중입니다.</p>";
+    panel.style.display = "block";
+    return;
+  }
+
+  const startTag = `<h2>20${code}</h2>`;
+  const startIndex = fullProblemText.indexOf(startTag);
+
+  if (startIndex === -1) {
+    panel.innerHTML = `<p>코드 ${code}에 해당하는 문제를 찾을 수 없습니다.</p>`;
+    panel.style.display = "block";
+    console.log(fullProblemText)
+    return;
+  }
+  const contentStart = startIndex + startTag.length;
+
+  const endIndex = fullProblemText.indexOf("<h", startIndex + startTag.length);
+  const sliced = fullProblemText.slice(
+    contentStart,
+    endIndex === -1 ? fullProblemText.length : endIndex
+  );
+  console.log(sliced);
+  panel.innerHTML = sliced
+  panel.style.display = (panel.style.display === "none") ? "block" : "none";
+
+  // MathJax 수식 재렌더링
+  if (window.MathJax) {
+    MathJax.typesetPromise([panel]);
+  }
+}
+function appendProblemItems(problemCodes) {
+  const ul = document.querySelector("ul.question-list");
+  ul.innerHTML = ""; // 기존 항목 초기화
+
+  if (!problemCodes || problemCodes.length === 0) {
+    ul.innerHTML = "<li class='item t-body'><div class='item__content'><p>해당 조건에 해당하는 문제가 없습니다.</p></div></li>";
+    return;
+  }
+
+  problemCodes.forEach(code => {
+    const year = code.slice(0, 2);
+    const month = code.slice(2, 4);
+    const number = code.slice(4, 6);
+
+    const li = document.createElement("li");
+    li.className = "item t-body ui-sortable-handle";
+
+    li.innerHTML = `
+      <div class="item__content">
+        <div class="content">
+          <div class="content-img">
+            <img src="./ebsforrealpacuri_files/img_class_thum3.png" alt="">
+          </div>
+          <div class="content-detail">
+            <div class="content-detail__subject">
+              <strong class="box-class">
+                <label class="cate">${parseInt(month)}월 ${parseInt(number)}번</label>
+              </strong>
+              <p class="col2">${year}년</p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-wrap">
+
+        </div>
+        <div class="drag-wrap" style="display: flex;">
+          <img src="./ebsforrealpacuri_files/ico_drag.svg" alt="드래그">
+        </div>
+      </div>
+      <div class="preview-panel" style="display:none; margin-top: 10px;"></div>
+    `;
+    const button = document.createElement("button");
+    button.className = "btn type-4 medium preview";
+    button.type = "button";
+    button.textContent = "미리보기";
+    button.addEventListener("click", () => problemShow(code, button));
+
+    // 버튼 삽입
+    const btnWrap = li.querySelector(".btn-wrap");
+    if (btnWrap) btnWrap.appendChild(button);
+
+    ul.appendChild(li);
+  });
+}
+
+
+function selectSub(subject, main, mid, sub) {
+  const problemList = data[subject][main][mid][sub]; // ["251109", "230613", ...]
+  const container = document.getElementById("problem-list");
+
+  container.innerHTML = ""; // 초기화
+
+  if (!problemList || problemList.length === 0) {
+    container.textContent = "문제가 없습니다.";
+    return;
+  }
+
+  const ul = document.createElement("ul");
+  problemList.forEach(code => {
+    const li = document.createElement("li");
+    li.textContent = `문제 코드: ${code}`;
+    ul.appendChild(li);
+  });
+
+  container.appendChild(ul);
+}
+
+function clear(...ids) {
+  ids.forEach(id => document.getElementById(id).innerHTML = '');
+}
+</script>
+</body>
+</html>
