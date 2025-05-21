@@ -114,6 +114,7 @@ let data;  // 전역 변수로 선언
 let fullProblemText = "";
 
 window.onload = () => {
+    console.log("onload로그진입")
   fetch("{% static 'data.json' %}")
     .then(res => res.json())
     .then(json => {
@@ -132,7 +133,7 @@ window.onload = () => {
     });
 };
 window.addEventListener("DOMContentLoaded", () => {
-  fetch({% static 'output_modified.txt' %})
+  fetch("{% static 'output_modified.txt' %}")
     .then(res => res.text())
     .then(text => {
       fullProblemText = text;
