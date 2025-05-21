@@ -91,7 +91,7 @@
   \( B - A \)의 값은? [4점]
 </div>
 
-<img src="images/251113.png" alt="문제 13 그림" style="height: 200px; width: auto; margin: 20px 0;">
+<img src="/static/images/251113.png" alt="문제 13 그림" style="height: 200px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -106,7 +106,7 @@
   삼각형 ABC의 외접원의 반지름이 7일 때, 원 O 위의 점 P에 대하여 삼각형 PBC의 넓이의 최댓값은? (단, \( AB < AC \)) [4점]
 </div>
 
-<img src="images/251114.png" alt="문제 14 그림" style="height: 200px; width: auto; margin: 20px 0;">
+<img src="/static/images/251114.png" alt="문제 14 그림" style="height: 200px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -450,7 +450,7 @@
 </div>
 
 <!-- 이미지 삽입 -->
-<img src="images/250612.png" alt="문제 12 그래프" style="height:250px; width: auto; margin: 20px 0;">
+<img src="/static/images/250612.png" alt="문제 12 그래프" style="height:250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -469,7 +469,7 @@
   \( B - A = \frac{2}{3} \)일 때, 상수 \( m \)의 값은? (단, \( m < -1 \)) [4점]
 </div>
 
-<img src="images/250613.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/250613.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -674,7 +674,7 @@
   의 값을 구하시오. [4점]
 </div>
 
-<img src="images/241113.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/241113.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -934,7 +934,7 @@
 </div>
 <h2>20240920</h2>
 <div class="question">
-<img src="images/240920.png" alt="문제 20 그림" style="height: 250px; width: auto; margin: 20px 0;"><br>
+<img src="/static/images/240920.png" alt="문제 20 그림" style="height: 250px; width: auto; margin: 20px 0;"><br>
   사각형 ABCD에서 삼각형 BCD의 외접원의 반지름의 길이를 \( R_1 \),<br>
   삼각형 ABD의 외접원의 반지름의 길이를 \( R_2 \)라 하자.<br><br>
   다음은 \( R_1 \times R_2 \)의 값을 구하는 과정이다.<br><br>
@@ -1003,7 +1003,7 @@
 </div>
 <h2>20240930</h2>
 <div class="question">
-  <img src="images/240930.png" style="height:250px; width: auto;"><br><br>
+  <img src="/static/images/240930.png" style="height:250px; width: auto;"><br><br>
   길이가 10인 선분 \( AB \)를 지름으로 하는 원과 선분 \( AB \) 위에 \( AC = 4 \)인 점 \( C \)가 있다. 이 원 위의 점 \( P \)를 \( \angle PCB = \theta \)가 되도록 잡고,<br>
   점 \( P \)를 지나고 선분 \( AB \)에 수직인 직선이 이 원과 만나는 점 중 \( P \)가 아닌 점을 \( Q \)라 하자.<br><br>
   삼각형 \( PCQ \)의 넓이를 \( S(\theta) \)라 할 때,
@@ -1023,7 +1023,7 @@
 </div>
 <h2>20240610</h2>
 <div class="question">
-  <img src="images/240610.png" style="height:250px; width: auto;"><br><br>
+  <img src="/static/images/240610.png" style="height:250px; width: auto;"><br><br>
   양수 \( k \)에 대하여 함수 \( f(x) = kx(x-2)(x-3) \)이다.  
   곡선 \( y=f(x) \)와 \( x \)-축이 원점 \( O \)와 두 점 \( P \), \( Q \) (\( OP < OQ \))에서 만난다.  
   곡선 \( y=f(x) \)와 선분 \( OP \)로 둘러싸인 영역을 \( A \), 곡선 \( y=f(x) \)와 선분 \( PQ \)로 둘러싸인 영역을 \( B \)라 하자.  
@@ -1031,7 +1031,7 @@
 </div>
 <h2>20240611</h2>
 <div class="question">
-  <img src="images/240611.png" style="height:250px; width: auto;"><br><br>
+  <img src="/static/images/240611.png" style="height:250px; width: auto;"><br><br>
   그림과 같이 실수 \( t (0 < t < 1) \)에 대하여 곡선 \( y = x^2 \) 위의 점 중에서 직선 \( y = 2tx - 1 \)과의 거리가 최소인 점을 \( P \)라 하고,  
   직선 \( OP \)가 직선 \( y = 2tx - 1 \)과 만나는 점을 \( Q \)라 할 때,
   \[
@@ -1047,7 +1047,7 @@
 </div>
 <h2>20240613</h2>
 <div class="question">
-  <img src="images/240613.png" style="height:250px; width: auto;"><br><br>
+  <img src="/static/images/240613.png" style="height:250px; width: auto;"><br><br>
   \( \overline{BC} = 3 \), \( \overline{CD} = 2 \), \( \cos(\angle BCD) = -\frac{1}{3} \), \( \angle DAB > \frac{\pi}{2} \)인 사각형 \( ABCD \)에서  
   두 삼각형 \( ABC \)와 \( ACD \)는 모두 예각삼각형이다.  
   선분 \( AC \)를 \( 1:2 \)로 내분하는 점 \( E \)에 대하여 선분 \( AE \)를 지름으로 하는 원이 두 선분 \( AB \), \( AD \)와 만나는 점 중 \( A \)가 아닌 점을 각각 \( P_1 \), \( P_2 \)라 하고,  
@@ -1178,7 +1178,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/231110.png" alt="문제 10 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/231110.png" alt="문제 10 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1192,7 +1192,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/231111.png" alt="문제 11 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/231111.png" alt="문제 11 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1329,7 +1329,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/231128.png" alt="문제 28 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/231128.png" alt="문제 28 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1429,7 +1429,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/230912.png" alt="문제 12 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230912.png" alt="문제 12 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1445,7 +1445,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/230913.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230913.png" alt="문제 13 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1514,7 +1514,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/230921.png" alt="문제 21 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230921.png" alt="문제 21 그림" style="height: 250px; width: auto; margin: 20px 0;">
 <h2>20230922</h2>
 <div class="question">
   최고차항의 계수가 1이고 \( x = 3 \)에서 극댓값 8을 갖는 삼차함수 \( f(x) \)가 있다.  
@@ -1542,7 +1542,7 @@
 </div>
 
 <!-- 문제 그림 -->
-<img src="images/230928.png" alt="문제 28 그림" style="height:250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230928.png" alt="문제 28 그림" style="height:250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1595,7 +1595,7 @@
   선분 MD의 길이는? [4점]
 </div>
 
-<img src="images/230610.png" alt="문제 10 그림" style="height:250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230610.png" alt="문제 10 그림" style="height:250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>
@@ -1636,7 +1636,7 @@
   \( x_n < \frac{1}{k} \)을 만족하는 \( n \)의 최솟값이 6이 되도록 하는 자연수 \( k \)의 개수는? [4점]
 </div>
 
-<img src="images/230613.png" alt="문제 13 그림" style="height:250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230613.png" alt="문제 13 그림" style="height:250px; width: auto; margin: 20px 0;">
 
 <div class="options">
   <strong>① 78 ② 81 ③ 83 ④ 84 ⑤ 90</strong>
@@ -1768,7 +1768,7 @@
   일 때, \( 100k \)의 값을 구하시오. (단, \( 0 < \theta < \frac{\pi}{7} \)) [4점]
 </div>
 
-<img src="images/230629.png" alt="문제 29 그림" style="height: 250px; width: auto; margin: 20px 0;">
+<img src="/static/images/230629.png" alt="문제 29 그림" style="height: 250px; width: auto; margin: 20px 0;">
 
 <div class="options"></div>
 
