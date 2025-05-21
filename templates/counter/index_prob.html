@@ -83,7 +83,7 @@ let data;  // 전역 변수로 선언
 let fullProblemText = "";
 
 window.onload = () => {
-  fetch("data.json")
+  fetch("{% static 'data.json' %}")
     .then(res => res.json())
     .then(json => {
 
