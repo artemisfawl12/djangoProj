@@ -1,0 +1,7 @@
+<h2>블로그 글 작성</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button type="submit">작성하기</button>
+</form>

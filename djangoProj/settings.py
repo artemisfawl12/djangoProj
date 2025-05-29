@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'counter',
     'rest_framework',
+    'ckeditor',
 
 ]
 
@@ -57,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 ROOT_URLCONF = 'djangoProj.urls'
 
@@ -129,12 +135,19 @@ USE_I18N = True
 
 USE_TZ = True
 
+BLOG_WRITE_PASSWORD = 'letsbegatsby'
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT=BASE_DIR /'staticfiles'
+STATIC_URL = '/static/'
+#ssTATIC_ROOT=BASE_DIR /'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / 'staticfiles',  # 개발용 정적 파일 디렉토리
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

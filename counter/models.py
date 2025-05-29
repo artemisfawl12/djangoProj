@@ -1,4 +1,9 @@
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
+
+
 
 # Create your models here.
 
@@ -14,3 +19,35 @@ class review(models.Model):
 
     def __str__(self):
         return f"{self.ip_address} - {self.status}"
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+
+    author = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
+    content = RichTextUploadingField()
+    image = models.ImageField(upload_to='blog_images/',null=True, blank=True)
+    comments_count = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(unique=True)
+    def save(self, *args, **kwargs):
+
+        if not self.slug:
+
+            base_slug = slugify(self.title)
+            if not base_slug:
+                base_slug = 'post'
+            slug = base_slug
+            num = 1
+            while BlogPost.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{num}"
+                num += 1
+            self.slug = slug
+        if not self.image:
+            self.image = 'blog_images/default.jpeg'
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("blog_detail", kwargs={"slug": self.slug})

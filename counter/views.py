@@ -1,6 +1,5 @@
 import os
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import pickle
@@ -27,6 +26,42 @@ from threading import Thread
 import uuid
 from .shared_state import progress_map
 from django.core.cache import cache
+from .models import BlogPost
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import BlogPostForm
+
+
+def contact_render(request):
+    return render(request, 'counter/contact.html')
+
+def mentos_render(request):
+    return render(request, 'counter/index.html')
+def mentos_blog_render(request):
+    posts = BlogPost.objects.all()
+    return render(request, 'counter/blog.html', {'posts': posts})
+
+def blog_detail(request, slug):
+    post = get_object_or_404(BlogPost, slug=slug)
+    return render(request, 'counter/blog_detail.html', {'post': post})
+
+def create_blog_post(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('blog_list')
+    else:
+        form = BlogPostForm()
+    return render(request, 'counter/blog_form.html', {'form': form})
+
+def check_password(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data.get('password') == settings.BLOG_WRITE_PASSWORD:
+            return JsonResponse({'status': 'ok'})
+        else:
+            return JsonResponse({'status': 'fail'})
+
 
 result_map={}
 def return_num_chartscanner(request):
