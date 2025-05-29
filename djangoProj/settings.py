@@ -143,10 +143,10 @@ BLOG_WRITE_PASSWORD = 'letsbegatsby'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#ssTATIC_ROOT=BASE_DIR /'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',  # 개발용 정적 파일 디렉토리
-]
+STATIC_ROOT=BASE_DIR /'staticfiles'
+#ssTATICFILES_DIRS = [
+#    BASE_DIR / 'staticfiles',  # 개발용 정적 파일 디렉토리
+#]
 
 
 # Default primary key field type
