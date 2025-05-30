@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils import timezone
+
 
 
 
@@ -29,6 +31,8 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to='blog_images/',null=True, blank=True)
     comments_count = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
     def save(self, *args, **kwargs):
 
         if not self.slug:

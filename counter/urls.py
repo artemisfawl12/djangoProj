@@ -24,6 +24,8 @@ urlpatterns = [
     path('mentos/blog_form/', views.create_blog_post, name='create_blog_post'),
 
     path('check-password/', views.check_password, name='password_check'),
+
+    path('mentos/categorzied/', views.mentos_categorized, name='categorizes'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('mentos/<slug:slug>/', views.blog_detail, name='blog_detail'),

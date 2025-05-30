@@ -36,8 +36,21 @@ def contact_render(request):
 
 def mentos_render(request):
     return render(request, 'counter/index.html')
+
+def mentos_categorized(request):
+    categories = BlogPost.objects.values_list('category', flat=True).distinct()
+    categories_with_images = [
+        {'name': cat, 'image': f'img-{(i % 6) + 1}.jpg'}
+        for i, cat in enumerate(categories)
+    ]
+    return render(request, 'counter/portfolio.html', {'categories': categories_with_images})
+
 def mentos_blog_render(request):
-    posts = BlogPost.objects.all()
+    category = request.GET.get('category')
+    if category:
+        posts = BlogPost.objects.filter(category=category)
+    else:
+        posts = BlogPost.objects.all()
     return render(request, 'counter/blog.html', {'posts': posts})
 
 def blog_detail(request, slug):
