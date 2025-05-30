@@ -135,7 +135,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-BLOG_WRITE_PASSWORD = 'letsbegatsby'
+BLOG_WRITE_PASSWORD = 'liter24'
 
 
 
@@ -144,7 +144,7 @@ BLOG_WRITE_PASSWORD = 'letsbegatsby'
 
 STATIC_URL = '/static/'
 STATIC_ROOT=BASE_DIR /'staticfiles'
-#ssTATICFILES_DIRS = [
+#sSTATICFILES_DIRS = [
 #    BASE_DIR / 'staticfiles',  # 개발용 정적 파일 디렉토리
 #]
 
