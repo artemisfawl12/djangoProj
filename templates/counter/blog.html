@@ -78,9 +78,9 @@
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li><a href="/mentos/">Home</a></li>
-					<li class="fh5co-active"><a href="blog.html">Blog</a></li>
-					<li><a href="/mentos/categorzied/">Portfolio</a></li>
-					<li><a href="/mentos/">About</a></li>
+					<li class="fh5co-active"><a href="/mentos/blog">Blog</a></li>
+					<!--<li><a href="/mentos/categorzied/">Portfolio</a></li>-->
+					<li><a href="/about/">About</a></li>
 					<li><a href="/contact/">Contact</a></li>
 				</ul>
 			</nav>
@@ -98,19 +98,17 @@
 		</aside>
 
 		<div id="fh5co-main">
-			<div class="fh5co-narrow-content">
+			<div class="fh5co-narrow-content" style="padding-bottom: 10px">
                 <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>Read Our Blog</span>
+                    <span>Preview Our Magazine</span>
                     <button id="add-post-btn">+</button>
                 </h2>
-
-
-				<div class="row row-bottom-padded-md">
+				<div class="row">
                     {% for post in posts %}
                         {% if post.slug %}
                         <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
                             <div class="blog-entry">
-                                <a href="{{ post.get_absolute_url }}" class="blog-img">
+                                <a href="{{ post.get_absolute_url }}" class="blog-img"style="height: 253px; width: auto;">
                                     <img src="{{ post.image.url }}" class="img-responsive" alt="">
                                 </a>
                                 <div class="desc">
@@ -130,6 +128,38 @@
 
 
 
+				</div>
+			</div>
+
+            <div id="magazine-represent">
+				<div class="fh5co-narrow-content">
+					<div class="row">
+						<div class="col-md-8 animate-box" style="height: 95px; padding-top: 30px">
+							<h1 class="fh5co-heading" style="font-size: 35px">MEDIMENTORS Magazine</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-3 col-md-pull-3 animate-box">
+							<p style="font-size: 16px;padding-top: 0px; color: #0f0f0f">
+                                MEDIMENTORS는 의대생들이 직접 만든, 고등학생을 위한 진로 멘토링 서비스입니다.<br><br>
+                                단순한 정보 제공을 넘어, 칼럼과 채팅을 통해 진실되고 디테일한 생각과 경험을 나누며 수험생의 고민에 진심으로 다가가고자 합니다.<br>
+                                <br>
+                                여기에서 제공되는 칼럼은 모두 현직 의대생들이 직접 기획하고 작성하며,<br>
+                                교내 활동, 학습 노하우, 입시 전략, 그리고 의대 생활에 대한 현실적인 이야기까지 폭넓게 담겨 있습니다.<br>
+                                칼럼 작성자와 직접 채팅으로 소통하며, 여러분의 진로 고민을 함께 나누고 풀어나갈 수 있습니다.<br>
+                                <br>
+                            </p>
+                            <p style="font-size: 17px;padding-top: 0px; color: #0f0f0f">
+                                <strong>
+                                MEDIMENTORS는 고등학생 여러분의 길잡이가 되겠습니다.<br><br>
+                                진로 앞에서 막막함을 느낄 때, <br>
+                                선배들의 진심어린 조언으로 나만의 방향을 찾아갈 수 있도록 돕겠습니다.<br>
+                                여러분의 미래를 함께 고민하고, 응원하며, 함께 만들어가는 페이지로 채워가겠습니다.</strong>
+                            </p>
+							<p><a href="/about/" class="btn btn-primary" style="width: 160px">ABOUT US</a></p>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		

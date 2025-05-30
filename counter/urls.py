@@ -22,6 +22,7 @@ urlpatterns = [
     path('mentos/',mentos_render,name="mentos mentors"),
     path('mentos/blog',mentos_blog_render,name="blog_list"),
     path('mentos/blog_form/', views.create_blog_post, name='create_blog_post'),
+    path('about/', views.about_render, name='about_page'),
 
     path('check-password/', views.check_password, name='password_check'),
 

@@ -30,7 +30,8 @@ from .models import BlogPost
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BlogPostForm
 
-
+def about_render(request):
+    return render(request, 'counter/about.html')
 def contact_render(request):
     return render(request, 'counter/contact.html')
 
@@ -60,11 +61,14 @@ def blog_detail(request, slug):
 def create_blog_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST, request.FILES)
+        print("here you are")
         if form.is_valid():
+            print("valid")
             form.save()
             return redirect('blog_list')
     else:
         form = BlogPostForm()
+        print("somthing wrong")
     return render(request, 'counter/blog_form.html', {'form': form})
 
 def check_password(request):
