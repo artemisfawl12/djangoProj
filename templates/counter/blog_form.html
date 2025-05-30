@@ -1,7 +1,35 @@
-<h2>블로그 글 작성</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <button type="submit">작성하기</button>
-</form>
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-container p {
+    margin-bottom: 15px;
+  }
+
+  .form-container button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+</style>
+
+<div class="form-container">
+  <h2>블로그 글 작성</h2>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form.as_p }}
+      <button type="submit">작성하기</button>
+  </form>
+</div>

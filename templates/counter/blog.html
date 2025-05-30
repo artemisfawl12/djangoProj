@@ -96,8 +96,11 @@
 
 		<div id="fh5co-main">
 			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Read Our Blog</h2>
-                <button id="add-post-btn">+</button>
+                <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Read Our Blog</span>
+                    <button id="add-post-btn">+</button>
+                </h2>
+
 
 				<div class="row row-bottom-padded-md">
                     {% for post in posts %}
