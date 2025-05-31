@@ -71,6 +71,15 @@
     .fh5co-feature {
       flex-grow: 1;
     }
+    .post-content {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .post-content img,
+    .post-content table {
+      max-width: 100%;
+      height: auto;
+    }
     </style>
 
 
@@ -107,7 +116,9 @@
 						<h2 class="fh5co-heading" style="font-size: 25px">{{ post.title }}</h2>
                         <p style="font-size: 15px">작성자: {{ post.author }}</p>
                         <p style="font-size: 15px">카테고리: {{ post.category }}</p>
-						{{ post.content|safe }}
+						<div class="post-content">
+                            {{ post.content|safe }}
+                        </div>
 					</div>
 				</div>
 			</div>
