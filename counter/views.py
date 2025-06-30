@@ -32,6 +32,8 @@ from .models import BlogPost
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BlogPostForm
 from .serializer import ChartScannerReviewSerializer
+from rest_framework import status
+
 
 class ChartScannerReviewSubmitView(APIView):
     def post(self, request):
