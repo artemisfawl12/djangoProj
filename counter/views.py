@@ -757,7 +757,7 @@ def count_characters(request):
 def author_count(request):
     user_ip = get_ip(request)
     FileLog.objects.create(ip_address=user_ip, timestamp=datetime.now(), status="author page called")
-    return render(request,'counter/form.html')
+    return render(request,'counter/guide_page.html')
 
 def coin_ticker_data(request):
     name_ticker_dict=coin_ticker_dict()
