@@ -30,9 +30,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('mentos/<slug:slug>/', views.blog_detail, name='blog_detail'),
-
-
-
+    path('chartscanner/review/', views.ChartScannerReviewSubmitView.as_view(), name='chartscanner-review-submit'),
 
 ]
 

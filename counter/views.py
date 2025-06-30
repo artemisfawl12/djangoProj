@@ -19,6 +19,8 @@ import logging
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 import numpy as np
 import cv2
 from .image_process import find_best
@@ -29,6 +31,15 @@ from django.core.cache import cache
 from .models import BlogPost
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BlogPostForm
+from .serializer import ChartScannerReviewSerializer
+
+class ChartScannerReviewSubmitView(APIView):
+    def post(self, request):
+        serializer = ChartScannerReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': '리뷰 저장 완료'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def about_render(request):
     return render(request, 'counter/about.html')

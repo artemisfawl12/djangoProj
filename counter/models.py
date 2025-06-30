@@ -6,6 +6,13 @@ from django.utils import timezone
 
 
 
+class ChartScannerReview(models.Model):
+    nickname = models.CharField(max_length=50)  # 유저 닉네임
+    comment = models.TextField()               # 리뷰 본문
+    created_at = models.DateTimeField(auto_now_add=True)  # 생성 일시 (자동 저장)
+
+    def __str__(self):
+        return f"{self.nickname} - {self.comment[:20]}"
 
 # Create your models here.
 
