@@ -7,6 +7,7 @@ import os
 
 urlpatterns = [
     path('', views.author_count, name='author_count'),  # 기본 URL과 views.home 연결
+    path('capitoldemo/', views.capitol_demo, name='capitol_Demo'),
     path('api/stocks/', stock_ticker_data, name='stock_ticker_data'),
     path('api/coins/',coin_ticker_data, name="coin_ticker_data"),
     path('api/multichart/<str:ticker>/',multi_chart, name="multichart_stock"),
